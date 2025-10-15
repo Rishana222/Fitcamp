@@ -1,47 +1,51 @@
-import React from 'react'
-import Header from './Header Illustration.png'
-import Logo from './Logo.png';
-import User from './Icon User.png'
-
+import React from "react";
+import Logo from "../assets/logo.png";
 
 const Navbar = () => {
   return (
-    <>
-      <img className='object-cover w-full   h-[900px] bg-top relative' src={Header} alt="" />
-      <div className='absolute top-3 lg:top-14  '>
-        <div className='flex px-4 md:px-8 lg:px-24  '>
-          <img src={Logo} alt="" className='w-10 md:w-auto  ' />
-          <h1 className='ml-2 font-bold uppercase mt-2 md:text-2xl lg:text-3xl lg:mt-1'>fitcamp</h1>
+    <nav className="absolute top-3 lg:top-10 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
+      <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium">
+        <div className="flex items-center space-x-2 mb-2 md:mb-0">
+          <img src={Logo} alt="Logo" className="w-10 md:w-12" />
+          <h1 className="font-bold uppercase text-xl md:text-2xl lg:text-3xl">
+            Fitcamp
+          </h1>
         </div>
-        <div className='ml-[150px] -mt-9 md:flex md:space-x-4 md:ml-[300px] font-medium lg:ml-[600px]'>
-          <h1>subscribe plan</h1>
-          <h1>blog</h1>
-          <h1>Testimonial</h1>
-          <h1>About</h1>
-          <button className='mt-2 lg:-mt-1 bg-indigo-500 text-white py-2  rounded-4xl px-2 relative top-[-6px] hover:bg-indigo-600 capitalize '>my subscribtion</button>
-
+        <div className="flex flex-col md:flex-row items-center text-sm md:text-base space-y-2 md:space-y-0 md:space-x-6">
+          <a href="#subscribe" className="hover:text-gray-200 capitalize">
+            subscribe plan
+          </a>
+          <a href="#blog" className="hover:text-gray-200 capitalize">
+            blog
+          </a>
+          <a href="#testimonial" className="hover:text-gray-200 capitalize">
+            testimonial
+          </a>
+          <a href="#about" className="hover:text-gray-200 capitalize">
+            about
+          </a>
+          <button className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-full capitalize">
+            my subscription
+          </button>
         </div>
       </div>
-      <div className="absolute top-[200px] left-1/2 transform -translate-x-1/2  text-white    text-center">
-        <div className='bg-black  py-2 rounded-3xl flex px-3'>
-          <img className='h-[35px]' src={User} alt="" />
-          <h1 className='capitalize text-xs mt-2'>over 100k+ members joined</h1>
-        </div>
-      </div>
-      <div> <h1 className='text-white capitalize lg:text-6xl lg:font-bold md:text-5xl md:font-medium  absolute left-1/2 transform -translate-x-1/2 top-[290px] text-xl font-medium sm:text-4xl sm:font-bold sm:top-[250px]'>priotize your health</h1></div>
-      <div className='absolute left-1/2 transform -translate-x-1/2 top-[350px] md:top-[350px] lg:top-[365px]  capitalize text-xs text-white sm:text-xl '>
-        <p>transform your investing your wellness</p>
-      </div>
-      <div className='absolute left-1/2 transform -translate-x-1/2 top-[400px] bg-white text-black px-2 py-2 rounded-3xl w-[250px] text-xs lg:top-[400px]  flex'>
-        <input className='w-full ' type="search" placeholder="search gym location nearby" id="" />
-        <button className='bg-black text-white px-3 py-1.5 rounded-2xl '>search</button>
-      </div>
-      <div className='absolute bottom-0.5 bg-white text-black'>
-          yhye
-      </div>
+    </nav>
+  );
+};
 
-    </>
-  )
-}
+export default Navbar;
+   
+            
+         
+                 
+          
+              
+         
+           
+          
+           
+          
+          
 
-export default Navbar
+
+
