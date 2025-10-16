@@ -12,16 +12,16 @@ const Navbar = () => {
           </h1>
         </div>
         <div className="flex flex-col md:flex-row items-center text-sm md:text-base space-y-2 md:space-y-0 md:space-x-6">
-          <a href="#subscribe" className="hover:text-gray-200 capitalize">
+          <a href="#subscribe" className="hover:text-gray-700 capitalize">
             subscribe plan
           </a>
-          <a href="#blog" className="hover:text-gray-200 capitalize">
+          <a href="#blog" className="hover:text-gray-700 capitalize">
             blog
           </a>
-          <a href="#testimonial" className="hover:text-gray-200 capitalize">
+          <a href="#testimonial" className="hover:text-gray-700 capitalize">
             testimonial
           </a>
-          <a href="#about" className="hover:text-gray-200 capitalize">
+          <a href="#about" className="hover:text-gray-700 capitalize">
             about
           </a>
           <button className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-full capitalize">

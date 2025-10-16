@@ -9,7 +9,7 @@ const Search = () => {
     return (
         <>
 
-            <section className="relative w-full min-h-[900px] overflow-hidden bg-[#2cb4f5]">
+            <section className="relative w-full min-h-[880px] overflow-visible mb-[180px] md:mb-[120px]">
                 <div className="absolute inset-0 bg-grid opacity-40 z-0"></div>
                 <img
                     className="object-cover w-full h-full absolute top-0 left-0 opacity-80"
@@ -41,7 +41,7 @@ const Search = () => {
                         </button>
                     </div>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-3 bg-white bottom-[-30px] overflow-visible text-black absolute w-[90%] left-1/2 transform -translate-x-1/2 shadow-2xl z-10'>
+                <div className='grid grid-cols-1 md:grid-cols-3 bg-white bottom-[-150px] md:bottom-[-90px] overflow-visible text-black absolute w-[90%] left-1/2 transform -translate-x-1/2 shadow-2xl z-10'>
                     <div className='text-center py-3 mb-3'>
                         <img className='w-12 mx-auto mb-2' src={Location} alt="" />
                         <h1 className='capitalize font-medium'>find nearby location</h1>
