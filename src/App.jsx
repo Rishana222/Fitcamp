@@ -1,15 +1,15 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import HomePage from './pages/HomePage'
+import Search  from './components/Homepage/Search'
 
 function App() {
 
   return (
     <>
       <Navbar />
-          <HomePage/>
-      <Footer />
+          <Search />
+      {/* <Footer /> */}
 
     </>
   )
