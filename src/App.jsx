@@ -16,7 +16,7 @@ function App() {
           <Search />
           <GymLocation/>
           <LatestAdded/>
-          <Card/>
+         <Card/>
           <JoinedUser/>
           <Membership/>
       <Footer />

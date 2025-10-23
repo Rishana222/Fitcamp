@@ -1,47 +1,88 @@
 export const gyms = [
   {
-    id: 1,
     name: "Fitcamp Senayan City Victory",
     location: "Senayan, Jakarta Selatan",
-    image: "/assets/gym1.jpg",
+    image: "src/assets/Gym 6.png",
     facilities: [
-      "Sauna",
-      "Shower",
-      "Looker",
-      "Cardio",
-      "Mattress",
-      "Machine"
+      { name: "Sauna", desc: "Relax Body", icons:"src/assets/Sauna.png" },
+      { name: "Shower", desc: "After Gym", icons:"src/assets/Shower Room.png" },
+      { name: "Locker", desc: "Saving Bag", icons:"src/assets/Locker.png" },
+      { name: "Cardio", desc: "Heart Rate", icons:"src/assets/Cardio.png" },
+      { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
+      { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
-    time: "05:00 AM - 11:00 PM"
+    icon:"src/assets/Operational Time.png",
+    opening: "05:00 AM - 11:00 PM",
   },
   {
-    id: 2,
     name: "Fitcamp Padang Winner",
-    location: "Kota Padang, Sumtra Barat",
-    image: "/assets/gym2.jpg",
+    location: "Kota Padang, Sumatra Barat",
+    image: "src/assets/Gym 3.png",
     facilities: [
-      "Sauna",
-      "Shower",
-      "Looker",
-      "Cardio",
-      "Mattress",
-      "Machine"
+      { name: "Sauna", desc: "Relax Body", icons:"src/assets/Sauna.png" },
+      { name: "Shower", desc: "After Gym", icons:"src/assets/Shower Room.png" },
+      { name: "Locker", desc: "Saving Bag", icons:"src/assets/Locker.png" },
+      { name: "Cardio", desc: "Heart Rate", icons:"src/assets/Cardio.png" },
+      { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
+      { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
-    time: "05:00 AM - 11:00 PM"
+    opening: "05:00 AM - 11:00 PM",
   },
   {
-    id: 3,
     name: "Fitcamp Majapahit Solo",
     location: "Solo, Jawa Tengah",
-    image: "/assets/gym3.jpg",
+    image: "src/assets/Gym 5.png",
     facilities: [
-      "Sauna",
-      "Shower",
-      "Looker",
-      "Cardio",
-      "Mattress",
-      "Machine"
+     { name: "Sauna", desc: "Relax Body", icons:"src/assets/Sauna.png" },
+      { name: "Shower", desc: "After Gym", icons:"src/assets/Shower Room.png" },
+      { name: "Locker", desc: "Saving Bag", icons:"src/assets/Locker.png" },
+      { name: "Cardio", desc: "Heart Rate", icons:"src/assets/Cardio.png" },
+      { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
+      { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
-    time: "05:00 AM - 11:00 PM"
-  }
+    opening: "05:00 AM - 11:00 PM",
+  },
+  {
+    name: "Fitcamp Bali Resort",
+    location: "Kutai, Bali Barat",
+    image: "src/assets/Gym 2.png",
+   facilities: [
+      { name: "Sauna", desc: "Relax Body", icons:"src/assets/Sauna.png" },
+      { name: "Shower", desc: "After Gym", icons:"src/assets/Shower Room.png" },
+      { name: "Locker", desc: "Saving Bag", icons:"src/assets/Locker.png" },
+      { name: "Cardio", desc: "Heart Rate", icons:"src/assets/Cardio.png" },
+      { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
+      { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
+    ],
+    opening: "05:00 AM - 11:00 PM",
+  },
+  {
+    name: "Fitcamp Suramadu",
+    location: "Sampang, Madura",
+    image: "src/assets/Gym 1.png",
+    facilities: [
+      { name: "Sauna", desc: "Relax Body", icons:"src/assets/Sauna.png" },
+      { name: "Shower", desc: "After Gym", icons:"src/assets/Shower Room.png" },
+      { name: "Locker", desc: "Saving Bag", icons:"src/assets/Locker.png" },
+      { name: "Cardio", desc: "Heart Rate", icons:"src/assets/Cardio.png" },
+      { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
+      { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
+    ],
+    opening: "05:00 AM - 11:00 PM",
+  },
+  {
+    name: "Fitcamp City Mall",
+    location: "City Mall, Surabaya",
+    image: "src/assets/Gym 4.png",
+    facilities: [
+      { name: "Sauna", desc: "Relax Body", icons:"src/assets/Sauna.png" },
+      { name: "Shower", desc: "After Gym", icons:"src/assets/Shower Room.png" },
+      { name: "Locker", desc: "Saving Bag", icons:"src/assets/Locker.png" },
+      { name: "Cardio", desc: "Heart Rate", icons:"src/assets/Cardio.png" },
+      { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
+      { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
+    ],
+    opening: "05:00 AM - 11:00 PM",
+  },
+
 ];
