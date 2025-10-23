@@ -13,7 +13,7 @@ const Membership = () => {
         <h1 className='text-center font-extrabold text-xl mb-2 sm:text-3xl md:text-4xl'>Unlock All the Membership  Benefits</h1>
         <p className='text-center text-gray-600 md:text-xl xs:text-xs  '>Experience full access to premium, features, services, and facilities</p>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-3  '>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-3 mb-12 '>
         <div className='text-center place-items-center mb-3.5'>
           <img className='h-[65px] flex items-center mb-3 ' src={Flexible} alt="" />
           <h1 className='font-bold'>Flexible Time</h1>

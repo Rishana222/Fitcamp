@@ -14,42 +14,50 @@ const GymLocation = () => {
         <h1 className='text-2xl md:text-3xl capitalize font-medium px-5 md:px-11 mb-1 lg:px-14'>gym location</h1>
         <p className='md:px-11  px-5 text-gray-500 mb-1 lg:px-14'>Find the nearby gym that near your location to transfrom your healthy journey </p>
 
-   <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 place-items-center lg:px-4'>
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Jakarta} alt="" />
-    <p className='text-gray-600 pt-2'>Jakarta</p>
+   <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 place-items-center gap-6 lg:px-4 xl:px-11'>
+  {/* Jakarta */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Jakarta} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Jakarta</p>
   </div>
 
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Bandng} alt="" />
-    <p className='text-gray-600 pt-2'>Bandng</p>
+  {/* Bandng */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Bandng} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Bandng</p>
   </div>
 
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Surabaya} alt="" />
-    <p className='text-gray-600 pt-2'>Surabaya</p>
+  {/* Surabaya */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Surabaya} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Surabaya</p>
   </div>
 
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Madura} alt="" />
-    <p className='text-gray-600 pt-2'>Madura</p>
+  {/* Madura */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Madura} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Madura</p>
   </div>
 
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Bali} alt="" />
-    <p className='text-gray-600 pt-2'>Bali</p>
+  {/* Bali */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Bali} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Bali</p>
   </div>
 
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Padang} alt="" />
-    <p className='text-gray-600 pt-2'>Padang</p>
+  {/* Padang */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Padang} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Padang</p>
   </div>
 
-  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-6 py-3 space-x-3.5 mb-5'>
-    <img src={Semarang} alt="" />
-    <p className='text-gray-600 pt-2'>Semarang</p>
+  {/* Semarang */}
+  <div className='bg-white flex justify-center items-center w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[170px] xl:max-w-[160px] rounded-4xl shadow-xl/30 px-4 py-2.5 space-x-2.5 mb-5'>
+    <img src={Semarang} alt="" className='h-8 w-auto xl:h-7' />
+    <p className='text-gray-600 pt-1 text-sm xl:text-xs'>Semarang</p>
   </div>
 </div>
+
 
 
     </div> 

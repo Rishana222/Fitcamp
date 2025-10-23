@@ -26,6 +26,7 @@ export const gyms = [
       { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
       { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
+    icon:"src/assets/Operational Time.png",
     opening: "05:00 AM - 11:00 PM",
   },
   {
@@ -40,6 +41,7 @@ export const gyms = [
       { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
       { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
+    icon:"src/assets/Operational Time.png",
     opening: "05:00 AM - 11:00 PM",
   },
   {
@@ -54,6 +56,7 @@ export const gyms = [
       { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
       { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
+    icon:"src/assets/Operational Time.png",
     opening: "05:00 AM - 11:00 PM",
   },
   {
@@ -68,6 +71,7 @@ export const gyms = [
       { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
       { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
+    icon:"src/assets/Operational Time.png",
     opening: "05:00 AM - 11:00 PM",
   },
   {
@@ -82,6 +86,7 @@ export const gyms = [
       { name: "Mattress", desc: "Equipment", icons:"src/assets/Matras.png" },
       { name: "Machine", desc: "Saving Bag", icons:"src/assets/Machine.png" },
     ],
+    icon:"src/assets/Operational Time.png",
     opening: "05:00 AM - 11:00 PM",
   },
 

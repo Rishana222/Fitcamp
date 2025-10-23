@@ -41,37 +41,38 @@ const Search = () => {
                         </button>
                     </div>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-3 bg-white bottom-[-150px] md:bottom-[-90px] overflow-visible text-black absolute w-[90%] left-1/2 transform -translate-x-1/2 shadow-2xl z-10'>
-                    <div className='text-center py-3 mb-3'>
-                        <img className='w-12 mx-auto mb-2' src={Location} alt="" />
-                        <h1 className='capitalize font-medium'>find nearby location</h1>
-                        <p>
-                            Find the nearby gym that <br />
-                            is near your location to transform <br />
-                            your healthy journey
-                        </p>
-                    </div>
+                <div className='grid grid-cols-1 md:grid-cols-3 bg-white bottom-[-150px] md:bottom-[-90px] overflow-visible text-black absolute w-[90%] xl:w-[70%] left-1/2 transform -translate-x-1/2 shadow-2xl z-10'>
+    <div className='text-center py-3 mb-3'>
+        <img className='w-12 mx-auto mb-2' src={Location} alt="" />
+        <h1 className='capitalize font-medium'>find nearby location</h1>
+        <p>
+            Find the nearby gym that <br />
+            is near your location to transform <br />
+            your healthy journey
+        </p>
+    </div>
 
-                    <div className='text-center py-3 mb-3'>
-                        <img className='w-12 mx-auto mb-2' src={Illustration} alt="" />
-                        <h1 className='capitalize font-medium'>Become Membership</h1>
-                        <p>
-                            Access all FitCamp gyms <br />
-                            and become part of our exclusive <br />
-                            healthy community.
-                        </p>
-                    </div>
+    <div className='text-center py-3 mb-3'>
+        <img className='w-12 mx-auto mb-2' src={Illustration} alt="" />
+        <h1 className='capitalize font-medium'>Become Membership</h1>
+        <p>
+            Access all FitCamp gyms <br />
+            and become part of our exclusive <br />
+            healthy community.
+        </p>
+    </div>
 
-                    <div className='text-center py-3 mb-3'>
-                        <img className='w-12 mx-auto mb-2' src={Maintain} alt="" />
-                        <h1 className='capitalize font-medium'>Maintain The Body</h1>
-                        <p>
-                            Ensure long-term wellness <br />
-                            with effective healthy body <br />
-                            maintenance strategies
-                        </p>
-                    </div>
-                </div>
+    <div className='text-center py-3 mb-3'>
+        <img className='w-12 mx-auto mb-2' src={Maintain} alt="" />
+        <h1 className='capitalize font-medium'>Maintain The Body</h1>
+        <p>
+            Ensure long-term wellness <br />
+            with effective healthy body <br />
+            maintenance strategies
+        </p>
+    </div>
+</div>
+
 
             </section>
 

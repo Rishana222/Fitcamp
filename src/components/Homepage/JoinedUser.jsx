@@ -5,7 +5,7 @@ import frame from '../../assets/Frame 36.png'
 const JoinedUser = () => {
   return (
     <>
-      <div className='mb-14 flex flex-col sm:flex-row justify-between items-start sm:items-center px-6 md:px-24'>
+      <div className='mb-14 flex l sm:flex-row justify-between items-start sm:items-center px-6 md:px-24'>
   <h1 className='text-left font-bold sm:text-xl md:text-2xl md:font-extrabold mb-3 sm:mb-0'>
     Joined 10.000+ User <br /> with Happy User
   </h1>
