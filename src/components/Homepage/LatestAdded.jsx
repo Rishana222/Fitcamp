@@ -23,7 +23,7 @@ const LatestAdded = () => {
         </button>
       </div>
       {/* mapping */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6 lg:px-12 xl:px-20 mb-14">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  xl:gap-y-6 p-6 lg:px-12 xl:px-20 mb-14">
   {gyms.map((it, index) => (
     <div
       key={index}
