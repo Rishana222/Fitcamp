@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Categories from './pages/Categories';
+import Detail from './pages/Detail';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category" element={<Categories />} />
+          <Route path="/detail" element={<Detail/>}/>
         </Routes>
         <Footer />
       </Router>

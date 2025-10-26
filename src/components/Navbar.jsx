@@ -1,9 +1,10 @@
 import React from "react";
 import Logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className=" top-3 lg:top-10 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
+    <nav className="absolute top-3 lg:top-10 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
       <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium">
         <div className="flex items-center space-x-2 mb-2 md:mb-0">
           <img src={Logo} alt="Logo" className="w-10 md:w-12" />
@@ -18,7 +19,7 @@ const Navbar = () => {
           <a href="#blog" className="hover:text-gray-700 capitalize">
             blog
           </a>
-          <a href="#testimonial" className="hover:text-gray-700 capitalize">
+         <a href="#testimonial"  className="hover:text-gray-700 capitalize"> 
             testimonial
           </a>
           <a href="#about" className="hover:text-gray-700 capitalize">
