@@ -6,6 +6,7 @@ import Illustration from '../../assets/Illustration.png'
 import Maintain from '../../assets/Maintain.png'
 
 const Search = () => {
+    
     return (
         <>
 
