@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Categories from './pages/Categories';
 import Detail from './pages/Detail';
+import Subscription from './pages/Subscription';
+
 
 function App() {
 
@@ -16,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/category" element={<Categories />} />
           <Route path="/detail" element={<Detail/>}/>
+          <Route path="/subscription" element={<Subscription/>}/>
         </Routes>
         <Footer />
       </Router>
