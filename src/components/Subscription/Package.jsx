@@ -1,8 +1,13 @@
 import React from 'react'
 import subscribe from '../../assets/Subscribe.png'
 import { sData } from '../../data/subscriptiondata'
+import { useNavigate } from 'react-router-dom'
 
 const Package = () => {
+    const Navigate = useNavigate();
+    const handleSubscribeClick = ()=>(
+        Navigate('/checkout')
+    )
     return (
         <>
             <div className="pt-32 mb-10 ">
@@ -35,7 +40,7 @@ const Package = () => {
                                         <h1 className='ml-4 text-xs' >{s.text4}</h1>
                                      </div>
                                      <div className='flex justify-between'>
-                                        <button className='bg-indigo-500 mt-1 text-white px-3 py-1 rounded-full '>Subscribe</button>
+                                        <button onClick={handleSubscribeClick} className='bg-indigo-500 mt-1 text-white px-3 py-1 rounded-full '>Subscribe</button>
                                         <div className='text-xs'>
                                             <p className='font-black'>{s.rp}</p>
                                             <p className='text-gray-500'>{s.duration}</p>

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Categories from './pages/Categories';
 import Detail from './pages/Detail';
 import Subscription from './pages/Subscription';
+import Checkout from './pages/Checkout'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/category" element={<Categories />} />
           <Route path="/detail" element={<Detail/>}/>
           <Route path="/subscription" element={<Subscription/>}/>
+          <Route path="/checkout" element={<Checkout/>}/>
         </Routes>
         <Footer />
       </Router>
