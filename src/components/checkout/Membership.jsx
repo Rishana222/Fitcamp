@@ -3,8 +3,8 @@ import banner from '../../assets/Banner Membership.png'
 
 const Membership = () => {
   return (
-    <div className='px-5 mt-3 mb-4'>
-        <img src={banner} alt="" />
+    <div className='px-5   mb-[100px] md:ml-[70px] lg:ml-[0px]'>
+        <img className='lg:w-[700px] lg:ml-[130px] md:w-[700px]' src={banner} alt="" />
     </div>
   )
 }
