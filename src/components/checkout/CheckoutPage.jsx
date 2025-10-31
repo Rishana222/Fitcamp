@@ -13,7 +13,6 @@ const CheckoutPage = () => {
           <div className="relative bg-sky-200 h-[350px] mb-[1100px] sm:mb-[990px] lg:mb-[480px]">
       <div className="absolute inset-x-0 top-32 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
         
-        {/* ACCOUNT DETAILS */}
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-xl mt-24 lg:mt-0">
           <h1 className="font-bold text-lg mb-2">Account Details</h1>
           <p className="text-gray-500 text-sm mb-4">
@@ -54,7 +53,6 @@ const CheckoutPage = () => {
           </form>
         </div>
 
-        {/* SUMMARY BOX */}
         <div className="lg:col-span-1 bg-white p-6 rounded-xl shadow-xl h-fit">
           <h2 className="font-bold text-lg mb-2">Summary</h2>
           <p className="text-gray-500 text-sm mb-4">Quick snapshot, review your bill</p>
@@ -81,8 +79,6 @@ const CheckoutPage = () => {
             <img className="h-5 w-5" src={vector} alt="" />
           </div>
         </div>
-
-        {/* BOOKING DETAILS */}
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-xl mt-8 lg:mt-0">
           <h1 className="font-bold text-lg mb-2">Booking Details</h1>
           <p className="text-sm text-gray-500 mb-4">Your next workout awaits, check booking details</p>

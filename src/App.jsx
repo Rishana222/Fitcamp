@@ -8,6 +8,9 @@ import Detail from './pages/Detail';
 import Subscription from './pages/Subscription';
 import Checkout from './pages/Checkout'
 import Checkout2 from './pages/Checkout2';
+import Payments from './components/Payment/Payments';
+import ViewSubscription from './components/Payment/ViewSubscription';
+import Transaction from './components/Payment/Transaction';
 
 
 function App() {
@@ -23,6 +26,9 @@ function App() {
           <Route path="/subscription" element={<Subscription/>}/>
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/booking" element={<Checkout2/>}/>
+          <Route path="/payment" element={<Payments/>}/>
+          <Route path="/viewsubscription" element={<ViewSubscription/>}/>
+          <Route path="/ticket" element={<Transaction/>}/>
         </Routes>
         <Footer />
       </Router>
