@@ -5,42 +5,53 @@ import rating from '../../assets/Frame 82 (1).png'
 const HappyStories = () => {
   return (
     <>
-      <div className="bg-gray-50 shadow-2xl w-[90%] sm:w-[80%] md:w-[65%] lg:w-[65%] mx-auto rounded-xl mb-10 left-0">
-  <div className="mb-10 text-left ml-6">
-    <h1 className="font-bold text-3xl mb-2">Happy Stories</h1>
-    <p className="text-xs font-light text-gray-400">
-      What they said about this gym location, facilities, and environment
-    </p>
-  </div>
+        <div className="bg-white shadow-2xl rounded-xl mb-10 px-6 py-8
+    w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[650px] xl:max-w-[700px]
+    mx-auto lg:mx-0 lg:ml-[60px] mt-[30px]"> {/* Adjusted max-w to match Fitcamp Central Park card */}
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 px-6 md:px-8 mb-10">
-    {testimonials.map((items, index) => (
-      <div
-        key={index}
-        className="border border-gray-200 rounded-lg px-4 py-3 h-auto sm:h-[170px] w-full"
-      >
-        <div className="flex mb-2">
-          <img className="h-[45px]" src={items.img} alt="" />
-          <div className="ml-3">
-            <h1 className="font-bold">{items.name}</h1>
-            <p className="text-xs text-gray-500">{items.role}</p>
-          </div>
-        </div>
-
-        <p className="text-gray-500 font-light mb-3 text-sm">{items.text}</p>
-        <div>
-          <img src={rating} alt="" />
-        </div>
+      <div className="mb-8 text-left">
+        <h1 className="font-bold text-3xl mb-2 text-gray-900">Happy Stories</h1>
+        <p className="text-sm font-light text-gray-500">
+          What they said about this gym location, facilities, and environment
+        </p>
       </div>
-    ))}
-  </div>
 
-  <div className="py-3">
-    <button className="bg-black text-white rounded-full px-5 py-3 mx-auto flex">
-      Load More
-    </button>
-  </div>
-</div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+        {testimonials.map((items, index) => (
+          <div
+            key={index}
+            className="border border-gray-200 rounded-lg px-4 py-4 h-full flex flex-col justify-between"
+          >
+            <div className="flex items-center mb-3">
+              <img
+                className="h-[45px] w-[45px] rounded-full object-cover"
+                src={items.img}
+                alt={items.name}
+              />
+              <div className="ml-3">
+                <h1 className="font-bold text-base">{items.name}</h1>
+                <p className="text-xs text-gray-500">{items.role}</p>
+              </div>
+            </div>
+
+            <p className="text-gray-700 font-light mb-3 text-sm leading-relaxed">
+              {items.text}
+            </p>
+            <div>
+              {rating && <img src={rating} alt="Rating" className="h-[20px] w-auto" />}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="py-3 flex justify-center">
+        <button className="bg-black text-white rounded-full px-6 py-3 text-sm hover:bg-gray-800 transition-colors">
+          Load More
+        </button>
+      </div>
+    </div>
+
+
 
     </>
   )
