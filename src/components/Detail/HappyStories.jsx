@@ -7,7 +7,7 @@ const HappyStories = () => {
     <>
         <div className="bg-white shadow-2xl rounded-xl mb-10 px-6 py-8
     w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[650px] xl:max-w-[700px]
-    mx-auto lg:mx-0 lg:ml-[60px] xl:ml-[100px] mt-[30px]"> {/* Adjusted max-w to match Fitcamp Central Park card */}
+    mx-auto lg:mx-0 lg:ml-[60px] xl:ml-[150px] mt-[30px]"> {/* Adjusted max-w to match Fitcamp Central Park card */}
 
       <div className="mb-8 text-left">
         <h1 className="font-bold text-3xl mb-2 text-gray-900">Happy Stories</h1>
