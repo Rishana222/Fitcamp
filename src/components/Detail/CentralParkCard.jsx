@@ -6,7 +6,7 @@ import profile from '../../assets/Profile 4.png'
 const CentralParkCard = () => {
     return (
         <>
-           <div className="flex flex-col lg:flex-row justify-center lg:justify-start lg:gap-[10px] w-full mt-[100px] md:mt-[150px] lg:mt-[120px] xl:mt-[80px] lg:ml-[60px]">
+           <div className="flex flex-col lg:flex-row justify-center lg:justify-start lg:gap-[60px] w-full mt-[100px] md:mt-[150px] lg:mt-[120px] xl:mt-[80px] lg:ml-[60px] xl:ml-[100px]">
       <div className="bg-white rounded-xl shadow-2xl px-4 sm:px-6 py-8 w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[650px] xl:max-w-[700px] mx-auto lg:mx-0">
         <div className="flex flex-col sm:flex-row justify-between mb-7 items-start sm:items-center">
           <div>
@@ -75,8 +75,8 @@ const CentralParkCard = () => {
         </div>
       </div>
 
-      {/* Contact Person Card */}
-      <div className="bg-white rounded-xl shadow-2xl h-[180px] w-full max-w-[90%] sm:max-w-[60%] md:max-w-[40%] lg:max-w-[300px] xl:max-w-[250px] mx-auto mt-8 lg:mt-0 px-6 py-5">
+      {/* Contact Person  */}
+      <div className="bg-white rounded-xl shadow-2xl h-[180px] w-full max-w-[90%] sm:max-w-[60%] md:max-w-[40%] lg:max-w-[250px] xl:max-w-[250px]  mt-8 lg:mt-0 px-6 py-5">
         <h1 className="font-black text-xl mb-3">Contact Person</h1>
         <hr className="border-t border-gray-300 w-full mb-4" />
         <div className="flex items-center">
