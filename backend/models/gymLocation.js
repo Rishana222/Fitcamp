@@ -3,7 +3,8 @@ const gymLocationSchema = new mongoose.Schema({
      name:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
+        trim:true
      },
      cardImage:{
         type:String,

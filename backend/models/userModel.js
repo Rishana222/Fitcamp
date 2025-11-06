@@ -3,6 +3,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        trim:true
     },
     email: {
         type: String,
@@ -19,6 +20,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true
     }
+    
 })
 
 const user = mongoose.model("user", userSchema)
