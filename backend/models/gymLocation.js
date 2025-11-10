@@ -9,8 +9,7 @@ const gymLocationSchema = new mongoose.Schema({
      cardImage:{
         type:String,
         required:true
-     }
-     
+     }        
 })
 
 const gymLocation = mongoose.model('gymLocation',gymLocationSchema)
