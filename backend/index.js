@@ -1,13 +1,15 @@
 const express = require('express');
 const {DBConnection} = require("./config/db");
 const userRoute = require('./routes/user.route')
+const { errorMiddleware } = require('./handlers/errorHandler');
 
 const app= express();
 const PORT = 5000;
-
+app.use(express.json());
 DBConnection()
-app.use(express.json())
+
 app.use('/api/user',userRoute)
+app.use(errorMiddleware);
 
 app.get('/',(req,res)=>{
     res.send("hello world")

@@ -2,25 +2,25 @@ const { createUserService, getUserService, deleteUserService } = require('../ser
 
 
 
-exports.userCreateController = async (req, res) => {
+const userCreateController = async (req, res) => {
     try {
-        const user = await createUserService(req.body)
+      const user = await createUserService(req.body)
         return res.status(201).json(user)
     } catch (error) {
         throw error
     }
 };
 
-exports.userGetController = async (req, res) => {
+const userGetController = async (req, res) => {
     try {
-        const users = await getUserService();
+        const users = await getUserService(req.params.id);
         return res.status(200).json(users);
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
 };
 
-exports.userDeleteController = async (req, res) => {
+const userDeleteController = async (req, res) => {
     try {
         await deleteUserService(req.params.id);
         return res.status(200).json({message:'User deleted successfully' })

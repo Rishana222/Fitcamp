@@ -6,8 +6,9 @@ const route = express.Router();
 
 
 route.post('/create',userCreateController)
-route.get('/getuser',userGetController)
-route.delete('/deleteuser',userDeleteController)
+route.get('/get', userGetController);
+route.get('/getuser/:id',userGetController)
+route.delete('/deleteuser/:id',userDeleteController)
 
 
 module.exports=route
