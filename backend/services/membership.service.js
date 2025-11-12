@@ -14,7 +14,7 @@ const getAllMembershipService = async (id)=>{
 }
 
 const updateMembershipService = async (id,updates)=>{
-    return await Membership.findByIdAndUpdate(id,updates)
+    return await Membership.findByIdAndUpdate(id,updates,{new:true})
 }
 
 const deleteMembershipService = async (id)=>{

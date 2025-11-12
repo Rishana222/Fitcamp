@@ -4,6 +4,7 @@ const userRoute = require('./routes/user.route')
 const subscriptionRoute = require('./routes/subscription.route')
 const paymentRoute = require('./routes/payment.route')
 const membershipRoute = require('./routes/membership.route')
+const gymLocationRoute = require('./routes/gymLocation.route')
 const { errorMiddleware } = require('./handlers/errorHandler');
 
 const app= express();
@@ -15,6 +16,7 @@ app.use('/api/user',userRoute)
 app.use('/api/subscription',subscriptionRoute)
 app.use('/api/payment',paymentRoute)
 app.use('/api/membership',membershipRoute)
+app.use('/api/gymLocation',gymLocationRoute)
 app.use(errorMiddleware);
 
 app.get('/',(req,res)=>{
