@@ -32,8 +32,9 @@ const FacilityUpdateController = async (req, res) => {
 const FacilityDeleteController = async (req,res)=>{
     try {
        const deleted = await deleteFacilityService(req.params.id,req.body) 
-       if (!deleted) return res.status(404).json({ message: 'Facility not found' })
-         return res.status(200).json({ message: 'Deleted successfully' })
+       if (!deleted) return res.status(404).json({ message: 'Facility not found' });
+       
+        return res.status(200).json({ message: 'Deleted successfully' });
     } catch (error) {
       return res.status(400).json({ message: error.message })  
     }

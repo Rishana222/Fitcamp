@@ -15,7 +15,10 @@ const getUserService = async (id) => {
 }
 
 const deleteUserService = async (id) => {
-    return await User.findByIdAndDelete(id);
+    if (!id)
+        throw new Error('user id is required')
+    const user = await User.findByIdAndDelete(id)
+    return user
 }
 
-module.exports = { createUserService, getUserService ,deleteUserService}
+module.exports = { createUserService, getUserService, deleteUserService }

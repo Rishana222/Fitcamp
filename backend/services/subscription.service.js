@@ -10,20 +10,30 @@ const createSubscriptionService = async (data) => {
     return subscribe
 };
 
-const getAllSubscriptionsService = async ()=>{
+const getAllSubscriptionsService = async () => {
     return await Subscription.find();
 };
 
-const getSubscriptionsService = async (id) => {
-    return await Subscription.findById(id);
-};
+const getSubscriptionsService = async (id)=>{
+    if (!id) return null
+     const subscription = await  Subscription.findById(id) 
+     return subscription || null
+}
 
 const updateSubscriptionsService = async (id,update) =>{
-    return await  Subscription.findByIdAndUpdate(id,update,{new:true});
-};
+    if (!id)
+         throw new Error('invalid subscription id')     
+    const updated = await Subscription.findByIdAndUpdate(id,update,{ new: true })
+    if (!updated) 
+        throw new Error('subscription not found')
+    return updated
+} 
 
-const deleteSubscriptionsService = async (id) =>{
-    return await Subscription.findByIdAndDelete(id);
-};
+const deleteSubscriptionsService = async (id) => {
+    if (!id)
+       throw new Error('user id is required') 
+    const deleted = await Subscription.findByIdAndDelete(id)
+    return deleted
+}
 
-module.exports = { createSubscriptionService,getAllSubscriptionsService ,getSubscriptionsService,updateSubscriptionsService,deleteSubscriptionsService}
+module.exports = { createSubscriptionService, getAllSubscriptionsService, getSubscriptionsService, updateSubscriptionsService, deleteSubscriptionsService }

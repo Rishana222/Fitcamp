@@ -6,7 +6,7 @@ const route = express.Router()
 route.post('/createfacility',FacilityCreateController)
 route.get('/getfacility',FacilityGetController)
 route.put('/updatesfacility/:id',FacilityUpdateController)
-route.delete('/deletefaciity/:id',FacilityDeleteController)
+route.delete('/deletefacility/:id',FacilityDeleteController)
 
 
 module.exports=route
