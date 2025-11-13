@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-export const DBConnection = async ()=>{
-    try {
-      await mongoose.connect('mongodb+srv://rishanaponneth_db_user:lJRwXvDQefsmo1j7@fitcamp0.dmhgvoi.mongodb.net/?appName=fitcamp0').then(()=>{console.log("MongoDB connected successfully");
-      }) 
-    } catch (error) {
-      console.log(error);
-        
-    }
-}
+dotenv.config();
+
+const DBConnection = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log(" MongoDB connected successfully");
+  } catch (error) {
+    console.log(" DB connection error:", error.message);
+  }
+};
+
+module.exports = { DBConnection };

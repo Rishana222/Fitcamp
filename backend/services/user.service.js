@@ -10,6 +10,10 @@ const createUserService = async (data) => {
     return user
 }
 
+const getAllUserService = async ()=>{
+    return await User.find()
+}
+
 const getUserService = async (id) => {
     return await User.findById(id);
 }
@@ -21,4 +25,4 @@ const deleteUserService = async (id) => {
     return user
 }
 
-module.exports = { createUserService, getUserService, deleteUserService }
+module.exports = { createUserService, getUserService, deleteUserService,getAllUserService}

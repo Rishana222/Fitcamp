@@ -1,4 +1,5 @@
 const express = require('express');
+const dotenv = require("dotenv");
 const {DBConnection} = require("./config/db");
 const userRoute = require('./routes/user.route')
 const subscriptionRoute = require('./routes/subscription.route')
@@ -8,8 +9,11 @@ const gymLocationRoute = require('./routes/gymLocation.route')
 const facilityRoute = require ('./routes/facility.route')
 const { errorMiddleware } = require('./handlers/errorHandler');
 
+
+dotenv.config();
+
 const app= express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.use(express.json());
 DBConnection()
 
