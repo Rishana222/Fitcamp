@@ -10,19 +10,25 @@ const createUserService = async (data) => {
     return user
 }
 
-const getAllUserService = async ()=>{
+const getAllUserService = async () => {
     return await User.find()
 }
 
 const getUserService = async (id) => {
-    return await User.findById(id);
+    const user = await User.findById(id);
+    if (!user) {
+        throw new Error('user not found', 400)
+    }
+    return user
 }
 
 const deleteUserService = async (id) => {
-    if (!id)
-        throw new Error('user id is required')
+    const existingUser = await User.findById(id)
+    if (!existingUser) {
+        throw new Error('user not found', 400)
+    }
     const user = await User.findByIdAndDelete(id)
     return user
 }
 
-module.exports = { createUserService, getUserService, deleteUserService,getAllUserService}
+module.exports = { createUserService, getUserService, deleteUserService, getAllUserService }

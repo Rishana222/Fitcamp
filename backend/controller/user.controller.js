@@ -1,3 +1,4 @@
+const { errorMiddleware, ErrorHandler } = require('../handlers/errorHandler');
 const { createUserService, getUserService, deleteUserService,getAllUserService } = require('../services/user.service')
 
 
@@ -22,6 +23,11 @@ const userAllGetController = async (req, res) => {
 
 const userGetController = async (req, res) => {
     try {
+      // const id = req.params.id
+      // if(!id){
+      //   throw ErrorHandler("id requ",400)
+
+      // }
         const users = await getUserService(req.params.id);
         return res.status(200).json(users);
     } catch (error) {
@@ -31,11 +37,22 @@ const userGetController = async (req, res) => {
 
 const userDeleteController = async (req, res) => {
     try {
-        await deleteUserService(req.params.id);
-        return res.status(200).json({message:'User deleted successfully' })
+        const { id } = req.params;
+
+        if (!id) {
+            throw ErrorHandler("id requ", 400);
+        }
+
+        await deleteUserService(id);
+
+        return res.status(200).json({
+            message: 'User deleted successfully'
+        });
+
     } catch (error) {
-       return res.status(400).json({ message:error.message});
+        return res.status(error.status || 400).json({
+            message: error.message
+        });
     }
 };
-
 module.exports = { userCreateController, userGetController, userDeleteController,userAllGetController }
