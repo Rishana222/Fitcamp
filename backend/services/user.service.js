@@ -14,21 +14,21 @@ const getAllUserService = async () => {
     return await User.find()
 }
 
-const getUserService = async (id) => {
+const getUserService = async (id)=>{
     const user = await User.findById(id);
-    if (!user) {
-        throw new Error('user not found', 400)
+    if (!user){
+        throw new ErrorHandler('user not found',404)
     }
     return user
 }
 
-const deleteUserService = async (id) => {
-    const existingUser = await User.findById(id)
-    if (!existingUser) {
-        throw new Error('user not found', 400)
+const deleteUserService = async (id)=>{
+    const existingUser = await User.findById(id);
+    if (!existingUser){
+        throw new ErrorHandler('user not found',404);
     }
-    const user = await User.findByIdAndDelete(id)
-    return user
+    const user =await User.findByIdAndDelete(id);
+    return user;
 }
 
 module.exports = { createUserService, getUserService, deleteUserService, getAllUserService }

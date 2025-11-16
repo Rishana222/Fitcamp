@@ -6,53 +6,54 @@ const { createUserService, getUserService, deleteUserService,getAllUserService }
 const userCreateController = async (req, res) => {
     try {
       const user = await createUserService(req.body)
-        return res.status(201).json(user)
+      res.status(201).json({ success: true, data: user });
     } catch (error) {
-        throw error
+       res.status(400).json({ success: false, message: error.message });
     }
 };
 
 const userAllGetController = async (req, res) => {
-  try {
-    const users = await getAllUserService()
-    res.status(200).json(users)
-  } catch (error) {
-    res.status(400).json({ message: error.message })
-  }
-}
+    try {
+        const users = await getAllUserService();
+       res.status(200).json({ success: true, data: users });
+    } catch (error) {
+         res.status(400).json({ success: false, message: error.message });
+    }
+};
 
 const userGetController = async (req, res) => {
     try {
-      // const id = req.params.id
-      // if(!id){
-      //   throw ErrorHandler("id requ",400)
-
-      // }
-        const users = await getUserService(req.params.id);
-        return res.status(200).json(users);
-    } catch (error) {
-        return res.status(400).json({ message: error.message });
+         const id = req.params.id;
+        if (!id) {
+            throw new ErrorHandler("ID is required", 400);
+        }
+        const user = await getUserService(id);
+        res.status(200).json({ success: true, data: user});
+       } catch (error) {
+        res.status(error.statusCode || 400).json({ success: false,message: error.message
+       });
     }
-};
-
+};    
+    
 const userDeleteController = async (req, res) => {
     try {
-        const { id } = req.params;
-
+        const id = req.params.id;
         if (!id) {
-            throw ErrorHandler("id requ", 400);
+            throw new ErrorHandler("ID is required", 400);
         }
 
-        await deleteUserService(id);
+        const deletedUser = await deleteUserService(id);
 
-        return res.status(200).json({
-            message: 'User deleted successfully'
-        });
-
-    } catch (error) {
-        return res.status(error.status || 400).json({
-            message: error.message
-        });
+        res.status(200).json({success: true,message: 'User deleted successfully',data: deletedUser
+        });    
+        } catch (error) {
+        res.status(error.statusCode || 400).json({success: false, message: error.message
+         });
     }
-};
+};     
+           
+          
+            
+        
+    
 module.exports = { userCreateController, userGetController, userDeleteController,userAllGetController }

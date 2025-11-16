@@ -1,5 +1,6 @@
 const Membership = require('../models/membershipModel')
 const { ErrorHandler } = require('../handlers/errorHandler')
+const membership = require('../models/membershipModel')
 
 const createMembershipService = async (data) => {
     const membershipModel = new Membership(data)
@@ -11,25 +12,29 @@ const getMembershipService = async () => {
 }
 
 const getAllMembershipService = async (id)=>{
-  if(!id) return null
-  const membership = await Membership.findById(id)
-  return membership
+ const membership= await Membership.findById(id)
+ if(!membership){
+    throw new ErrorHandler('Membership not found',404)
+ }
+ return membership
 }
 
-const updateMembershipService = async (id, updated) => {
-    if (!id)
-        throw new ErrorHandler('invalid membership id')
-    const update = await Membership.findByIdAndUpdate(id, updated, { new: true })
-    if (!update)
-        throw new ErrorHandler('membership ot found')
-    return update
-}
+const updateMembershipService = async (id, updatedData) => {
+    const existingMembership = await Membership.findById(id);
+    if (!existingMembership) {
+        throw new ErrorHandler('Membership not found', 404);
+    }
+    const updatedMembership = await Membership.findByIdAndUpdate(  id,updatedData, { new: true } );
+     return updatedMembership;
+}; 
 
 const deleteMembershipService = async (id) => {
-    if (!id)
-        throw new ErrorHandler('user id is required')
-    const deleted = await Membership.findByIdAndDelete(id)
-    return deleted
+  const existingMembership = await Membership.findById(id);
+  if (!existingMembership){
+    throw new ErrorHandler('membership not found',404)
+  }
+  const membership= await Membership.findByIdAndDelete(id)
+  return membership
 }
 
 module.exports = { createMembershipService, getMembershipService, getAllMembershipService, updateMembershipService, deleteMembershipService }

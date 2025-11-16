@@ -1,3 +1,4 @@
+const { ErrorHandler } = require('../handlers/errorHandler');
 const { createSubscriptionService, getAllSubscriptionsService,getSubscriptionsService, updateSubscriptionsService, deleteSubscriptionsService } = require('../services/subscription.service')
 
 const subscriptionCreateController = async (req, res) => {
@@ -19,35 +20,53 @@ const getAllSubscriptionsController = async (req, res) => {
 };
 
 const subscriptionGetController = async (req, res) => {
-    try {
-        const subscriptions = await getSubscriptionsService(req.params.id)
-        return res.status(200).json(subscriptions)
-    } catch (error) {
-        return res.status(400).json({ message: error.message })
-    }
+  try {
+     const id= req.params.id
+     if (!id){
+        throw new ErrorHandler('ID is required',400)
+     }
+     const subscription = await getSubscriptionsService(id);
+   return res.status(200).json({success: true, data: subscription})
+  } catch (error) {
+    return res.status(400).json({success: false,message: error.message})
+  }
 }
 
 const subscriptionUpdateController = async (req,res)=>{
-    try {
-        const updatedSubscription = await updateSubscriptionsService(req.params.id, req.body);
+   try {
+    const id = req.params.id;
+    const updateData = req.body;
+    if(!id){
+        throw new ErrorHandler('ID is required',400)
+    }
+    const updatedSubscription = await updateSubscriptionsService(id,updateData);
+    res.status(200).json({success: true, message: "Subscription updated successfully", data: updatedSubscription})
+    } catch (error) {
+    res.status(400).json({success: false,message: error.message})
+   }
+}       
+           
+   
 
-        if (!updatedSubscription) {
-            return res.status(400).json({message:"Subscription not found"})
+const subscriptionDeleteController = async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (!id) {
+            throw new ErrorHandler("ID is required", 400);
         }
+        const deletedSubscription = await deleteSubscriptionsService(id);
 
-        res.status(200).json({message:"Subscription updated successfully"})
+        res.status(200).json({ success: true, message: 'Subscription deleted successfully', data: deletedSubscription
+         });
     } catch (error) {
-        return res.status(500).json({message:"something went wrong"})
+        res.status(error.status || 400).json({ success: false,message: error.message
+        });
     }
-}
-
-const subscriptionDeleteController = async (req,res)=>{
-    try {
-        await deleteSubscriptionsService(req.params.id);
-        return res.status(200).json({message:'User deleted successfully' })
-    } catch (error) {
-        return res.status(400).json({ message: error.message })
-    }
-}
+};      
+            
+       
+           
+           
+        
 
 module.exports = { subscriptionCreateController, subscriptionGetController ,subscriptionDeleteController,subscriptionUpdateController,getAllSubscriptionsController}

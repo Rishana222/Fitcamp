@@ -14,26 +14,30 @@ const getAllSubscriptionsService = async () => {
     return await Subscription.find();
 };
 
-const getSubscriptionsService = async (id)=>{
-    if (!id) return null
-     const subscription = await  Subscription.findById(id) 
-     return subscription || null
-}
+const getSubscriptionsService = async (id) => {
+    const subscription = await Subscription.findById(id);
+    if (!subscription) {
+        throw new ErrorHandler('Subscription not found', 404);
+    }
+    return subscription;
+};
 
-const updateSubscriptionsService = async (id,update) =>{
-    if (!id)
-         throw new Error('invalid subscription id')     
-    const updated = await Subscription.findByIdAndUpdate(id,update,{ new: true })
-    if (!updated) 
-        throw new Error('subscription not found')
-    return updated
-} 
+const updateSubscriptionsService = async (id, updateData) => {
+    const existingSubscription = await Subscription.findById(id);
+    if (!existingSubscription) {
+        throw new ErrorHandler('subscription not found', 404);
+    }
+    const updatedSubscription = await Subscription.findByIdAndUpdate(id,updateData, { new: true });
+    return updatedSubscription;
+};
 
 const deleteSubscriptionsService = async (id) => {
-    if (!id)
-       throw new Error('user id is required') 
-    const deleted = await Subscription.findByIdAndDelete(id)
-    return deleted
-}
+    const existingSubscription = await Subscription.findById(id);
+    if (!existingSubscription) {
+       throw new ErrorHandler('subscription not found',404)
+    }
+    const subscription = await Subscription.findByIdAndDelete(id);
+    return subscription;
+};
 
 module.exports = { createSubscriptionService, getAllSubscriptionsService, getSubscriptionsService, updateSubscriptionsService, deleteSubscriptionsService }
