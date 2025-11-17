@@ -1,5 +1,6 @@
 const GymLocation = require ('../models/gymLocation')
 const {ErrorHandler} = require ('../handlers/errorHandler')
+const { findById } = require('../models/membershipModel')
 
 const createGymLocationService =async (data)=>{
     const gym = await GymLocation(data)
@@ -11,19 +12,21 @@ const getGymLocationService = async()=>{
 }
 
 const updateGymLocationService = async (id,update)=>{
-    if(!id)
-        throw new ErrorHandler('invalid id')
-    const updated = await GymLocation.findByIdAndUpdate(id,update,{new:true})
-    if (!updated)
-        throw new ErrorHandler("gymLocation not found")
-    return updated
+const existingLocation = await GymLocation.findById(id)
+if (!existingLocation) {
+    throw new ErrorHandler('Location not found',404)
+}
+const updatedLocation = await GymLocation.findByIdAndUpdate(id,update,{new:true})
+return updatedLocation
 }
 
 const deleteGymLocationService = async (id)=>{
-    if(!id)
-        throw new ErrorHandler('user id is required')
-    const deleted = await GymLocation.findByIdAndDelete(id)
-    return deleted
+  const existingLocation = await findById(id)
+  if(!existingLocation){
+    throw new ErrorHandler('Location not found',404)
+  }
+  const location = await GymLocation.findByIdAndDelete(id)
+  return location
 }
 
 module.exports={createGymLocationService,getGymLocationService,updateGymLocationService,deleteGymLocationService}

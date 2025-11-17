@@ -1,5 +1,6 @@
 const Facility = require('../models/facilityModel')
 const {ErrorHandler} = require ('../handlers/errorHandler')
+const { findById } = require('../models/gymLocation')
 
 const createFacilityService = async (data) => {
     const facility = new Facility(data)
@@ -11,19 +12,21 @@ const getFacilityService = async () => {
 }
 
 const updateFacilityService = async (id,updated)=>{
-    if(!id)
-        throw new ErrorHandler('invalid id')
-    const update = await Facility.findByIdAndUpdate(id,updated,{new:true})
-    if(!update)
-        throw new ErrorHandler('facility not found')
-    return update
+   const existingFacility = await findById(id)
+   if (!existingFacility){
+    throw new ErrorHandler('facility not found',404)
+   }
+   const updatedFacility = await Facility.findByIdAndUpdate(id,updated,{new:true})
+   return updatedFacility
 
 }
 const deleteFacilityService = async (id)=>{
-    if(!id)
-        throw new ErrorHandler('id required')
-    const deleted = await Facility.findByIdAndDelete(id)
-    return deleted
+   const existingFacility = await findById(id)
+   if (!existingFacility){
+    throw new ErrorHandler('facility not found',404)
+   }
+   const deleteFacility = await Facility.findByIdAndDelete(id)
+   return deleteFacility
 }
 
 module.exports = { createFacilityService, getFacilityService, updateFacilityService,deleteFacilityService }

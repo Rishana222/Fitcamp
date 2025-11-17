@@ -19,7 +19,7 @@ const getUserService = async (id)=>{
     if (!user){
         throw new ErrorHandler('user not found',404)
     }
-    return user
+    return user;
 }
 
 const deleteUserService = async (id)=>{
