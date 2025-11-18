@@ -1,10 +1,133 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/Home';
+import Categories from './pages/Categories';
+import Detail from './pages/Detail';
+import Subscription from './pages/Subscription';
+import Checkout from './pages/Checkout'
+import Checkout2 from './pages/Checkout2';
+import Payments from './components/Payment/Payments';
+import ViewSubscription from './components/Payment/ViewSubscription';
+import Transaction from './components/Payment/Transaction';
+import Dashboard from './Dashboard.jsx';
+
+
+
+
+
+const router = createBrowserRouter([
+
+  {
+    path: '/',
+    element: <App />,
+    children: [
+
+      {
+        path: "/",
+        element: (
+          <>
+
+            <Home />
+
+          </>
+        ),
+      },
+      {
+        path: "/category",
+        element: (
+          <>
+
+            <Categories />
+
+          </>
+        ),
+      },
+      {
+        path: "/detail",
+        element: (
+          <>
+
+            <Detail />
+
+          </>
+        ),
+      },
+      {
+        path: "/subscription",
+        element: (
+          <>
+
+            <Subscription />
+
+          </>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <>
+
+            <Checkout />
+
+          </>
+        ),
+      },
+      {
+        path: "/booking",
+        element: (
+          <>
+
+            <Checkout2 />
+
+          </>
+        ),
+      },
+      {
+        path: "/payment",
+        element: (
+          <>
+
+            <Payments />
+
+          </>
+        ),
+      },
+      {
+        path: "/viewsubscription",
+        element: (
+          <>
+
+            <ViewSubscription />
+
+          </>
+        ),
+      },
+      {
+        path: "/ticket",
+        element: (
+          <>
+
+            <Transaction />
+
+          </>
+        ),
+      },
+    ]
+  },
+  {
+    path:'/dashboard',
+    element:<Dashboard/>
+  }
+]);
+
+
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
