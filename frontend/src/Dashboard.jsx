@@ -7,18 +7,22 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+
 const { Header, Sider, Content } = Layout;
 
 const Dashboard = () => {
   const [collapsed, setCollapsed] = useState(false);
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
   return (
-    <Layout className='h-screen'>
+    <Layout className="h-screen">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical h-40" />
+
         <Menu
           theme="dark"
           mode="inline"
@@ -27,13 +31,12 @@ const Dashboard = () => {
             {
               key: '1',
               icon: <UserOutlined />,
-              label: <Link to={''}></Link>,
-              
+              label: <Link to="gym-location">Gym Location</Link>,
             },
             {
               key: '2',
               icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              label: <Link to="facilities">Facility</Link>,
             },
             {
               key: '3',
@@ -43,6 +46,7 @@ const Dashboard = () => {
           ]}
         />
       </Sider>
+
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button
@@ -56,6 +60,7 @@ const Dashboard = () => {
             }}
           />
         </Header>
+
         <Content
           style={{
             margin: '24px 16px',
@@ -65,11 +70,11 @@ const Dashboard = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-         
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
   );
 };
 
-export default Dashboard
+export default Dashboard;
