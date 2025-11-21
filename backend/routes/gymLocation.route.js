@@ -1,11 +1,12 @@
 const express = require ('express')
 const GymLocation = require('../models/gymLocation')
 const { GymLocationCreateController, GymLocationGetController, GymLocationUpdateController, GymLocationDeleteController } = require('../controller/gymLocation.controller')
+const upload = require('../middlewares/uploadMiddlewares')
 const route = express.Router()
 
-route.post('/creategymLocation',GymLocationCreateController)
+route.post('/creategymLocation',upload.single('cardImage'),GymLocationCreateController)
 route.get('/getgymLocation',GymLocationGetController)
-route.put('/updategymLocation',GymLocationUpdateController)
+route.put('/updategymLocation',upload.single('cardImage'),GymLocationUpdateController)
 route.delete('/deletegymLocation/:id',GymLocationDeleteController)
 
 

@@ -3,7 +3,15 @@ const { createGymLocationService, getGymLocationService, updateGymLocationServic
 
 const GymLocationCreateController = async (req, res) => {
     try {
-        const gymLocation = await createGymLocationService(req.body)
+        const data = req.body;
+
+        if (req.file) {
+            data.cardImage = req.file.path; 
+        } else {
+             return res.status(400).json({ message: "cardImage is required" });
+        }
+
+        const gymLocation = await createGymLocationService(data)
         return res.status(201).json(gymLocation)
     } catch (error) {
         return res.status(400).json({ message: error.message })
@@ -23,13 +31,19 @@ const GymLocationUpdateController = async (req, res) => {
     try {
      const id = req.params.id;
      const update = req.body;
-     if (!id){
-        throw new ErrorHandler('id id required',400)
+
+     if (req.file) {
+        update.cardImage = req.file.path;
      }
-     const updatedLocation = await updateGymLocationService(id,update)
-     return res.status(200).json({success:true,message:'location updated successfully',data:updatedLocation})
+
+     if (!id){
+        throw new ErrorHandler('id is required',400)
+     }
+     
+     const updatedLocation = await updateGymLocationService(id, update)
+     return res.status(200).json({success:true, message:'location updated successfully', data:updatedLocation})
     } catch (error) {
-    return res.status(400).json({success:false,message:error.message}) 
+    return res.status(400).json({success:false, message:error.message}) 
     }
 }
 

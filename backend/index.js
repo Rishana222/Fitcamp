@@ -8,11 +8,13 @@ const membershipRoute = require('./routes/membership.route')
 const gymLocationRoute = require('./routes/gymLocation.route')
 const facilityRoute = require ('./routes/facility.route')
 const { errorMiddleware } = require('./handlers/errorHandler');
+const cors = require('cors');
 
 
 dotenv.config();
 
 const app= express();
+app.use(cors())
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 DBConnection()
