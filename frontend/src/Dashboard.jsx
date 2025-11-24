@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import location from '../src/assets/icons8-location-16 (1).png'
+import facility from '../src/assets/icons8-treadmill-16 (1).png'
+import subscription from './assets/icons8-subscription-16.png'
+import gym from './assets/icons8-gym-16 (2).png'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
+ WalletOutlined ,
+  EnvironmentOutlined,
+  ToolOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
@@ -30,19 +34,24 @@ const Dashboard = () => {
           items={[
             {
               key: '1',
-              icon: <UserOutlined />,
+              icon: <img src={location}/>,
               label: <Link to="gym-location">Gym Location</Link>,
             },
             {
               key: '2',
-              icon: <VideoCameraOutlined />,
-              label: <Link to="facilities">Facility</Link>,
+              icon:  <img src={facility}/>,
+              label: <Link to="facilities">Facilities</Link>,
             },
             {
               key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
+              icon: <img src={subscription}/>,
+              label: <Link to="subscription">Subscriptions</Link>,
             },
+             {
+              key: '4',
+              icon: <img src={gym}/>,
+              label: <Link to="gym">Gym</Link>,
+            }
           ]}
         />
       </Sider>

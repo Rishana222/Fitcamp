@@ -1,124 +1,125 @@
 import { InboxOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Form, Image, Input, Modal, Table } from "antd";
+import { Button, Form, Image, Input, Modal, Table, Tag, message } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
-import axios from "axios";
+import { createFacility, getFacility } from "../../utils/facilityApi";
 
 function FacilityPage() {
-  const [openCreateModal, setOpenCreateModal] = useState(false);
+    const [openCreateModal, setOpenCreateModal] = useState(false);
 
-  // GET Facilities
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ["getFacilities"],
-    queryFn: async () => axios.get("/api/facility").then((res) => res.data),
-  });
-
-  // TABLE Columns
-  const columns = [
-    {
-      title: "Facility Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (src) => <Image width={80} src={src} />,
-    },
-    {
-      title: "Icons",
-      dataIndex: "icons",
-      key: "icons",
-      render: (icons) => icons?.join(", "),
-    },
-  ];
-
-  // Submit Create Facility
-  const onCreateFormSubmit = async (values) => {
-    const iconsArray = values.icons.split(",").map((i) => i.trim());
-
-    await axios.post("/api/facility", {
-      name: values.name,
-      description: values.description,
-      image: values.image, // from normal input (URL)
-      icons: iconsArray,
+    const { data, isLoading, refetch } = useQuery({
+        queryKey: "getFacility",
+        queryFn: () => getFacility()
     });
 
-    setOpenCreateModal(false);
-    refetch();
-  };
+    const columns = [
+        {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+        },
+        {
+            title: "Description",
+            dataIndex: "description",
+            key: "description",
+        },
+        {
+            title: "Image",
+            dataIndex: "image",
+            key: "image",
+            render: (text) => <Image width={70} src={text} />
+        },
+        {
+            title: "Icons",
+            dataIndex: "icons",
+            key: "icons",
+            render: (icons) =>
+                Array.isArray(icons) ? icons.map((icon, index) => (
+                    <Tag key={index} color="blue">{icon}</Tag>
+                )) : null
+        }
+        // Action column removed
+    ];
 
-  return (
-    <>
-      {/* Header Add Button */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Facilities</h2>
-        <Button type="primary" onClick={() => setOpenCreateModal(true)}>
-          Add Facility
-        </Button>
-      </div>
+    const onCreateFormSubmit = async (values) => {
+        try {
+            const payload = {
+                name: values.name,
+                description: values.description,
+                image: "https://dummyimage.com/300",
+                icons: ["icon1.png", "icon2.png"]
+            };
 
-      {/* Facility Table */}
-      <div className="w-full mt-4">
-        <Table
-          columns={columns}
-          dataSource={data}
-          loading={isLoading}
-          rowKey="_id"
-        />
-      </div>
+            await createFacility(payload);
+            message.success("Facility created successfully");
+            setOpenCreateModal(false);
+            refetch();
+        } catch (error) {
+            message.error("Creation failed");
+        }
+    };
 
-      {/* Create Modal */}
-      <Modal
-        open={openCreateModal}
-        onCancel={() => setOpenCreateModal(false)}
-        footer={null}
-        title={"Create Facility"}
-      >
-        <Form layout="vertical" onFinish={onCreateFormSubmit}>
-          {/* Facility Name */}
-          <Form.Item
-            name={"name"}
-            label="Facility Name"
-            rules={[{ required: true, message: "Facility name required" }]}
-          >
-            <Input placeholder="Enter facility name" />
-          </Form.Item>
+    return (
+        <>
+            <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold">Facilities</h2>
+                <Button type="primary" onClick={() => setOpenCreateModal(true)}>
+                    Add
+                </Button>
+            </div>
 
-          {/* Description */}
-          <Form.Item name={"description"} label="Description">
-            <Input.TextArea rows={3} placeholder="Enter description" />
-          </Form.Item>
+            <div className="w-full mt-4">
+                <Table
+                    columns={columns}
+                    dataSource={data?.data?.data}
+                    loading={isLoading}
+                    rowKey="_id"
+                />
+            </div>
 
-          {/* Image URL Input */}
-          <Form.Item
-            name={"image"}
-            label="Image URL"
-            rules={[{ required: true, message: "Image URL required" }]}
-          >
-            <Input placeholder="Enter image URL" />
-          </Form.Item>
+            <Modal 
+                open={openCreateModal} 
+                onCancel={() => setOpenCreateModal(false)} 
+                footer={null} 
+                title="Create Facility"
+            >
+                <Form layout="vertical" onFinish={onCreateFormSubmit}>
+                    <Form.Item name="name" label="Facility Name" rules={[{ required: true }]}>
+                        <Input placeholder="Enter facility name" />
+                    </Form.Item>
 
-          {/* Icons */}
-          <Form.Item
-            name={"icons"}
-            label="Icons (comma separated)"
-            rules={[{ required: true, message: "Icons required" }]}
-          >
-            <Input placeholder="ex: icon1, icon2, icon3" />
-          </Form.Item>
+                    <Form.Item name="description" label="Description">
+                        <Input.TextArea rows={3} placeholder="Enter description" />
+                    </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" className="w-full" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </>
-  );
+                    <Form.Item name="image" label="Main Image">
+                        <Dragger beforeUpload={() => false}>
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">Click or drag file to upload</p>
+                        </Dragger>
+                    </Form.Item>
+
+                    <Form.Item name="icons" label="Icons">
+                        <Dragger multiple beforeUpload={() => false}>
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">Upload multiple icon images</p>
+                        </Dragger>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button className="w-full" type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+        </>
+    );
 }
 
 export default FacilityPage;

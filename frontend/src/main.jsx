@@ -16,7 +16,9 @@ import Dashboard from './Dashboard.jsx';
 import GymLocation from './components/Homepage/GymLocation.jsx';
 import GymLocationPage from './pages/Dashboard/GymLocationPage.jsx';
 import FacilityPage from './pages/Dashboard/FacilityPage.jsx';
+import SubscriptionPage from './pages/Dashboard/SubscriptionPage.jsx';
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query"
+import GymPage from './pages/Dashboard/GymPage.jsx';
 
 
 
@@ -131,6 +133,14 @@ const router = createBrowserRouter([
     {
       path:'facilities',
       element:<FacilityPage/>
+    },
+    {
+      path:'subscription',
+      element:<SubscriptionPage/>
+    },
+    {
+      path:'gym',
+      element:<GymPage/>
     }
   ]
 }
