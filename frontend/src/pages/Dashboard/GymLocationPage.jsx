@@ -13,7 +13,7 @@ function GymLocationPage() {
     const [form]= Form.useForm()
 
     const {data,isLoading,refetch} = useQuery({
-        queryKey:"getGymLocation",
+         queryKey: ['getGymLocation'], 
         queryFn:()=>getGymlocation()
     })
 
@@ -54,6 +54,7 @@ function GymLocationPage() {
             name:values.name,
             cardImage:image
            }
+           
            createGym(payLoad,{
             onSuccess(){
                 form.resetFields()

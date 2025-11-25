@@ -3,16 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Image, Input, Modal, Table, Tag, message } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
-import { createFacility, getFacility } from "../../utils/facilityApi";
+import { createFacility, getFacility, usecreateFacility } from "../../utils/facilityApi";
 
 function FacilityPage() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
-
+    const [form]= Form.useForm()
     const { data, isLoading, refetch } = useQuery({
-        queryKey: "getFacility",
+        queryKey: ["getFacility"],
         queryFn: () => getFacility()
     });
 
+    const { mutate: createFacility } = usecreateFacility()
     const columns = [
         {
             title: "Name",
@@ -42,8 +43,29 @@ function FacilityPage() {
     ];
 
     const onCreateFormSubmit = (values) => {
-      console.log(values);
-      
+        console.log(values);
+        let image;
+        if (values.image.file.originFileObj) {
+            image = values.image.file.originFileObj
+        } else {
+            message.error("image required")
+        }
+        const payLoad = {
+            name: values.name,
+            image: image
+        }
+        createFacility(payLoad, {
+            onSuccess() {
+                form.resetFields()
+                refetch()
+                setOpenCreateModal(false)
+            },
+            onError() {
+                message.error("failed")
+            }
+        })
+
+
     };
 
     return (
@@ -63,13 +85,13 @@ function FacilityPage() {
                 />
             </div>
 
-            <Modal 
-                open={openCreateModal} 
-                onCancel={() => setOpenCreateModal(false)} 
-                footer={null} 
+            <Modal
+                open={openCreateModal}
+                onCancel={() => setOpenCreateModal(false)}
+                footer={null}
                 title="Create Facility"
             >
-                <Form layout="vertical" onFinish={onCreateFormSubmit}>
+                <Form layout="vertical" onFinish={onCreateFormSubmit} form={form}>
                     <Form.Item name="name" label="Facility Name" rules={[{ required: true }]}>
                         <Input placeholder="Enter facility name" />
                     </Form.Item>
