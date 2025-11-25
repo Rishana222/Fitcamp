@@ -6,7 +6,7 @@ const GymLocationCreateController = async (req, res) => {
         const data = req.body;
 
         if (req.file) {
-            data.cardImage = req.file.path; 
+            data.card.Image = req.file.path; 
         } else {
              return res.status(400).json({ message: "cardImage is required" });
         }
@@ -16,6 +16,7 @@ const GymLocationCreateController = async (req, res) => {
     } catch (error) {
         return res.status(400).json({ message: error.message })
     }
+    
 }
 
 const GymLocationGetController = async (req,res) => {
@@ -26,7 +27,7 @@ const GymLocationGetController = async (req,res) => {
         return res.status(400).json({ message: error.message })
     }
 }
-
+  
 const GymLocationUpdateController = async (req, res) => {
     try {
      const id = req.params.id;
