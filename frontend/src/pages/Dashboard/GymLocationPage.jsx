@@ -1,20 +1,23 @@
 import { InboxOutlined } from "@ant-design/icons"
 import { useQuery } from "@tanstack/react-query"
-import { Button, Form, Image, Input, Modal, Table } from "antd"
+import { Button, Form, Image, Input, message, Modal, Table } from "antd"
 import Dragger from "antd/es/upload/Dragger"
 import { useState } from "react"
-import { getGymlocation } from "../../utils/gymlocationApi"
+import { getGymlocation, useCreateGymLocation } from "../../utils/gymlocationApi"
 
 
 
 function GymLocationPage() {
 
     const [openCreateModal, setOpenCreateModal] = useState(false)
+    const [form]= Form.useForm()
 
     const {data,isLoading,refetch} = useQuery({
         queryKey:"getGymLocation",
         queryFn:()=>getGymlocation()
     })
+
+    const {mutate:createGym}=useCreateGymLocation()
 
     console.log({data});
     
@@ -39,6 +42,28 @@ function GymLocationPage() {
 
     
     const onCreateFormSubmit = (values)=>{
+           console.log(values);
+            let image;
+           if (values.cardImage.file.originFileObj){
+                image=values.cardImage.file.originFileObj
+           }else{
+            message.error("image required")
+           }
+
+           const payLoad = {
+            name:values.name,
+            cardImage:image
+           }
+           createGym(payLoad,{
+            onSuccess(){
+                form.resetFields()
+                refetch()
+                setOpenCreateModal(false)
+            },
+            onError(){
+                message.error("failed")
+            }
+           })
            
             
     }
@@ -56,7 +81,7 @@ function GymLocationPage() {
             </div>
 
             <Modal open={openCreateModal} onCancel={() => setOpenCreateModal(false)} footer={null} title={'Create Gym Location'} >
-                <Form layout="vertical" onFinish={onCreateFormSubmit}>
+                <Form layout="vertical" onFinish={onCreateFormSubmit} form={form}>
                     <Form.Item name={'name'} label="Location Name" rules={[{ required: true, message: "location name required" }]}>
                         <Input placeholder="enter location name" />
                     </Form.Item>

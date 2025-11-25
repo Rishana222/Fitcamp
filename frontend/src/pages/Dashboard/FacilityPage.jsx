@@ -39,31 +39,16 @@ function FacilityPage() {
                     <Tag key={index} color="blue">{icon}</Tag>
                 )) : null
         }
-        // Action column removed
     ];
 
-    const onCreateFormSubmit = async (values) => {
-        try {
-            const payload = {
-                name: values.name,
-                description: values.description,
-                image: "https://dummyimage.com/300",
-                icons: ["icon1.png", "icon2.png"]
-            };
-
-            await createFacility(payload);
-            message.success("Facility created successfully");
-            setOpenCreateModal(false);
-            refetch();
-        } catch (error) {
-            message.error("Creation failed");
-        }
+    const onCreateFormSubmit = (values) => {
+      console.log(values);
+      
     };
 
     return (
         <>
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Facilities</h2>
+            <div className="flex items-center justify-end">
                 <Button type="primary" onClick={() => setOpenCreateModal(true)}>
                     Add
                 </Button>

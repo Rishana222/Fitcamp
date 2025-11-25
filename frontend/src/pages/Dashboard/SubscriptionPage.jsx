@@ -61,8 +61,7 @@ function SubscriptionPage() {
 
     return (
         <>
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold">Subscriptions</h2>
+            <div className="flex items-center justify-end mb-4">
                 <Button type="primary" onClick={() => setOpenCreateModal(true)}>
                     Add Subscription
                 </Button>
@@ -70,7 +69,7 @@ function SubscriptionPage() {
 
             <Table
                 columns={columns}
-                dataSource={data?.data || data} // adjust according to GET response
+                dataSource={data?.data || data} 
                 loading={isLoading}
                 rowKey="_id"
             />

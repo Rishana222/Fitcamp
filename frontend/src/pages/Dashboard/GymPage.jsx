@@ -66,8 +66,7 @@ function GymPage() {
 
     return (
         <>
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Gym Management</h2>
+            <div className="flex items-center justify-end">
                 <Button type="primary" onClick={() => setOpenCreateModal(true)}>
                     Add Gym
                 </Button>
