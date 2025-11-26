@@ -1,20 +1,22 @@
 const { ErrorHandler } = require('../handlers/errorHandler');
-const { 
-    createFacilityService, 
-    getFacilityService, 
-    updateFacilityService, 
-    deleteFacilityService 
-} = require('../services/facility.service');
+const { createFacilityService,getFacilityService,updateFacilityService,deleteFacilityService} = require('../services/facility.service');
 
 const FacilityCreateController = async (req, res) => {
-    try {
-        const facility = await createFacilityService(req.body);
-        return res.status(201).json(facility);
-    } catch (error) {
-        return res.status(400).json({ message: error.message });
+  try {
+    const data = req.body;
+    if (req.file) {
+      data.image = req.file.filename; 
+    } else {
+      return res.status(400).json({ message: "Image is required" });
     }
-};
 
+    const facility = await createFacilityService(data);
+
+    return res.status(201).json(facility);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 const FacilityGetController = async (req, res) => {
     try {
         const facilities = await getFacilityService();

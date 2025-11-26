@@ -1,7 +1,12 @@
+import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "./axios";
 
 export const createGym = (data) => {
-    return axiosInstance.post('/api/gym/creategym', data);
+    return axiosInstance.post('/api/gym/creategym', data,{
+        headers:{
+            "Content-Type":"multipart/form-data"
+        }
+    });
 };
 
 export const getGym = () => {
@@ -19,3 +24,12 @@ export const updateGym = (id, data) => {
 export const deleteGym = (id) => {
     return axiosInstance.delete(`/api/gym/deletegym/${id}`);
 };
+
+export const useCreateGym =()=>{
+    return useMutation(
+        {
+            mutationKey:"creategym",
+            mutationFn:createGym
+        }
+    )
+}

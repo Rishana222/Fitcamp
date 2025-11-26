@@ -41,7 +41,9 @@ function GymLocationPage() {
     ]
 
     const onCreateFormSubmit = (values)=>{
+
            console.log(values);
+
             let image;
            if (values.cardImage.file.originFileObj){
                 image=values.cardImage.file.originFileObj
@@ -53,6 +55,7 @@ function GymLocationPage() {
             name:values.name,
             cardImage:image
            }
+           
            createGym(payLoad,{
             onSuccess(){
                 form.resetFields()
@@ -62,9 +65,7 @@ function GymLocationPage() {
             onError(){
                 message.error("failed")
             }
-           })
-           
-            
+           })        
     }
 
     return (

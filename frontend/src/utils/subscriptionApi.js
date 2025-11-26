@@ -25,7 +25,7 @@ export const usecreateSubscription =()=>{
      return useMutation(
         {
             mutationKey:"createsubscription",
-            mutationFn:"createSubscription"
+            mutationFn:createSubscription
         }
      )
 }

@@ -1,11 +1,12 @@
 const express = require ('express')
 const Facility = require('../models/facilityModel')
 const { FacilityCreateController, FacilityGetController,FacilityUpdateController,FacilityDeleteController } = require('../controller/facility.controller')
+const upload = require('../middlewares/uploadMiddlewares')
 const route = express.Router()
 
-route.post('/createfacility',FacilityCreateController)
+route.post('/createfacility',upload.single('image'),FacilityCreateController)
 route.get('/getfacility',FacilityGetController)
-route.put('/updatesfacility/:id',FacilityUpdateController)
+route.put('/updatesfacility/:id',upload.single('image'),FacilityUpdateController)
 route.delete('/deletefacility/:id',FacilityDeleteController)
 
 

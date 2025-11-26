@@ -4,13 +4,14 @@ import { Button, Form, Image, Input, Modal, Select, Table } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
 
-import { getGym } from "../../utils/gymApi";
+import { useCreateGym, getGym } from "../../utils/gymApi";
 import { getGymlocation } from "../../utils/gymlocationApi";
 import { getFacility } from "../../utils/facilityApi";
 
 function GymPage() {
 
     const [openCreateModal, setOpenCreateModal] = useState(false);
+    const [form] = Form.useForm()
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["getGym"],
@@ -26,6 +27,8 @@ function GymPage() {
         queryKey: ["getFacility"],
         queryFn: () => getFacility(),
     });
+
+    const { mutate: createGym } = useCreateGym()
 
     const columns = [
         {
@@ -61,7 +64,31 @@ function GymPage() {
     ];
 
     const onCreateFormSubmit = (values) => {
-        console.log("Form values:", values);
+        console.log(values);
+
+        let image;
+        if (values.image.file.originFileObj) {
+            image = values.image.file.originFileObj
+        } else {
+            message.error("image required")
+        }
+        const payLoad = {
+            name: values.name,                        
+            description: values.description,          
+            image:image,                
+            gymLocation: values.gymLocationId,        // Selected Gym Location ID
+            facilites: values.facilites               // Array of selected Facility IDs
+        }
+        createGym(payLoad,{
+            onSuccess(){
+                form.resetFields()
+                refetch()
+                setOpenCreateModal(false)
+            },
+            onError(){
+                message.error("failed")
+            }
+        })
     };
 
     return (
@@ -87,7 +114,7 @@ function GymPage() {
                 footer={null}
                 title={"Create Gym"}
             >
-                <Form layout="vertical" onFinish={onCreateFormSubmit}>
+                <Form layout="vertical" onFinish={onCreateFormSubmit} form={form}>
                     <Form.Item
                         name={"name"}
                         label="Gym Name"

@@ -2,20 +2,22 @@ import { InboxOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Input, Modal, Table, Tag, message, DatePicker, Select } from "antd";
 import { useState } from "react";
-import { createSubscription, getAllSubscription } from "../../utils/subscriptionApi";
+import { usecreateSubscription, getAllSubscription } from "../../utils/subscriptionApi";
 import dayjs from "dayjs";
 
 const { RangePicker } = DatePicker;
 
 function SubscriptionPage() {
+
     const [openCreateModal, setOpenCreateModal] = useState(false);
-    const [form]=Form.useForm()
+    const [form] = Form.useForm()
+
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["getAllSubscription"],
         queryFn: getAllSubscription
     });
 
-    const {mutate:createSub}=createSubscription()
+    const { mutate: createSub } = usecreateSubscription()
 
     const columns = [
         {
@@ -44,21 +46,24 @@ function SubscriptionPage() {
     ];
 
     const onCreateFormSubmit = async (values) => {
-        try {
-            const payload = {
-                membershipId: values.membershipId,
-                startDate: values.dateRange[0].format("YYYY-MM-DD"),
-                endDate: values.dateRange[1].format("YYYY-MM-DD"),
-                status: values.status
-            };
+        console.log(values);
 
-            await createSubscription(payload);
-            message.success("Subscription created successfully");
-            setOpenCreateModal(false);
-            refetch();
-        } catch (error) {
-            message.error("Creation failed");
-        }
+        const payLoad = {
+            membershipId: values.membershipId,              
+            startDate: dayjs(start).format("YYYY-MM-DD"),   // convert moment to string
+            endDate: dayjs(end).format("YYYY-MM-DD"),       // convert moment to string
+            status: values.status                            
+        };
+        createSub(payLoad,{
+              onSuccess() {
+                form.resetFields()
+                refetch()
+                setOpenCreateModal(false)
+            },
+            onError() {
+                message.error("failed")
+            }
+        })
     };
 
     return (
@@ -71,7 +76,7 @@ function SubscriptionPage() {
 
             <Table
                 columns={columns}
-                dataSource={data?.data || data} 
+                dataSource={data?.data || data}
                 loading={isLoading}
                 rowKey="_id"
             />

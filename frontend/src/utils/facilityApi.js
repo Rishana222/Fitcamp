@@ -23,7 +23,7 @@ export const deleteFacility = (id)=>{
 export const usecreateFacility = ()=>{
     return useMutation(
         {
-            mutationKey:"createfacilities",
+            mutationKey:["createfacilities"],
             mutationFn:createFacility
         }
     )

@@ -7,14 +7,17 @@ import {  getFacility, usecreateFacility } from "../../utils/facilityApi";
 import { icons } from "antd/es/image/PreviewGroup";
 
 function FacilityPage() {
+
     const [openCreateModal, setOpenCreateModal] = useState(false);
     const [form]= Form.useForm()
+
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["getFacility"],
         queryFn: () => getFacility()
     });
 
     const { mutate: createFacility } = usecreateFacility()
+
     const columns = [
         {
             title: "Name",
@@ -44,20 +47,24 @@ function FacilityPage() {
     ];
 
     const onCreateFormSubmit = (values) => {
+
         console.log(values);
+        
         let image;
         if (values.image.file.originFileObj) {
             image = values.image.file.originFileObj
         } else {
             message.error("image required")
         }
+
         const payLoad = {
             name: values.name,
             description:values.description,
             image: image,
             icons: values.icons
         }
-        createFacility(payLoad, {
+
+        createFacility(payLoad,{
             onSuccess() {
                 form.resetFields()
                 refetch()
@@ -67,8 +74,6 @@ function FacilityPage() {
                 message.error("failed")
             }
         })
-
-
     };
 
     return (
