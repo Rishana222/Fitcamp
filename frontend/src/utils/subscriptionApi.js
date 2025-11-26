@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "./axios";
 
 export const createSubscription = (data)=>{
@@ -18,4 +19,13 @@ export const updateSubscription = (id,data)=>{
 
 export const deleteSubscription = (id)=>{
     return axiosInstance.delete(`/api/subscription/deletesubscription/${id}`)
+}
+
+export const usecreateSubscription =()=>{
+     return useMutation(
+        {
+            mutationKey:"createsubscription",
+            mutationFn:"createSubscription"
+        }
+     )
 }

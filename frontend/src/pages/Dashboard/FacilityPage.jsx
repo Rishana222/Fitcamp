@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Image, Input, Modal, Table, Tag, message } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
-import { createFacility, getFacility, usecreateFacility } from "../../utils/facilityApi";
+import {  getFacility, usecreateFacility } from "../../utils/facilityApi";
+import { icons } from "antd/es/image/PreviewGroup";
 
 function FacilityPage() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
@@ -52,7 +53,9 @@ function FacilityPage() {
         }
         const payLoad = {
             name: values.name,
-            image: image
+            description:values.description,
+            image: image,
+            icons: values.icons
         }
         createFacility(payLoad, {
             onSuccess() {

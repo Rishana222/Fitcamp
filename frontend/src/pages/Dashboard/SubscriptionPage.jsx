@@ -9,11 +9,13 @@ const { RangePicker } = DatePicker;
 
 function SubscriptionPage() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
-
+    const [form]=Form.useForm()
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["getAllSubscription"],
         queryFn: getAllSubscription
     });
+
+    const {mutate:createSub}=createSubscription()
 
     const columns = [
         {
@@ -80,7 +82,7 @@ function SubscriptionPage() {
                 footer={null}
                 title="Create Subscription"
             >
-                <Form layout="vertical" onFinish={onCreateFormSubmit}>
+                <Form layout="vertical" onFinish={onCreateFormSubmit} form={form}>
                     <Form.Item
                         name="membershipId"
                         label="Membership ID"

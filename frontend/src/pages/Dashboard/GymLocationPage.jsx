@@ -40,7 +40,6 @@ function GymLocationPage() {
         
     ]
 
-    
     const onCreateFormSubmit = (values)=>{
            console.log(values);
             let image;
@@ -54,7 +53,6 @@ function GymLocationPage() {
             name:values.name,
             cardImage:image
            }
-           
            createGym(payLoad,{
             onSuccess(){
                 form.resetFields()
