@@ -4,26 +4,31 @@ const { createFacilityService,getFacilityService,updateFacilityService,deleteFac
 const FacilityCreateController = async (req, res) => {
   try {
     const data = req.body;
-    if (req.file) {
-      data.image = req.file.filename; 
-    } else {
-      return res.status(400).json({ message: "Image is required" });
+
+    if (!req.files['image'] || req.files['image'].length === 0) {
+      return res.status(400).json({ message: "Main image required" });
+    }
+    data.image = req.files['image'][0].filename;
+
+    if (req.files['icons'] && req.files['icons'].length > 0) {
+      data.icons = req.files['icons'].map(f => f.filename);
     }
 
     const facility = await createFacilityService(data);
+    return res.status(201).json({ success: true, data: facility, message: "Facility created successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-    return res.status(201).json(facility);
+const FacilityGetController = async (req, res) => {
+  try {
+    const facilities = await getFacilityService();
+    return res.status(200).json({ success: true, data: facilities });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
-};
-const FacilityGetController = async (req, res) => {
-    try {
-        const facilities = await getFacilityService();
-        return res.status(200).json(facilities);
-    } catch (error) {
-        return res.status(400).json({ message: error.message });
-    }
 };
 
 const FacilityUpdateController = async (req, res) => {

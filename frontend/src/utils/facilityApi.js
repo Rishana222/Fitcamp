@@ -28,3 +28,12 @@ export const usecreateFacility = ()=>{
         }
     )
 }
+
+export const useDeleteFacility = ()=>{
+    return useMutation(
+        {
+            mutationKey:'deletefacility',
+            mutationFn:deleteFacility
+        }
+    )
+}

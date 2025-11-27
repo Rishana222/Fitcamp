@@ -2,8 +2,8 @@ import { InboxOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Input, Modal, Table, Tag, message, DatePicker, Select } from "antd";
 import { useState } from "react";
-import { usecreateSubscription, getAllSubscription } from "../../utils/subscriptionApi";
-import dayjs from "dayjs";
+import { usecreateSubscription, getAllSubscription, useDeleteSubscription } from "../../utils/subscriptionApi";
+import { toast } from 'react-toastify';
 
 const { RangePicker } = DatePicker;
 
@@ -18,6 +18,7 @@ function SubscriptionPage() {
     });
 
     const { mutate: createSub } = usecreateSubscription()
+    const { mutate: deleteSub } = useDeleteSubscription()
 
     const columns = [
         {
@@ -42,30 +43,54 @@ function SubscriptionPage() {
             render: (status) => (
                 <Tag color={status === "active" ? "green" : "red"}>{status}</Tag>
             )
+        },
+        {
+            title: "action",
+            key: "id",
+            render: (record) => (
+                <div>
+                    <button onClick={() => onHandleDelete(record._id)}>Delete</button>
+                </div>
+            )
         }
     ];
 
     const onCreateFormSubmit = async (values) => {
         console.log(values);
 
+        const [start, end] = values.dateRange;
         const payLoad = {
-            membershipId: values.membershipId,              
-            startDate: dayjs(start).format("YYYY-MM-DD"),   
-            endDate: dayjs(end).format("YYYY-MM-DD"),       
-            status: values.status                            
+            membershipId: values.membershipId,
+            startDate: start.format("YYYY-MM-DD"),
+            endDate: end.format("YYYY-MM-DD"),
+            status: values.status
         };
-        createSub(payLoad,{
-              onSuccess() {
-                form.resetFields()
-                refetch()
-                setOpenCreateModal(false)
+        createSub(payLoad, {
+            onSuccess(res) {
+                form.resetFields();
+                refetch();
+                setOpenCreateModal(false);
+                toast.success(res?.data?.message || "Subscription created ");
             },
-            onError() {
-                message.error("failed")
+            onError(err) {
+                console.error(err);
+                toast.error(err?.response?.data?.message || "Failed to create");
             }
         })
     };
 
+    const onHandleDelete = (id) => {
+        deleteSub(id, {
+            onSuccess(list) {
+            refetch()
+            toast.success(list?.data.message)     
+            },
+            onError() {
+            toast.error('failed')
+            }
+        }
+        )
+    }
     return (
         <>
             <div className="flex items-center justify-end mb-4">

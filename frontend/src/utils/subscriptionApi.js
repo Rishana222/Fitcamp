@@ -29,3 +29,12 @@ export const usecreateSubscription =()=>{
         }
      )
 }
+
+export const useDeleteSubscription =()=>{
+    return useMutation(
+        {
+            mutationKey:"deletesub",
+            mutationFn:deleteSubscription
+        }
+    )
+}

@@ -1,7 +1,7 @@
 const { ErrorHandler } = require('../handlers/errorHandler');
 const { createSubscriptionService, getAllSubscriptionsService,getSubscriptionsService, updateSubscriptionsService, deleteSubscriptionsService } = require('../services/subscription.service')
 
-const subscriptionCreateController = async (req, res) => {
+const subscriptionCreateController = async (req, res,) => {
     try {
         const subscription = await createSubscriptionService(req.body)
         return res.status(201).json({ success: true, data: subscription, message: "Subscription created successfully" })
