@@ -50,8 +50,8 @@ function SubscriptionPage() {
 
         const payLoad = {
             membershipId: values.membershipId,              
-            startDate: dayjs(start).format("YYYY-MM-DD"),   // convert moment to string
-            endDate: dayjs(end).format("YYYY-MM-DD"),       // convert moment to string
+            startDate: dayjs(start).format("YYYY-MM-DD"),   
+            endDate: dayjs(end).format("YYYY-MM-DD"),       
             status: values.status                            
         };
         createSub(payLoad,{

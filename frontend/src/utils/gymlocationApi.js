@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "./axios";
+import { use } from "react";
 
 export const createGymlocation = (data)=>{
     return axiosInstance.post('/api/gymLocation/creategymLocation',data,{
@@ -28,6 +29,15 @@ export const useCreateGymLocation=()=>{
         {
             mutationKey:"createLocation",
             mutationFn:createGymlocation
+        }
+    )
+}
+
+export const useDeleteGymLocation=()=>{
+    return useMutation(
+        {
+            mutationKey:"deletegym",
+            mutationFn:deleteGymlocation
         }
     )
 }

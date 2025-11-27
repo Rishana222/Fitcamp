@@ -6,13 +6,13 @@ const GymLocationCreateController = async (req, res) => {
         const data = req.body;
 
         if (req.file) {
-            data.card.Image = req.file.path; 
+            data.cardImage = req.file.path; 
         } else {
              return res.status(400).json({ message: "cardImage is required" });
         }
 
         const gymLocation = await createGymLocationService(data)
-        return res.status(201).json(gymLocation)
+        return res.status(201).json({success:true,message:"location added sucessfully",gymLocation})
     } catch (error) {
         return res.status(400).json({ message: error.message })
     }

@@ -76,8 +76,8 @@ function GymPage() {
             name: values.name,                        
             description: values.description,          
             image:image,                
-            gymLocation: values.gymLocationId,        // Selected Gym Location ID
-            facilites: values.facilites               // Array of selected Facility IDs
+            gymLocation: values.gymLocationId,        
+            facilites: values.facilites              
         }
         createGym(payLoad,{
             onSuccess(){

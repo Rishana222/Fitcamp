@@ -3,24 +3,28 @@ import { useQuery } from "@tanstack/react-query"
 import { Button, Form, Image, Input, message, Modal, Table } from "antd"
 import Dragger from "antd/es/upload/Dragger"
 import { useState } from "react"
-import { getGymlocation, useCreateGymLocation } from "../../utils/gymlocationApi"
+import { getGymlocation, useCreateGymLocation, useDeleteGymLocation } from "../../utils/gymlocationApi"
+import { toast } from 'react-toastify'
+
 
 
 
 function GymLocationPage() {
 
     const [openCreateModal, setOpenCreateModal] = useState(false)
-    const [form]= Form.useForm()
+    const [form] = Form.useForm()
 
-    const {data,isLoading,refetch} = useQuery({
-         queryKey: ['getGymLocation'], 
-        queryFn:()=>getGymlocation()
+    const { data, isLoading, refetch } = useQuery({
+        queryKey: ['getGymLocation'],
+        queryFn: () => getGymlocation(),
+
     })
 
-    const {mutate:createGym}=useCreateGymLocation()
+    const { mutate: createGym } = useCreateGymLocation()
+    const { mutate: deleteGym } = useDeleteGymLocation()
 
-    console.log({data});
-    
+    console.log({ data });
+
 
     const columns = [
         {
@@ -32,40 +36,68 @@ function GymLocationPage() {
             title: "Image",
             dataIndex: 'cardImage',
             key: 'cardImage',
-            render:(text)=>(
-                    <Image src={`${text}`} />
+            render: (text) => (
+                <Image src={`${text}`} />
             )
         },
+        {
+            title: "action",
+            key: "id",
+            render: (record) => (
+                <div>
+                    <button onClick={() => onHandleDelete(record._id)}>Delete</button>
+                </div>
+            )
+        }
 
-        
     ]
 
-    const onCreateFormSubmit = (values)=>{
+    const onCreateFormSubmit = (values) => {
+        console.log(values);
 
-           console.log(values);
+        let image;
 
-            let image;
-           if (values.cardImage.file.originFileObj){
-                image=values.cardImage.file.originFileObj
-           }else{
-            message.error("image required")
-           }
+        // Validate image
+        if (values?.cardImage?.file?.originFileObj) {
+            image = values.cardImage.file.originFileObj;
+        } else {
+            toast.error("Image is required");
+            return; // STOP execution
+        }
 
-           const payLoad = {
-            name:values.name,
-            cardImage:image
-           }
-           
-           createGym(payLoad,{
-            onSuccess(){
-                form.resetFields()
-                refetch()
-                setOpenCreateModal(false)
+        const payLoad = {
+            name: values.name,
+            cardImage: image
+        };
+
+        createGym(payLoad, {
+            onSuccess(list) {
+                form.resetFields();
+                refetch();
+                setOpenCreateModal(false);
+                toast.success(list?.data.message || "Created successfully");
+                console.log(list, ":::::::::");
+                console.log(message, "dfhhcyghfgh");
+
             },
-            onError(){
-                message.error("failed")
+            onError(error) {
+                console.error(error?.message);
+                toast.error(error?.response?.data?.message || error?.message || "Something went wrong");
             }
-           })        
+        });
+    };
+
+    const onHandleDelete = (id) => {
+        deleteGym(id, {
+            onSuccess(list) {
+                refetch()
+                toast.success(list?.data.message)
+                // toast.success('deleted successfully')
+            },
+            onError() {
+                toast.error('failed')
+            }
+        })
     }
 
     return (
@@ -85,7 +117,7 @@ function GymLocationPage() {
                     <Form.Item name={'name'} label="Location Name" rules={[{ required: true, message: "location name required" }]}>
                         <Input placeholder="enter location name" />
                     </Form.Item>
-                    <Form.Item name={'cardImage'} label="Image" rules={[{required:true,message:"image required"}]}>
+                    <Form.Item name={'cardImage'} label="Image" rules={[{ required: true, message: "image required" }]}>
                         <Dragger >
                             <p className="ant-upload-drag-icon">
                                 <InboxOutlined />

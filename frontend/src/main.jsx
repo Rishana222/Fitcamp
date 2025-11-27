@@ -24,7 +24,7 @@ import GymPage from './pages/Dashboard/GymPage.jsx';
 
 
 const router = createBrowserRouter([
-
+  
   {
     path: '/',
     element: <App />,
@@ -152,7 +152,7 @@ const qureyClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={qureyClient} >
-
+    
     <RouterProvider router={router}/>
     </QueryClientProvider>
   </StrictMode>,

@@ -1,8 +1,11 @@
 const GymLocation = require ('../models/gymLocation')
 const {ErrorHandler} = require ('../handlers/errorHandler')
 const { findById } = require('../models/membershipModel')
+const gymLocation = require('../models/gymLocation')
 
 const createGymLocationService =async (data)=>{
+  console.log({data});
+  
     const gym = await GymLocation(data)
     return await gym.save()
 }
@@ -21,7 +24,7 @@ return updatedLocation
 }
 
 const deleteGymLocationService = async (id)=>{
-  const existingLocation = await findById(id)
+  const existingLocation = await gymLocation.findById(id)
   if(!existingLocation){
     throw new ErrorHandler('Location not found',404)
   }

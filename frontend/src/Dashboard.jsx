@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const { Header, Sider, Content } = Layout;
 
@@ -24,6 +25,18 @@ const Dashboard = () => {
 
   return (
     <Layout className="h-screen">
+      <ToastContainer
+      position='top-right'
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme='dark'
+      />
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical h-40" />
 
