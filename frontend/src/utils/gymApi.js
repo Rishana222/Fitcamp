@@ -33,3 +33,13 @@ export const useCreateGym =()=>{
         }
     )
 }
+
+
+export const useDeleteGym = ()=>{
+    return useMutation(
+        {
+            mutationKey:"deleteGym",
+            mutationFn:deleteGym
+        }
+    )
+}

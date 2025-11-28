@@ -4,9 +4,10 @@ import { Button, Form, Image, Input, Modal, Select, Table, message } from "antd"
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
 
-import { useCreateGym, getGym } from "../../utils/gymApi";
+import { useCreateGym, getGym,useDeleteGym } from "../../utils/gymApi";
 import { getGymlocation } from "../../utils/gymlocationApi";
 import { getFacility } from "../../utils/facilityApi";
+import { toast } from "react-toastify";
 
 function GymPage() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
@@ -17,20 +18,53 @@ function GymPage() {
     const facilities = useQuery({ queryKey: ["getFacility"], queryFn: getFacility });
 
     const { mutate: createGymMutate } = useCreateGym();
+    const {mutate: deleteGymMutate} = useDeleteGym();
 
-    // Table columns
     const columns = [
-        { title: "Name", dataIndex: "name", key: "name" },
-        { title: "Description", dataIndex: "description", key: "description", render: text => text || "—" },
-        { title: "Image", dataIndex: "image", key: "image", render: img => img ? <Image width={70} src={img} /> : "—" },
-        { title: "Location", dataIndex: "gymLocation", key: "gymLocation", render: loc => loc?.name || "—" },
-        { title: "Facilities", dataIndex: "facilites", key: "facilites", render: list => Array.isArray(list) ? list.map(f => f.name).join(", ") : "—" },
+        {
+            title: "Name",
+            dataIndex: "name",
+            key: "name"
+        },
+        {
+            title: "Description",
+            dataIndex: "description",
+            key: "description"
+        },
+        {
+            title: "Image",
+            dataIndex: "image",
+            key: "image",
+            render: (text) => <Image width={70} src={text} />
+        },
+        {
+            title: "Location",
+            dataIndex: "gymLocation",
+            key: "gymLocation",
+            render: loc => loc?.name || "—"
+        },
+        {
+            title: "Facilities",
+            dataIndex: "facilities",
+            key: "facilities",
+            render: list => Array.isArray(list) ? list.map(f => f.name).join(", ") : "—"
+        },
+        {
+            title: "Action",
+            key: "id",
+            render: (record) => (
+                <div>
+                    <button onClick={() => onHandleDelete(record._id)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">Delete</button>
+                </div>
+            )
+        }
     ];
 
-    // Form submit
     const onCreateFormSubmit = (values) => {
+        console.log(values);
+
         if (!values.image?.file?.originFileObj) {
-            message.error("Image is required");
+            toast.error("Image is required");
             return;
         }
 
@@ -39,7 +73,7 @@ function GymPage() {
             description: values.description || "",
             image: values.image.file.originFileObj,
             gymLocation: values.gymLocation,
-            facilites: values.facilites || [],
+            facilites: values.facilities || [],
         };
 
         createGymMutate(payload, {
@@ -54,12 +88,23 @@ function GymPage() {
             }
         });
     };
-
-    // Normalize select options
+     const onHandleDelete = (id) => {
+        deleteGymMutate(id, {
+            onSuccess(list) {
+            refetch()
+            toast.success(list?.data.message)     
+            },
+            onError() {
+            toast.error('failed')
+            }
+        }
+        )
+    }
+    
     const locationOptions = Array.isArray(gymLocations.data?.data) ? gymLocations.data.data.map(l => ({ label: l.name, value: l._id })) : [];
-    const facilityOptions = Array.isArray(facilities.data?.data)
-  ? facilities.data.data.map(f => ({ label: f.name, value: f._id }))
-  : [];
+    const facilityOptions = Array.isArray(facilities.data?.data?.data)? facilities.data.data.data.map(f => ({ label: f.name, value: f._id })): [];
+    
+    
     return (
         <>
             <div className="flex items-center justify-end mb-4">
@@ -68,13 +113,13 @@ function GymPage() {
 
             <Table
                 columns={columns}
-                dataSource={Array.isArray(data?.data) ? data.data : []}
+                dataSource={data?.data ?? []}
                 loading={isLoading}
                 rowKey="_id"
             />
 
             <Modal open={openCreateModal} onCancel={() => setOpenCreateModal(false)} footer={null} title="Create Gym">
-                <Form layout="vertical" form={form} onFinish={onCreateFormSubmit}>
+                <Form layout="vertical" form={form} onFinish={onCreateFormSubmit} >
                     <Form.Item name="name" label="Gym Name" rules={[{ required: true }]}>
                         <Input placeholder="Enter gym name" />
                     </Form.Item>
@@ -83,8 +128,8 @@ function GymPage() {
                         <Input.TextArea placeholder="Enter description" />
                     </Form.Item>
 
-                    <Form.Item name="image" label="Gym Image" rules={[{ required: true }]}>
-                        <Dragger beforeUpload={() => false}>
+                    <Form.Item name={"image"} label="Gym Image" rules={[{ required: true }]}>
+                        <Dragger >
                             <p className="ant-upload-drag-icon"><InboxOutlined /></p>
                             <p className="ant-upload-text">Click or drag file to upload</p>
                         </Dragger>
@@ -94,8 +139,8 @@ function GymPage() {
                         <Select placeholder="Choose a location" options={locationOptions} />
                     </Form.Item>
 
-                    <Form.Item name="facilites" label="Select Facilities">
-                        <Select placeholder="Choose facilities" mode="multiple" options={facilityOptions} />
+                    <Form.Item name="facilities" label="Select Facilities" rules={[{ required: true }]}>
+                        <Select placeholder="Choose facilities" mode="multiple"  options={facilityOptions} />
                     </Form.Item>
 
                     <Form.Item>

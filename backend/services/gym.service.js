@@ -7,7 +7,7 @@ const createGymService = async (data)=>{
 }
 
 const getAllGymService = async ()=>{
-    return await Gym.find()
+    return await Gym.find().populate('gymLocation')
 }
 
 const getGymServiceById = async (id) => {

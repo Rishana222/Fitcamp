@@ -48,11 +48,11 @@ function FacilityPage() {
                 )) : null
         },
         {
-            title: "action",
+            title: "Action",
             key: "id",
             render: (record) => (
                 <div>
-                    <button onClick={() => onHandleDelete(record._id)}>Delete</button>
+                    <button onClick={() => onHandleDelete(record._id)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">Delete</button>
                 </div>
             )
         }
