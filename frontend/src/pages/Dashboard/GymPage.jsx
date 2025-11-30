@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Image, Input, Modal, Select, Table, message } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
-
 import { useCreateGym, getGym,useDeleteGym } from "../../utils/gymApi";
 import { getGymlocation } from "../../utils/gymlocationApi";
 import { getFacility } from "../../utils/facilityApi";
@@ -44,12 +43,6 @@ function GymPage() {
             render: loc => loc?.name || "—"
         },
         {
-            title: "Facilities",
-            dataIndex: "facilities",
-            key: "facilities",
-            render: list => Array.isArray(list) ? list.map(f => f.name).join(", ") : "—"
-        },
-        {
             title: "Action",
             key: "id",
             render: (record) => (
@@ -81,7 +74,7 @@ function GymPage() {
                 form.resetFields();
                 refetch();
                 setOpenCreateModal(false);
-                message.success("Gym created successfully");
+                toast.success("Gym created successfully");
             },
             onError() {
                 message.error("Failed to create gym");
@@ -102,7 +95,7 @@ function GymPage() {
     }
     
     const locationOptions = Array.isArray(gymLocations.data?.data) ? gymLocations.data.data.map(l => ({ label: l.name, value: l._id })) : [];
-    const facilityOptions = Array.isArray(facilities.data?.data?.data)? facilities.data.data.data.map(f => ({ label: f.name, value: f._id })): [];
+    
     
     
     return (
@@ -137,10 +130,6 @@ function GymPage() {
 
                     <Form.Item name="gymLocation" label="Select Location" rules={[{ required: true }]}>
                         <Select placeholder="Choose a location" options={locationOptions} />
-                    </Form.Item>
-
-                    <Form.Item name="facilities" label="Select Facilities" rules={[{ required: true }]}>
-                        <Select placeholder="Choose facilities" mode="multiple"  options={facilityOptions} />
                     </Form.Item>
 
                     <Form.Item>
