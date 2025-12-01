@@ -14,10 +14,9 @@ export const getGymlocation = ()=>{
     return axiosInstance.get('/api/gymLocation/getgymLocation')
 }
 
-export const updateGymlocation = (id,data)=>{
-    return axiosInstance.put(`/api/gymLocation/updategymLocation/${id}`,data)
-}
-
+export const updateGymlocation = (id, payload) => {
+  return axiosInstance.put(`/api/gymLocation/updategymLocation/${id}`, payload);
+};
 export const deleteGymlocation = (id)=>{
     return axiosInstance.delete(`/api/gymLocation/deletegymLocation/${id}`)
 }
@@ -42,11 +41,9 @@ export const useDeleteGymLocation=()=>{
     )
 }
 
-export const useUpdateGymLocation = ()=>{
-    return useMutation(
-        {
-            mutationKey:"updateGym",
-            mutationFn:updateGymlocation
-        }
-    )
-}
+export const useUpdateGymLocation = () => {
+  return useMutation({
+    mutationKey: "updateGym",         // unique key for this mutation
+    mutationFn: ({ id, data }) => updateGymlocation(id, data),
+  });
+};

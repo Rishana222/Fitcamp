@@ -13,7 +13,11 @@ export const getFacility =()=>{
     return axiosInstance.get('/api/facility/getfacility')
 }
 export const updateFacility = (id,data)=>{
-    return axiosInstance.put(`/api/facility/updatesfacility/${id}`,data)
+    return axiosInstance.put(`/api/facility/updatesfacility/${id}`,data,{
+         headers:{
+            "Content-Type":"multipart/form-data"
+        }
+    })
 }
 
 export const deleteFacility = (id)=>{
@@ -37,3 +41,11 @@ export const useDeleteFacility = ()=>{
         }
     )
 }
+
+export const useUpdateFacilities = () => {
+    return useMutation(({ id, data }) =>
+        axiosInstance.put(`/api/facility/updatesfacility/${id}`, data, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+    );
+};

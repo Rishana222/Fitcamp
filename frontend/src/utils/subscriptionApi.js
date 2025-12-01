@@ -38,3 +38,10 @@ export const useDeleteSubscription =()=>{
         }
     )
 }
+
+export const useUpdateSubscription = () => {
+  return useMutation({
+    mutationKey: "updateSub",         
+    mutationFn: ({ id, data }) => updateSubscription(id, data),
+  });
+};

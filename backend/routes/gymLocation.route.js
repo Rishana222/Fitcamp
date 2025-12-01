@@ -6,7 +6,7 @@ const route = express.Router()
 
 route.post('/creategymLocation',upload.single('cardImage'),GymLocationCreateController)
 route.get('/getgymLocation',GymLocationGetController)
-route.put('/updategymLocation',upload.single('cardImage'),GymLocationUpdateController)
+route.put('/updategymLocation/:id',upload.single('cardImage'),GymLocationUpdateController);
 route.delete('/deletegymLocation/:id',GymLocationDeleteController)
 
 

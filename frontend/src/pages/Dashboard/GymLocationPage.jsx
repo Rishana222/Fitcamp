@@ -15,7 +15,7 @@ function GymLocationPage() {
     const [openUpdateModal, setOpenUpdateModal] = useState(false)
     const [form] = Form.useForm()
     const [updateForm] = Form.useForm()
-    //   const updateGymLocationMutation = useUpdateGymLocation();
+  
 
     const [gymId, setGymId] = useState()
 
@@ -50,9 +50,9 @@ function GymLocationPage() {
             title: "Action",
             key: "id",
             render: (record) => (
-                <div>
+                <div className="flex space-x-4">
                     <button onClick={() => onHandleDelete(record._id)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">Delete</button>
-                    <button onClick={() => HandleOpenUpdateModal(record)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">update</button>
+                    <button onClick={() => HandleOpenUpdateModal(record)} className="bg-blue-500 text-white  px-3 py-1 rounded-xs hover:bg-blue-700">update</button>
                 </div>
             )
         }
@@ -114,27 +114,32 @@ function GymLocationPage() {
         })
         setOpenUpdateModal(true)
     }
-    const onUpdateFormSubmit = (value)=>{
-        const payload = {
-        id: gymId, 
-        data: value 
-    };
-        updateGymlocation(payload, {
-        onSuccess(list) {
-            updateForm.resetFields();      
-            refetch();                     
-            setOpenUpdateModal(false);    
-            toast.success(list?.data?.message || "Updated successfully");
-        },
-        onError(error) {
-            console.error(error?.message);
-            toast.error(
-                error?.response?.data?.message || error?.message || "Something went wrong"
-            );
-        }
-    });
-    }
 
+const onUpdateFormSubmit = (value) => {
+    const payload = {
+        name: value.name
+    };
+
+    updateGymlocation(
+        { id: gymId, data: payload },
+        {
+            onSuccess(list) {
+                updateForm.resetFields();
+                setOpenUpdateModal(false);
+                refetch();
+                toast.success(list?.data?.message || "Updated successfully");
+            },
+            onError(error) {
+                toast.error(error?.response?.data?.message || error?.message || "Something went wrong");
+            }
+        }
+    );
+};           
+            
+ 
+       
+    
+ 
 
 
     return (
@@ -176,7 +181,7 @@ function GymLocationPage() {
                     <Form.Item name={'name'} label="Location Name" rules={[{ required: true, message: "location name required" }]}>
                         <Input placeholder="enter location name" />
                     </Form.Item>
-                    <Form.Item name={'cardImage'} label="Image" rules={[{ required: true, message: "image required" }]}>
+                   <Form.Item name={'cardImage'} label="Image">
                         <Dragger >
                             <p className="ant-upload-drag-icon">
                                 <InboxOutlined />
