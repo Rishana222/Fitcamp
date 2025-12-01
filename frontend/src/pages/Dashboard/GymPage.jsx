@@ -142,4 +142,3 @@ function GymPage() {
 }
 
 export default GymPage;
-w

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Button, Form, Image, Input, message, Modal, Table } from "antd"
 import Dragger from "antd/es/upload/Dragger"
 import { useState } from "react"
-import { getGymlocation, useCreateGymLocation, useDeleteGymLocation } from "../../utils/gymlocationApi"
+import { getGymlocation, useCreateGymLocation, useDeleteGymLocation ,useUpdateGymLocation  } from "../../utils/gymlocationApi"
 import { toast } from 'react-toastify'
 
 
@@ -12,7 +12,12 @@ import { toast } from 'react-toastify'
 function GymLocationPage() {
 
     const [openCreateModal, setOpenCreateModal] = useState(false)
+    const [openUpdateModal, setOpenUpdateModal] = useState(false)
     const [form] = Form.useForm()
+    const [updateForm] = Form.useForm()
+    //   const updateGymLocationMutation = useUpdateGymLocation();
+
+    const [gymId, setGymId] = useState()
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['getGymLocation'],
@@ -22,6 +27,7 @@ function GymLocationPage() {
 
     const { mutate: createGym } = useCreateGymLocation()
     const { mutate: deleteGym } = useDeleteGymLocation()
+    const { mutate: updateGymlocation } = useUpdateGymLocation()
 
     console.log({ data });
 
@@ -46,6 +52,7 @@ function GymLocationPage() {
             render: (record) => (
                 <div>
                     <button onClick={() => onHandleDelete(record._id)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">Delete</button>
+                    <button onClick={() => HandleOpenUpdateModal(record)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">update</button>
                 </div>
             )
         }
@@ -100,6 +107,36 @@ function GymLocationPage() {
         })
     }
 
+    const HandleOpenUpdateModal = (value) => {
+        setGymId(value._id)
+        updateForm.setFieldsValue({
+            name: value.name,
+        })
+        setOpenUpdateModal(true)
+    }
+    const onUpdateFormSubmit = (value)=>{
+        const payload = {
+        id: gymId, 
+        data: value 
+    };
+        updateGymlocation(payload, {
+        onSuccess(list) {
+            updateForm.resetFields();      
+            refetch();                     
+            setOpenUpdateModal(false);    
+            toast.success(list?.data?.message || "Updated successfully");
+        },
+        onError(error) {
+            console.error(error?.message);
+            toast.error(
+                error?.response?.data?.message || error?.message || "Something went wrong"
+            );
+        }
+    });
+    }
+
+
+
     return (
         <>
             <div className="flex items-center justify-between">
@@ -114,6 +151,28 @@ function GymLocationPage() {
 
             <Modal open={openCreateModal} onCancel={() => setOpenCreateModal(false)} footer={null} title={'Create Gym Location'} >
                 <Form layout="vertical" onFinish={onCreateFormSubmit} form={form}>
+                    <Form.Item name={'name'} label="Location Name" rules={[{ required: true, message: "location name required" }]}>
+                        <Input placeholder="enter location name" />
+                    </Form.Item>
+                    <Form.Item name={'cardImage'} label="Image" rules={[{ required: true, message: "image required" }]}>
+                        <Dragger >
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                            <p className="ant-upload-hint">
+                                Support for a single or bulk upload. Strictly prohibited from uploading company data or other
+                                banned files.
+                            </p>
+                        </Dragger>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button className="w-full" htmlType="submit">Submit</Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+            <Modal open={openUpdateModal} onCancel={() => setOpenUpdateModal(false)} footer={null} title={'update Gym Location'} >
+                <Form layout="vertical" onFinish={onUpdateFormSubmit} form={updateForm}>
                     <Form.Item name={'name'} label="Location Name" rules={[{ required: true, message: "location name required" }]}>
                         <Input placeholder="enter location name" />
                     </Form.Item>

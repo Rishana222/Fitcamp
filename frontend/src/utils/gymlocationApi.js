@@ -41,3 +41,12 @@ export const useDeleteGymLocation=()=>{
         }
     )
 }
+
+export const useUpdateGymLocation = ()=>{
+    return useMutation(
+        {
+            mutationKey:"updateGym",
+            mutationFn:updateGymlocation
+        }
+    )
+}
