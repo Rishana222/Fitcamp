@@ -34,7 +34,7 @@ const GymLocation = () => {
               onClick={() => handleCardClick(item._id)}
               className="flex mb-4 bg-white shadow-2xl px-2 py-2 rounded-full xl:px-3 cursor-pointer hover:scale-105 transition-transform duration-200"
             >
-              <img src={item.cardImage} alt={item.name} className="h-10 w-10 object-cover rounded-full" />
+              <img src={`http://localhost:5000/${item.cardImage}`} alt={item.name} className="h-10 w-10 object-cover rounded-full" />
               <span className="ml-2 mt-2">{item.name}</span>
             </div>
           ))}

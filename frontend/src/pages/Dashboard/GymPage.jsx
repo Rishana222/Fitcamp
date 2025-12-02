@@ -179,7 +179,7 @@ function GymPage() {
                         <Input.TextArea placeholder="Enter description" />
                     </Form.Item>
 
-                    <Form.Item name={"image"} label="Gym Image" rules={[{ required: true }]}>
+                    <Form.Item name={"image"} label="Gym Image" rules={[{ required: false }]}>
                         <Dragger >
                             <p className="ant-upload-drag-icon"><InboxOutlined /></p>
                             <p className="ant-upload-text">Click or drag file to upload</p>
