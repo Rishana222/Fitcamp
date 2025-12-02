@@ -43,7 +43,7 @@ export const useDeleteGymLocation=()=>{
 
 export const useUpdateGymLocation = () => {
   return useMutation({
-    mutationKey: "updateGym",         // unique key for this mutation
+    mutationKey: "updateGym",         
     mutationFn: ({ id, data }) => updateGymlocation(id, data),
   });
 };

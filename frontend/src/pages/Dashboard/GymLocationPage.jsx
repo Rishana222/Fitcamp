@@ -115,7 +115,7 @@ function GymLocationPage() {
         setOpenUpdateModal(true)
     }
 
-const onUpdateFormSubmit = (value) => {
+    const onUpdateFormSubmit = (value) => {
     const payload = {
         name: value.name
     };
@@ -134,12 +134,8 @@ const onUpdateFormSubmit = (value) => {
             }
         }
     );
-};           
+    };           
             
- 
-       
-    
- 
 
 
     return (

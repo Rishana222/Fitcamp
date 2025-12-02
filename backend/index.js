@@ -29,6 +29,7 @@ app.use('/api/facility',facilityRoute)
 app.use('/api/gym',gymRoute)
 app.use(errorMiddleware);
 
+
 app.get('/',(req,res)=>{
     res.send("hello world")
 })

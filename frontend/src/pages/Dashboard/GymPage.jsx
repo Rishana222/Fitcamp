@@ -5,14 +5,13 @@ import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
 import { useCreateGym, getGym,useDeleteGym,useUpdateGym } from "../../utils/gymApi";
 import { getGymlocation } from "../../utils/gymlocationApi";
-import { getFacility } from "../../utils/facilityApi";
 import { toast } from "react-toastify";
 
 function GymPage() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
     const [openUpdateModal, setOpenUpdateModal] = useState(false);
     const [form] = Form.useForm();
-   const [updateForm] = Form.useForm()
+    const [updateForm] = Form.useForm()
 
     const [gymsId,setGymsId]=useState()
 
