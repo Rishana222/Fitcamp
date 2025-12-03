@@ -13,6 +13,7 @@ const CentralParkCard = () => {
     queryFn: () => getFacility(),
   });
 
+
   return (
     <>
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-start lg:gap-[60px] w-full mt-[100px] md:mt-[150px] lg:mt-[120px] xl:mt-[80px] lg:ml-[60px] xl:ml-[150px]">
@@ -40,7 +41,7 @@ const CentralParkCard = () => {
           <hr className="border-t border-gray-300 mt-3" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 md:gap-x-8 mt-5">
-            {data?.data?.map((item) => (
+         {data?.data?.data?.map((item) => (
               <div key={item._id} className="flex items-center">
                 <img
                   className="h-[40px] w-[40px] object-contain"
