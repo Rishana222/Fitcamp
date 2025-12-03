@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import { getGym } from '../../utils/gymApi';
 
+
 const Card = () => {
   const Navigate = useNavigate();
 
@@ -11,6 +12,9 @@ const Card = () => {
     queryKey: ['gyms'],
     queryFn: getGym
   });
+
+    
+  
 
 
   const handleDetailClick = () => {

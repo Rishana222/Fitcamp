@@ -3,7 +3,16 @@ import { parkdata } from '../../data/centralParkdata'
 import operation from '../../assets/Operational Time.png'
 import address from '../../assets/Address.png'
 import profile from '../../assets/Profile 4.png'
+import { useQuery } from '@tanstack/react-query';
+import { getFacility } from '../../utils/facilityApi'
+
 const CentralParkCard = () => {
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["getFacility"],
+    queryFn: () => getFacility(),
+  });
+
   return (
     <>
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-start lg:gap-[60px] w-full mt-[100px] md:mt-[150px] lg:mt-[120px] xl:mt-[80px] lg:ml-[60px] xl:ml-[150px]">
@@ -31,12 +40,28 @@ const CentralParkCard = () => {
           <hr className="border-t border-gray-300 mt-3" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 md:gap-x-8 mt-5">
-            {parkdata.map((card, index) => (
-              <div key={index} className="flex items-center">
-                <img className="h-[40px] w-[40px] object-contain" src={card.image} alt="" />
+            {data?.data?.map((item) => (
+              <div key={item._id} className="flex items-center">
+                <img
+                  className="h-[40px] w-[40px] object-contain"
+                  src={item.image}
+                  alt={item.name}
+                />
                 <div className="ml-3">
-                  <h1 className="font-extrabold text-sm">{card.name}</h1>
-                  <p className="text-gray-500 text-xs">{card.sub}</p>
+                  <h1 className="font-extrabold text-sm">{item.name}</h1>
+                  <p className="text-gray-500 text-xs">{item.description}</p>
+
+                  <div className="flex gap-1 mt-1">
+                    {Array.isArray(item.icons) &&
+                      item.icons.map((icon, i) => (
+                        <img
+                          key={i}
+                          src={icon}
+                          className="h-[15px] w-[15px]"
+                          alt="icon"
+                        />
+                      ))}
+                  </div>
                 </div>
               </div>
             ))}
