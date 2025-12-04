@@ -185,7 +185,7 @@ function FacilityPage() {
                         getValueFromEvent={(e) => {
                             return e?.fileList?.[0]?.originFileObj || null;
                         }}
-                        rules={[{ required: true, message: "Image required" }]}
+                        
                     >
                         <Dragger maxCount={1} beforeUpload={() => false}>
                             <p className="ant-upload-drag-icon">
