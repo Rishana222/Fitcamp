@@ -3,8 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Image, Input, Modal, Select, Table, message } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useState } from "react";
-import { useCreateGym, getGym,useDeleteGym,useUpdateGym } from "../../utils/gymApi";
+import { useCreateGym, getGym, useDeleteGym, useUpdateGym } from "../../utils/gymApi";
 import { getGymlocation } from "../../utils/gymlocationApi";
+import { getFacility } from '../../utils/facilityApi'
 import { toast } from "react-toastify";
 
 function GymPage() {
@@ -13,14 +14,15 @@ function GymPage() {
     const [form] = Form.useForm();
     const [updateForm] = Form.useForm()
 
-    const [gymsId,setGymsId]=useState()
+    const [gymsId, setGymsId] = useState()
 
     const { data, isLoading, refetch } = useQuery({ queryKey: ["getGym"], queryFn: getGym });
     const gymLocations = useQuery({ queryKey: ["getGymLocation"], queryFn: getGymlocation });
+    const facilities = useQuery({ queryKey: ["getFacilities"], queryFn: getFacility })
 
     const { mutate: createGymMutate } = useCreateGym();
-    const {mutate: deleteGymMutate} = useDeleteGym();
-    const {mutate:updateGym}=useUpdateGym();
+    const { mutate: deleteGymMutate } = useDeleteGym();
+    const { mutate: updateGym } = useUpdateGym();
 
     const columns = [
         {
@@ -85,51 +87,55 @@ function GymPage() {
             }
         });
     };
-     const onHandleDelete = (id) => {
+    const onHandleDelete = (id) => {
         deleteGymMutate(id, {
             onSuccess(list) {
-            refetch()
-            toast.success(list?.data.message)     
+                refetch()
+                toast.success(list?.data.message)
             },
             onError() {
-            toast.error('failed')
+                toast.error('failed')
             }
         }
         )
     }
-    
+
     const locationOptions = Array.isArray(gymLocations.data?.data) ? gymLocations.data.data.map(l => ({ label: l.name, value: l._id })) : [];
-    
-     const HandleOpenUpdateModal = (value) => {
+    const facilityOptions = Array.isArray(facilities.data?.data) ? facilities.data.data.map(f => ({ label: f.name, value: f._id })) : [];
+
+    const HandleOpenUpdateModal = (value) => {
         setGymsId(value._id)
         updateForm.setFieldsValue({
             name: value.name,
-            description:value.description
+            description: value.description,
+            facilites: value.facilities || [],
         })
         setOpenUpdateModal(true)
     }
     const onUpdateFormSubmit = (value) => {
-    const payload = {
-        name: value.name,
-         description:value.description
+        const payload = {
+            name: value.name,
+            description: value.description,
+            gymLocation: value.gymLocation,
+              facilites: value.facilities || [],
+        };
+
+        updateGym(
+            { id: gymsId, data: payload },
+            {
+                onSuccess(list) {
+                    updateForm.resetFields();
+                    setOpenUpdateModal(false);
+                    refetch();
+                    toast.success(list?.data?.message || "Updated successfully");
+                },
+                onError(error) {
+                    toast.error(error?.response?.data?.message || error?.message || "Something went wrong");
+                }
+            }
+        );
     };
 
-    updateGym(
-        { id: gymsId, data: payload },
-        {
-            onSuccess(list) {
-                updateForm.resetFields();
-                setOpenUpdateModal(false);
-                refetch();
-                toast.success(list?.data?.message || "Updated successfully");
-            },
-            onError(error) {
-                toast.error(error?.response?.data?.message || error?.message || "Something went wrong");
-            }
-        }
-    );
-}; 
-    
     return (
         <>
             <div className="flex items-center justify-end mb-4">
@@ -164,6 +170,10 @@ function GymPage() {
                         <Select placeholder="Choose a location" options={locationOptions} />
                     </Form.Item>
 
+                    <Form.Item name="facilities" label="Select facility" rules={[{ required: true }]}>
+                        <Select placeholder="Choose a facility" options={facilityOptions} />
+                    </Form.Item>
+
                     <Form.Item>
                         <Button className="w-full" htmlType="submit">Submit</Button>
                     </Form.Item>
@@ -188,6 +198,10 @@ function GymPage() {
 
                     <Form.Item name="gymLocation" label="Select Location" rules={[{ required: true }]}>
                         <Select placeholder="Choose a location" options={locationOptions} />
+                    </Form.Item>
+
+                    <Form.Item name="facilities" label="Select facility" rules={[{ required: true }]}>
+                        <Select placeholder="Choose a facility" options={facilityOptions} />
                     </Form.Item>
 
                     <Form.Item>
