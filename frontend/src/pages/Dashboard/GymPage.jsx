@@ -32,8 +32,8 @@ function GymPage() {
   });
 
   const facilityMap = Object.fromEntries(
-  facilitiesQuery.data?.data?.data.map(f => [f._id, f.name]) || []
-);
+    facilitiesQuery.data?.data?.data.map(f => [f._id, f.name]) || []
+  );
 
   const { mutate: createGymMutate } = useCreateGym();
   const { mutate: deleteGymMutate } = useDeleteGym();
@@ -45,40 +45,45 @@ function GymPage() {
     { title: "Image", dataIndex: "image", key: "image", render: (text) => <Image width={70} src={text} /> },
     { title: "Location", dataIndex: "gymLocation", key: "gymLocation", render: (loc) => loc?.name || "—" },
     {
-  title: "Facilities",
-  dataIndex: "facilites",
-  key: "facilities",
-  render: (facilities) =>
-    Array.isArray(facilities) && facilities.length > 0
-      ? facilities.map(fId => facilityMap[fId]).join(", ") // map ID to name
-      : "—"
-},
-    { title: "Action", key: "id", render: (record) => (
-      <div className="flex space-x-4">
-        <button
-          onClick={() => onHandleDelete(record._id)}
-          className="bg-red-500 text-white px-3 py-1 rounded-xs hover:bg-red-700"
-        >
-          Delete
-        </button>
-        <button
-          onClick={() => HandleOpenUpdateModal(record)}
-          className="bg-blue-500 text-white px-3 py-1 rounded-xs hover:bg-blue-700"
-        >
-          Update
-        </button>
-      </div>
-    ) },
+      title: "Facilities",
+      dataIndex: "facilites",
+      key: "facilities",
+      render: (facilities) =>
+        Array.isArray(facilities) && facilities.length > 0
+          ? facilities.map(fId => facilityMap[fId]).join(", ") // map ID to name
+          : "—"
+    },
+    {
+      title: "Action", key: "id", render: (record) => (
+        <div className="flex space-x-4">
+          <button
+            onClick={() => onHandleDelete(record._id)}
+            className="bg-red-500 text-white px-3 py-1 rounded-xs hover:bg-red-700"
+          >
+            Delete
+          </button>
+          <button
+            onClick={() => HandleOpenUpdateModal(record)}
+            className="bg-blue-500 text-white px-3 py-1 rounded-xs hover:bg-blue-700"
+          >
+            Update
+          </button>
+        </div>
+      )
+    },
   ];
 
   const locationOptions = Array.isArray(gymLocations.data?.data)
     ? gymLocations.data.data.map((l) => ({ label: l.name, value: l._id }))
     : [];
 
-const facilityOptions = Array.isArray(facilitiesQuery.data?.data?.data)
+  const facilityOptions = Array.isArray(facilitiesQuery.data?.data?.data)
     ? facilitiesQuery.data.data.data.map(f => ({
-        label: f.name,
-        value: f._id
+      label: f.name,
+      value: f._id,
+      name: f.name,
+      description: f.description,
+      icon: f.icon
     }))
     : [];
   const onCreateFormSubmit = (values) => {
@@ -167,7 +172,7 @@ const facilityOptions = Array.isArray(facilitiesQuery.data?.data?.data)
         rowKey="_id"
       />
 
-      {/* Create Gym Modal */}
+
       <Modal open={openCreateModal} onCancel={() => setOpenCreateModal(false)} footer={null} title="Create Gym">
         <Form layout="vertical" form={form} onFinish={onCreateFormSubmit}>
           <Form.Item name="name" label="Gym Name" rules={[{ required: true }]}>
@@ -199,7 +204,7 @@ const facilityOptions = Array.isArray(facilitiesQuery.data?.data?.data)
         </Form>
       </Modal>
 
-      {/* Update Gym Modal */}
+
       <Modal open={openUpdateModal} onCancel={() => setOpenUpdateModal(false)} footer={null} title="Update Gym">
         <Form layout="vertical" form={updateForm} onFinish={onUpdateFormSubmit}>
           <Form.Item name="name" label="Gym Name" rules={[{ required: true }]}>
@@ -222,7 +227,20 @@ const facilityOptions = Array.isArray(facilitiesQuery.data?.data?.data)
           </Form.Item>
 
           <Form.Item name="facilities" label="Select Facilities">
-            <Select placeholder="Choose facilities" options={facilityOptions} mode="multiple" />
+            <Select
+              placeholder="Choose facilities"
+              options={facilityOptions}
+              mode="multiple"
+              optionRender={(option) => (
+                <div className="flex items-center space-x-2">
+                  <img src={option.data.icon} alt="" width={24} height={24} />
+                  <div>
+                    <div className="font-semibold">{option.data.name}</div>
+                    <div className="text-gray-500 text-sm">{option.data.description}</div>
+                  </div>
+                </div>
+              )}
+            />
           </Form.Item>
 
           <Form.Item>
