@@ -20,7 +20,7 @@ const gymSchema = new mongoose.Schema({
         ref:'gymLocation',
         required:true
     },
-    facilites:[
+    facilities:[
         {
             type: mongoose.Schema.Types.ObjectId,
         ref:'facility',
