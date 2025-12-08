@@ -1,17 +1,25 @@
-import React from "react";
-import Logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Logo from '../assets/logo.png'; 
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <nav className="absolute top-3 lg:top-10 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
       <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium">
-        <div className="flex items-center space-x-2 mb-2 md:mb-0">
+        
+        
+        <div
+          className="flex items-center space-x-2 mb-2 md:mb-0 cursor-pointer"
+          onClick={() => navigate('/')} 
+        >
           <img src={Logo} alt="Logo" className="w-10 md:w-12" />
           <h1 className="font-bold uppercase text-xl md:text-2xl lg:text-3xl">
             Fitcamp
           </h1>
         </div>
+
         <div className="flex flex-col md:flex-row items-center text-sm md:text-base space-y-2 md:space-y-0 md:space-x-6">
           <a href="#subscribe" className="hover:text-gray-700 capitalize">
             subscribe plan
@@ -19,7 +27,7 @@ const Navbar = () => {
           <a href="#blog" className="hover:text-gray-700 capitalize">
             blog
           </a>
-         <a href="#testimonial"  className="hover:text-gray-700 capitalize"> 
+          <a href="#testimonial" className="hover:text-gray-700 capitalize">
             testimonial
           </a>
           <a href="#about" className="hover:text-gray-700 capitalize">
@@ -29,24 +37,10 @@ const Navbar = () => {
             my subscription
           </button>
         </div>
+
       </div>
     </nav>
   );
 };
 
 export default Navbar;
-   
-            
-         
-                 
-          
-              
-         
-           
-          
-           
-          
-          
-
-
-

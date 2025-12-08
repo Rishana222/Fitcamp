@@ -15,6 +15,10 @@ const gymSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    openingIcon: {
+        type: String,
+        default: null 
+    },
     gymLocation:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'gymLocation',

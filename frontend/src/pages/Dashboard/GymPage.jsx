@@ -17,7 +17,7 @@ function GymPage() {
   const [form] = Form.useForm();
   const [updateForm] = Form.useForm();
 
-  
+
   const { data: gymData, isLoading, refetch } = useQuery({ queryKey: ["getGym"], queryFn: getGym });
   const gymLocations = useQuery({ queryKey: ["getGymLocation"], queryFn: getGymlocation });
   const facilitiesQuery = useQuery({ queryKey: ["getFacility"], queryFn: getFacility });
@@ -52,7 +52,7 @@ function GymPage() {
     { title: "Location", dataIndex: "gymLocation", key: "gymLocation", render: loc => loc?.name || "—" },
     {
       title: "Facilities",
-      dataIndex: "facilites",
+      dataIndex: "facilities",
       key: "facilities",
       render: facilities => Array.isArray(facilities) && facilities.length > 0
         ? (
@@ -71,6 +71,12 @@ function GymPage() {
           </div>
         ) : "—"
     },
+     {
+      title: "Opening Icon",
+      dataIndex: "openingIcon",
+      key: "openingIcon",
+      render: text => text ? <img src={`http://localhost:5000/uploads/${text}`} width={50} /> : "—"
+    },
     {
       title: "Action",
       key: "id",
@@ -86,37 +92,46 @@ function GymPage() {
           >Update</button>
         </div>
       )
-    }
+    },
+   
   ];
 
 
   const onCreateFormSubmit = values => {
-    const fileObj = values.image?.[0]?.originFileObj; 
-    if (!fileObj) {
-      toast.error("Gym image is required");
-      return;
-    }
+  const fileObj = values.image?.[0]?.originFileObj;
+  const iconFileObj = values.openingIcon?.[0]?.originFileObj; 
 
-    const payload = new FormData();
-    payload.append("name", values.name);
-    payload.append("description", values.description || "");
-    payload.append("image", fileObj);
-    payload.append("gymLocation", values.gymLocation);
+  if (!fileObj) {
+    toast.error("Gym image is required");
+    return;
+  }
 
-    if (values.facilities?.length) {
-      values.facilities.forEach(f => payload.append("facilites", f));
-    }
+  if (!iconFileObj) {  
+    toast.error("Opening icon is required");
+    return;
+  }
 
-    createGymMutate(payload, {
-      onSuccess: () => {
-        form.resetFields();
-        setOpenCreateModal(false);
-        refetch();
-        toast.success("Gym created successfully");
-      },
-      onError: err => toast.error(err?.response?.data?.message || "Failed to create gym")
-    });
-  };
+  const payload = new FormData();
+  payload.append("name", values.name);
+  payload.append("description", values.description || "");
+  payload.append("image", fileObj);
+  payload.append("openingIcon", iconFileObj); 
+  payload.append("gymLocation", values.gymLocation);
+
+  if (values.facilities?.length) {
+    values.facilities.forEach(f => payload.append("facilities", f));
+  }
+
+  createGymMutate(payload, {
+    onSuccess: () => {
+      form.resetFields();
+      setOpenCreateModal(false);
+      refetch();
+      toast.success("Gym created successfully");
+    },
+    onError: err => toast.error(err?.response?.data?.message || "Failed to create gym")
+  });
+};
 
   const onHandleDelete = id => {
     deleteGymMutate(id, {
@@ -129,35 +144,57 @@ function GymPage() {
   };
 
   const HandleOpenUpdateModal = gym => {
-    setGymsId(gym._id);
-    updateForm.setFieldsValue({
-      name: gym.name,
-      description: gym.description,
-      gymLocation: gym.gymLocation?._id,
-      facilities: Array.isArray(gym.facilites) ? gym.facilites.map(f => typeof f === "string" ? f : f._id) : []
-    });
-    setOpenUpdateModal(true);
-  };
+  setGymsId(gym._id);
 
-  const onUpdateFormSubmit = values => {
-    const payload = {
-      name: values.name,
-      description: values.description || "",
-      gymLocation: values.gymLocation,
-      facilites: values.facilities || []
-    };
+  updateForm.setFieldsValue({
+    name: gym.name,
+    description: gym.description,
+    gymLocation: gym.gymLocation?._id,
+    facilities: Array.isArray(gym.facilities)
+      ? gym.facilities.map(f => (typeof f === "string" ? f : f._id))
+      : [],
+    openingIcon: gym.openingIcon
+      ? [
+          {
+            uid: "-1",
+            name: "icon",
+            status: "done",
+            url: `http://localhost:5000/uploads/${gym.openingIcon}`,
+          },
+        ]
+      : [],
+  });
 
-    updateGym({ id: gymsId, data: payload }, {
-      onSuccess: () => {
-        updateForm.resetFields();
-        setOpenUpdateModal(false);
-        refetch();
-        toast.success("Updated successfully");
-      },
-      onError: error => toast.error(error?.response?.data?.message || "Failed")
-    });
-  };
+  setOpenUpdateModal(true);
+};
 
+const onUpdateFormSubmit = values => {
+  const payload = new FormData();
+
+  payload.append("name", values.name);
+  payload.append("description", values.description || "");
+  payload.append("gymLocation", values.gymLocation);
+
+  if (values.facilities) {
+     values.facilities.forEach(f => payload.append("facilities", f));
+  }
+
+  const fileObj = values.image?.[0]?.originFileObj;
+  if (fileObj) payload.append("image", fileObj);
+
+  const iconFileObj = values.openingIcon?.[0]?.originFileObj;
+  if (iconFileObj) payload.append("openingIcon", iconFileObj);
+
+  updateGym({ id: gymsId, data: payload }, {
+    onSuccess: () => {
+      updateForm.resetFields();
+      setOpenUpdateModal(false);
+      refetch();
+      toast.success("Updated successfully");
+    },
+    onError: error => toast.error(error?.response?.data?.message || "Failed")
+  });
+};
   return (
     <>
       <div className="flex items-center justify-end mb-4">
@@ -165,15 +202,15 @@ function GymPage() {
       </div>
 
       <Table
-  columns={columns}
-  dataSource={gymData?.data ?? []}
-  loading={isLoading}
-  rowKey="_id"
-  pagination={{ pageSize: 4 }}
-  scroll={{ x: 'max-content' }} 
-/>
+        columns={columns}
+        dataSource={gymData?.data ?? []}
+        loading={isLoading}
+        rowKey="_id"
+        pagination={{ pageSize: 4 }}
+        scroll={{ x: 'max-content' }}
+      />
 
-     
+
       <Modal open={openCreateModal} onCancel={() => setOpenCreateModal(false)} footer={null} title="Create Gym">
         <Form layout="vertical" form={form} onFinish={onCreateFormSubmit}>
           <Form.Item name="name" label="Gym Name" rules={[{ required: true }]}>
@@ -215,6 +252,18 @@ function GymPage() {
               }))}
             />
           </Form.Item>
+          <Form.Item
+            name="openingIcon"
+            label="Opening Icon"
+            rules={[{ required: true, message: "Opening icon is required" }]}
+            valuePropName="fileList"
+            getValueFromEvent={e => e?.fileList || []}
+          >
+            <Dragger beforeUpload={() => false} maxCount={1}>
+              <p className="ant-upload-drag-icon"><InboxOutlined /></p>
+              <p className="ant-upload-text">Click or drag file to upload icon</p>
+            </Dragger>
+          </Form.Item>
           <Form.Item>
             <Button className="w-full" htmlType="submit">Submit</Button>
           </Form.Item>
@@ -249,6 +298,17 @@ function GymPage() {
                 value: f.value
               }))}
             />
+          </Form.Item>
+          <Form.Item
+            name="openingIcon"
+            label="Opening Icon"
+            valuePropName="fileList"
+            getValueFromEvent={e => e?.fileList || []}
+          >
+            <Dragger beforeUpload={() => false} maxCount={1}>
+              <p className="ant-upload-drag-icon"><InboxOutlined /></p>
+              <p className="ant-upload-text">Click or drag file to upload icon</p>
+            </Dragger>
           </Form.Item>
           <Form.Item>
             <Button className="w-full" htmlType="submit">Update</Button>
