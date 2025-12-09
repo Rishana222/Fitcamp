@@ -18,8 +18,16 @@ export const getGymById = (id) => {
     return axiosInstance.get(`/api/gym/getgym/${id}`);
 };
 
+export const getGymsByLocation = (locationId) => {
+    return axiosInstance.get(`/api/gymLocations/${locationId}/gyms`);
+};
+
 export const updateGym = (id, data) => {
-    return axiosInstance.put(`/api/gym/updategym/${id}`, data);
+    return axiosInstance.put(`/api/gym/updategym/${id}`, data, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
 };
 
 export const deleteGym = (id) => {

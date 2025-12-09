@@ -1,9 +1,12 @@
 import React from "react";
 import Card from "../components/Homepage/Card";
 import { useLocation, useParams } from "react-router-dom";
+import { getGymsByLocation } from "../utils/gymApi";
 
 const Categories = () => {
-  const {id} = useParams()
+ const { id } = useParams();
+
+ 
 
   console.log({id});
   

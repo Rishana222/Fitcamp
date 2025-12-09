@@ -1,6 +1,6 @@
 const { ErrorHandler } = require('../handlers/errorHandler');
 const {
-  createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService} = require('../services/gym.service');
+  createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService,getGymsByLocationService} = require('../services/gym.service');
 
 const GymCreateController = async (req, res) => {
   try {
@@ -42,6 +42,25 @@ const GymGetByIdController = async (req, res) => {
     return res.status(200).json(gym);
   } catch (error) {
     return res.status(400).json({ message: error.message });
+  }
+};
+
+
+const GymGetByLocationController = async (req, res) => {
+  try {
+    const { locationId } = req.params;
+
+    if (!locationId) {
+      throw new ErrorHandler("locationId is required", 400);
+    }
+
+    const gyms = await getGymsByLocationService(locationId);
+    return res.status(200).json({
+      success: true,
+      data: gyms
+    });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -93,5 +112,5 @@ module.exports = {
   GymGetController,
   GymGetByIdController,
   GymUpdateController,
-  GymDeleteController
+  GymDeleteController,GymGetByLocationController
 };

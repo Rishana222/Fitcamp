@@ -8,6 +8,7 @@ import Membership from '../components/Homepage/Membership';
 import { useQuery } from '@tanstack/react-query';
 import { getGym } from '../utils/gymApi';
 
+
 function Home() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['gyms'],
@@ -19,7 +20,7 @@ function Home() {
       <Search />
       <GymLocation />
       <LatestAdded />
-      <Card  data={data}/>
+     <Card data={data} />
       <JoinedUser />
       <Membership />
     </>

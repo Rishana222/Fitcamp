@@ -1,7 +1,7 @@
 const express = require('express');
 const Gym = require('../models/GymModel')
 const upload = require('../middlewares/uploadMiddlewares');
-const { GymCreateController,GymGetController,GymGetByIdController,GymUpdateController,GymDeleteController} = require('../controller/gym.controller');
+const { GymCreateController,GymGetController,GymGetByIdController,GymUpdateController,GymDeleteController,GymGetByLocationController} = require('../controller/gym.controller');
 const route = express.Router();
 
 route.post(
@@ -22,6 +22,9 @@ route.put(
   ]),
   GymUpdateController
 );
+
+route.get('/gymLocations/:locationId/gyms', GymGetByLocationController);
+
 route.delete('/deletegym/:id', GymDeleteController);
 
 module.exports = route;

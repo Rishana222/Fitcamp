@@ -18,10 +18,13 @@ const getGymServiceById = async (id) => {
   return gym;
 };
 
-const getGymbyidService = async()=>{
-
-}
-
+const getGymsByLocationService = async (locationId) => {
+  const gyms = await Gym.find({ gymLocation: locationId }).populate('facilities');
+  if (!gyms || gyms.length === 0) {
+    throw new ErrorHandler("No gyms found for this location", 404);
+  }
+  return gyms;
+};
 
 
 
@@ -50,4 +53,4 @@ const deleteGymService = async (id) => {
 };
 
 
-module.exports={createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService,getGymbyidService}
+module.exports={createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService,getGymsByLocationService}
