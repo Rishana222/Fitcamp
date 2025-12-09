@@ -13,16 +13,9 @@ const Card = () => {
     queryFn: getGym
   });
 
-
-console.log({data});
-
-
-
-
-  const handleDetailClick = () => {
-    Navigate('/detail')
-  }
-
+const handleDetailClick = (id) => {
+  Navigate(`/detail/${id}`);
+};
   return (
     <>
       {/* mapping */}
