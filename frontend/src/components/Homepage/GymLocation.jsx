@@ -13,8 +13,8 @@ const GymLocation = () => {
   });
 
 
-  const handleCardClick = () => {
-    navigate('/category');
+  const handleCardClick = (id) => {
+    navigate(`/category/${id}`);
   };
 
   return (

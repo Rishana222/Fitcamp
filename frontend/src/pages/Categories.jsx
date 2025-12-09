@@ -1,7 +1,12 @@
 import React from "react";
 import Card from "../components/Homepage/Card";
+import { useLocation, useParams } from "react-router-dom";
 
 const Categories = () => {
+  const {id} = useParams()
+
+  console.log({id});
+  
   return (
     <>
     <div className="relative   bg-white px-6 md:px-12 lg:px-24 pt-32 mb-7">

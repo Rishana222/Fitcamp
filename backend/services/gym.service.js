@@ -18,6 +18,15 @@ const getGymServiceById = async (id) => {
   return gym;
 };
 
+const getGymbyidService = async()=>{
+
+}
+
+
+
+
+
+
 const updateGymService = async (id, update) => {
   const existingGym = await Gym.findById(id);
 
@@ -41,4 +50,4 @@ const deleteGymService = async (id) => {
 };
 
 
-module.exports={createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService}
+module.exports={createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService,getGymbyidService}

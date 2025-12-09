@@ -3,15 +3,16 @@ import { gyms } from '../../data/gymdatas'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import { getGym } from '../../utils/gymApi';
+import { imageUrl } from '../../utils/axios';
 
 
-const Card = () => {
+const Card = ({data}) => {
   const Navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['gyms'],
-    queryFn: getGym
-  });
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ['gyms'],
+  //   queryFn: getGym
+  // });
 
 const handleDetailClick = (id) => {
   Navigate(`/detail/${id}`);
@@ -57,7 +58,7 @@ const handleDetailClick = (id) => {
               {item.facilities?.map((f, i) => (
                 <div key={i} className="flex flex-col items-center justify-center rounded-lg p-2">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full">
-                   <img src={`http://localhost:5000/${f.icons?.[0]}`}alt="" className="h-[45px] object-contain" /> 
+                   <img src={`${imageUrl}${f.icons?.[0]}`}alt="" className="h-[45px] object-contain" /> 
                   </div>
                   <p className="text-sm font-bold text-gray-800 mt-2">{f.name}</p>
                   <p className="text-xs text-gray-500">{f.description}</p>
@@ -66,7 +67,7 @@ const handleDetailClick = (id) => {
             </div>
             <hr className="border-t border-gray-400 mt-3" />
             <div className="flex gap-3 mt-2.5 px-2">
-              <img className="h-[45px]" src={`http://localhost:5000/${item.icon}`} alt="" />
+              <img className="h-[45px]" src={`${imageUrl}${item.icon}`} alt="" />
               <div>
                 <p className="font-semibold text-gray-900">Opening Work</p>
                 <p className="text-sm text-gray-400">{item.openingWork || '05:00 AM - 11:00 PM'}</p>
