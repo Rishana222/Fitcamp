@@ -13,6 +13,9 @@ const GymLocation = () => {
   });
 
 
+
+  
+
   const handleCardClick = (id) => {
     navigate(`/category/${id}`);
   };

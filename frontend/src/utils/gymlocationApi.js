@@ -14,6 +14,11 @@ export const getGymlocation = ()=>{
     return axiosInstance.get('/api/gymLocation/getgymLocation')
 }
 
+export const getGymBylocation = (id)=>{
+    return axiosInstance.get(`/api/gym/gymLocations/${id}/gyms`)
+}
+
+
 export const updateGymlocation = (id, payload) => {
   return axiosInstance.put(`/api/gymLocation/updategymLocation/${id}`, payload);
 };

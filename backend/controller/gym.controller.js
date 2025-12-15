@@ -1,13 +1,13 @@
 const { ErrorHandler } = require('../handlers/errorHandler');
 const {
-  createGymService,getAllGymService,getGymServiceById,updateGymService,deleteGymService,getGymsByLocationService} = require('../services/gym.service');
+  createGymService, getAllGymService, getGymServiceById, updateGymService, deleteGymService, getGymsByLocationService } = require('../services/gym.service');
 
 const GymCreateController = async (req, res) => {
   try {
     const data = req.body;
 
     if (req.file) {
-      data.image = req.file.path;  
+      data.image = req.file.path;
     } else {
       return res.status(400).json({ message: "image is required" });
     }
@@ -55,14 +55,14 @@ const GymGetByLocationController = async (req, res) => {
     }
 
     const gyms = await getGymsByLocationService(locationId);
-    return res.status(200).json({
-      success: true,
-      data: gyms
-    });
+    return res.status(200).json({ success: true, data: gyms });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }
 };
+
+
+  
 
 const GymUpdateController = async (req, res) => {
   try {
@@ -112,5 +112,5 @@ module.exports = {
   GymGetController,
   GymGetByIdController,
   GymUpdateController,
-  GymDeleteController,GymGetByLocationController
+  GymDeleteController, GymGetByLocationController
 };

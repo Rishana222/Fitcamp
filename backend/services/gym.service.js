@@ -18,6 +18,7 @@ const getGymServiceById = async (id) => {
   return gym;
 };
 
+
 const getGymsByLocationService = async (locationId) => {
   const gyms = await Gym.find({ gymLocation: locationId }).populate('facilities');
   if (!gyms || gyms.length === 0) {
@@ -25,10 +26,6 @@ const getGymsByLocationService = async (locationId) => {
   }
   return gyms;
 };
-
-
-
-
 
 const updateGymService = async (id, update) => {
   const existingGym = await Gym.findById(id);
