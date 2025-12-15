@@ -12,6 +12,7 @@ const { errorMiddleware } = require('./handlers/errorHandler');
 const cors = require('cors');
 const path = require('path');   
 
+
 dotenv.config();
 
 const app= express();

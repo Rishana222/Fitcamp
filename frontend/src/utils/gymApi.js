@@ -19,7 +19,7 @@ export const getGymById = (id) => {
 };
 
 export const getGymsByLocation = (locationId) => {
-    return axiosInstance.get(`/api/gymLocations/${locationId}/gyms`);
+  return axiosInstance.get(`/api/gym/gymLocations/${locationId}/gyms`);
 };
 
 export const updateGym = (id, data) => {

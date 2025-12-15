@@ -23,7 +23,8 @@ const Categories = () => {
           Finding Fitcamp gym location nearby ‘Jakarta’ City
         </p>
       </div>
-      <Card data={data?.data} />
+ <Card data={data?.data} />
+
       <div className="mb-8 flex justify-center">
         <button className="bg-black text-white hover:bg-gray-700 px-3.5 py-1.5 rounded-full font-light">Load More</button>
       </div>
