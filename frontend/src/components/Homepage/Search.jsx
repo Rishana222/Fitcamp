@@ -31,6 +31,7 @@ const Search = () => {
                     <p className="mt-3 text-sm sm:text-base md:text-lg text-white/90 capitalize">
                         transform your life by investing in your wellness
                     </p>
+
                     <div className="mt-8 bg-white text-black px-2 py-2 rounded-3xl w-[260px] sm:w-[300px] md:w-[400px] mx-auto flex items-center">
                         <input
                             className="w-full outline-none text-sm px-2"
@@ -41,6 +42,7 @@ const Search = () => {
                             Search
                         </button>
                     </div>
+                    
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-3 bg-white bottom-[-150px] md:bottom-[-90px] overflow-visible text-black absolute w-[90%] xl:w-[55%] left-1/2 transform -translate-x-1/2 shadow-2xl z-10'>
     <div className='text-center py-3 mb-3'>

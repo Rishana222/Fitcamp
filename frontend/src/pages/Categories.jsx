@@ -17,14 +17,14 @@ const Categories = () => {
 
   return (
     <>
-      <div className="relative   bg-white px-6 md:px-12 lg:px-24 pt-32 mb-7">
-        <h1 className="text-4xl font-bold mb-3 text-black mt-28 md:mt-12">JAKRTA</h1>
-        <p className="text-gray-700 text-xs lg:font-bold">
-          Finding Fitcamp gym location nearby ‘Jakarta’ City
+      <div className="relative   bg-white px-6 md:px-12 lg:px-24 pt-32 mb-1">
+        {/* <h1 className="text-4xl font-bold mb-3 text-black mt-28 md:mt-12">JAKRTA</h1> */}
+        <p className="text-gray-700 text-xl lg:font-bold">
+          {/* Finding Fitcamp gym location nearby ‘Jakarta’ City */}
+          Explore gyms in this location
         </p>
       </div>
- <Card data={data?.data} />
-
+        <Card data={data?.data} />
       <div className="mb-8 flex justify-center">
         <button className="bg-black text-white hover:bg-gray-700 px-3.5 py-1.5 rounded-full font-light">Load More</button>
       </div>
