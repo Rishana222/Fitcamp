@@ -90,8 +90,8 @@ const Swiper = () => {
           </div>
         </div>
 
-{/*central park*/}       
-        <div className="flex flex-col lg:flex-row lg:items-start justify-center lg:justify-between gap-8 mt-10">
+{/* central park        */}
+         <div className="flex flex-col lg:flex-row lg:items-start justify-center lg:justify-between gap-8 mt-10">
           
           <div className="w-full lg:w-[600px] flex flex-col gap-8 self-start mx-auto lg:mx-0">
           
@@ -157,10 +157,10 @@ const Swiper = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> 
 
             {/* HappyStories*/}
-            <div className="bg-white shadow-2xl rounded-xl px-6 py-8 w-full">
+             <div className="bg-white shadow-2xl rounded-xl px-6 py-8 w-full">
               <div className="mb-8 text-left">
                 <h1 className="font-bold text-3xl mb-2 text-gray-900">Happy Stories</h1>
                 <p className="text-sm font-light text-gray-500">
@@ -219,7 +219,7 @@ const Swiper = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   );
 };
 

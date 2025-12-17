@@ -1,7 +1,9 @@
 import React from 'react'
-import CentralParkCard from '../components/Detail/CentralParkCard'
+import CentralParkCards from '../components/Detail/CentralParkCard'
 import HappyStories from '../components/Detail/HappyStories'
 import Swiper from '../components/Detail/Swiper'
+import SwiperMembership from '../components/Detail/SwiperMembership'
+
 
 const Detail = () => {
   return (
@@ -10,8 +12,11 @@ const Detail = () => {
     <Swiper/>
     {/* <CentralParkCard/>
     <HappyStories/> */}
+    {/* <SwiperMembership/>
+    <CentralParkCards/>
+    <HappyStorie/> */}
     </>
   )
 }
 
-export default Detail
+export default Detail 

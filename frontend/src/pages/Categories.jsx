@@ -14,7 +14,7 @@ const Categories = () => {
   });
 
   console.log({ id });
-
+if (isLoading) return <p>Loading...</p>;
   return (
     <>
       <div className="relative   bg-white px-6 md:px-12 lg:px-24 pt-32 mb-1">

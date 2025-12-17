@@ -6,7 +6,7 @@ import { getGym } from '../../utils/gymApi';
 import { imageUrl } from '../../utils/axios';
 
 
-const Card = ({data}) => {
+const Card = ({ data }) => {
   const Navigate = useNavigate();
 
   // const { data, isLoading, error } = useQuery({
@@ -14,9 +14,9 @@ const Card = ({data}) => {
   //   queryFn: getGym
   // });
 
-const handleDetailClick = (id) => {
-  Navigate(`/detail/${id}`);
-};
+  const handleDetailClick = (id) => {
+    Navigate(`/detail/${id}`);
+  };
   return (
     <>
       {/* mapping */}
@@ -24,7 +24,7 @@ const handleDetailClick = (id) => {
         {data?.data?.map((item) => (
           <div
             key={item._id}
-            onClick={() => handleDetailClick(item._id)}
+            // onClick={() => handleDetailClick(item._id)}
             className="bg-white rounded-2xl shadow-lg p-6 max-w-[380px] mx-auto"
           >
             <h2 className="text-lg font-extrabold text-gray-800 mb-1.5">{item.name}</h2>
@@ -43,7 +43,11 @@ const handleDetailClick = (id) => {
             <img
               src={`http://localhost:5000/${item.image}`}
               alt={item.name}
-              className="mt-4 w-full h-auto rounded-xl object-cover"
+              className="mt-4 w-full h-auto rounded-xl object-cover cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation(); 
+                handleDetailClick(item._id);
+              }}
             />
 
             <div className="flex justify-between mt-7 items-center">
@@ -58,7 +62,7 @@ const handleDetailClick = (id) => {
               {item.facilities?.map((f, i) => (
                 <div key={i} className="flex flex-col items-center justify-center rounded-lg p-2">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full">
-                   <img src={`${imageUrl}${f.icons?.[0]}`}alt="" className="h-[45px] object-contain" /> 
+                    <img src={`${imageUrl}${f.icons?.[0]}`} alt="" className="h-[45px] object-contain" />
                   </div>
                   <p className="text-sm font-bold text-gray-800 mt-2">{f.name}</p>
                   <p className="text-xs text-gray-500">{f.description}</p>
