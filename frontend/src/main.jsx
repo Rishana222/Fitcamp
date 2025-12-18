@@ -17,6 +17,7 @@ import GymLocation from './components/Homepage/GymLocation.jsx';
 import GymLocationPage from './pages/Dashboard/GymLocationPage.jsx';
 import FacilityPage from './pages/Dashboard/FacilityPage.jsx';
 import SubscriptionPage from './pages/Dashboard/SubscriptionPage.jsx';
+import Parkcard from './components/Detail/Parkcard.jsx';
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query"
 import GymPage from './pages/Dashboard/GymPage.jsx';
 
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
 
           </>
         ),
+      },
+      {
+        path: '/parkcard',       // <--- Hidden route
+        element: <Parkcard />,
       },
       {
         path: "/subscription",

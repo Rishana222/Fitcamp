@@ -8,10 +8,10 @@ import { getFacility } from '../../utils/facilityApi'
 
 const CentralParkCard = () => {
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["getFacility"],
-    queryFn: () => getFacility(),
-  });
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ["getFacility"],
+  //   queryFn: () => getFacility(),
+  // });
 
 
   return (
