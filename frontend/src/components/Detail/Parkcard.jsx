@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getGymById } from '../../utils/gymApi';
 import { imageUrl } from '../../utils/axios';
+import operationalIcon from '../../assets/Operational Time.png';
+import addressIcon from '../../assets/Address.png';
 
 const Parkcard = () => {
   const { gymId } = useParams();
@@ -69,17 +71,17 @@ const Parkcard = () => {
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 pt-2">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14  rounded-full flex items-center justify-center shrink-0">
-              <img src="src/assets/Operational Time.png" alt="Opening Work" className="w-8 h-8 object-contain" />
+               <img src={operationalIcon} alt="Opening Work" className="w-8 h-8 object-contain" />
             </div>
             <div>
               <h3 className="font-extrabold text-base leading-tight">Opening Work</h3>
-              <p className="text-gray-500 text-sm font-medium">{gym?.openingWork || '05:00 AM - 11:00 PM'}</p>
+             {/* <img src={operationalIcon} alt="Opening Work" className="w-8 h-8 object-contain" /> */}
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="w-14 h-14  rounded-full flex items-center justify-center shrink-0">
-              <img src="src/assets/Address.png" alt="Address" className="w-8 h-8 object-contain" />
+             <img src={addressIcon} alt="Address" className="w-8 h-8 object-contain" />
             </div>
             <div className="max-w-[240px]">
               <h3 className="font-extrabold text-base leading-tight">Detail Address</h3>

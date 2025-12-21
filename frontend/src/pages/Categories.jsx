@@ -18,7 +18,7 @@ if (isLoading) return <p>Loading...</p>;
   return (
     <>
       <div className="relative   bg-white px-6 md:px-12 lg:px-24 pt-32 mb-1">
-        {/* <h1 className="text-4xl font-bold mb-3 text-black mt-28 md:mt-12">JAKRTA</h1> */}
+        <h1 className="text-4xl font-bold mb-3 text-black mt-28 md:mt-12">JAKRTA</h1>
         <p className="text-gray-700 text-xl lg:font-bold">
           {/* Finding Fitcamp gym location nearby ‘Jakarta’ City */}
           Explore gyms in this location

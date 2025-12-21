@@ -47,7 +47,7 @@ function GymPage() {
 
   const columns = [
     { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Description", dataIndex: "description", key: "description" },
+    { title: "Description", dataIndex: "", key: "description" },
     { title: "Image", dataIndex: "image", key: "image", render: text => <Image width={70} src={text} /> },
     { title: "Location", dataIndex: "gymLocation", key: "gymLocation", render: loc => loc?.name || "—" },
     {

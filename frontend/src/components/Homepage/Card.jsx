@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getGym } from '../../utils/gymApi';
 import { imageUrl } from '../../utils/axios';
 import { Link } from "react-router-dom";
+import operationalIcon from '../../assets/Operational Time.png';
 
 
 const Card = ({ data }) => {
@@ -25,7 +26,7 @@ const Card = ({ data }) => {
         {data?.data?.map((item) => (
           <div
             key={item._id}
-           
+
             className="bg-white rounded-2xl shadow-lg p-6 max-w-[380px] mx-auto"
           >
             <h2 className="text-lg font-extrabold text-gray-800 mb-1.5">{item.name}</h2>
@@ -75,7 +76,7 @@ const Card = ({ data }) => {
             </div>
             <hr className="border-t border-gray-400 mt-3" />
             <div className="flex gap-3 mt-2.5 px-2">
-              <img className="h-[45px]" src={`${imageUrl}${item.icon}`} alt="" />
+             <img src={operationalIcon} alt="Opening Work" className="w-8 h-8 object-contain" />
               <div>
                 <p className="font-semibold text-gray-900">Opening Work</p>
                 <p className="text-sm text-gray-400">{item.openingWork || '05:00 AM - 11:00 PM'}</p>
