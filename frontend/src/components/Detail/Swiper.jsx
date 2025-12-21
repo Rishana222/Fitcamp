@@ -11,6 +11,7 @@ import profile from '../../assets/Profile 4.png';
 import rating from '../../assets/Frame 82 (1).png'; 
 import { parkdata } from '../../data/centralParkdata';
 import { testimonials } from '../../data/testimonial';
+import { imageUrl } from '../../utils/axios';
 
 const Swiper = () => {
   const navigate = useNavigate();

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import { getGym } from '../../utils/gymApi';
 import { imageUrl } from '../../utils/axios';
+import { Link } from "react-router-dom";
 
 
 const Card = ({ data }) => {
@@ -24,7 +25,7 @@ const Card = ({ data }) => {
         {data?.data?.map((item) => (
           <div
             key={item._id}
-            // onClick={() => handleDetailClick(item._id)}
+           
             className="bg-white rounded-2xl shadow-lg p-6 max-w-[380px] mx-auto"
           >
             <h2 className="text-lg font-extrabold text-gray-800 mb-1.5">{item.name}</h2>
@@ -45,21 +46,24 @@ const Card = ({ data }) => {
               alt={item.name}
               className="mt-4 w-full h-auto rounded-xl object-cover cursor-pointer"
               onClick={(e) => {
-                e.stopPropagation(); 
+                e.stopPropagation();
                 handleDetailClick(item._id);
               }}
             />
 
             <div className="flex justify-between mt-7 items-center">
               <h1 className="font-bold">Facilities</h1>
-              <a className="text-blue-500" href="#">
+              <Link
+                className="text-blue-500"
+                to={`/gym/${item._id}/facilities`}
+              >
                 View All
-              </a>
+              </Link>
             </div>
 
             {/*grid mapping ) */}
             <div className="grid grid-cols-3 gap-4 mt-4">
-              {item.facilities?.map((f, i) => (
+              {item.facilities?.slice(0, 6).map((f, i) => (
                 <div key={i} className="flex flex-col items-center justify-center rounded-lg p-2">
                   <div className="w-10 h-10 flex items-center justify-center rounded-full">
                     <img src={`${imageUrl}${f.icons?.[0]}`} alt="" className="h-[45px] object-contain" />

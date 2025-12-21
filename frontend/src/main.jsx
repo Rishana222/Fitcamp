@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/parkcard',       // <--- Hidden route
+        path: '/gym/:gymId/facilities',       // <--- Hidden route
         element: <Parkcard />,
       },
       {

@@ -12,6 +12,9 @@ const getAllGymService = async ()=>{
 
 const getGymServiceById = async (id) => {
   const gym = await Gym.findById(id)
+    .populate('gymLocation')
+    .populate('facilities');
+
   if (!gym) {
     throw new ErrorHandler("Gym not found", 404);
   }

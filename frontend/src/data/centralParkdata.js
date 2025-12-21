@@ -1,3 +1,4 @@
+
 export const parkdata = [
         { "name": "Sauna", "image": "src/assets/Sauna.png", "sub": "Relax Body" },
         { "name": "Toilet", "image": "src/assets/Toilet.png", "sub": "Hygienic" },
