@@ -28,9 +28,11 @@ const Parkcard = () => {
           <div>
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">{gym?.name}</h1>
             <div className="flex items-center gap-1 mt-1 text-gray-400">
-              <svg className="w-4 h-4 text-sky-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-              </svg>
+               <img
+                src="https://img.icons8.com/?size=100&id=52671&format=png&color=000000"
+                alt=""
+                className="h-[25px]"
+              />
               <span className="text-sm md:text-base">{gym?.gymLocation?.name}</span>
             </div>
           </div>
