@@ -8,6 +8,8 @@ const membershipRoute = require('./routes/membership.route')
 const gymLocationRoute = require('./routes/gymLocation.route')
 const facilityRoute = require ('./routes/facility.route')
 const gymRoute = require ('./routes/gym.route')
+const SignupRoute = require('./routes/signup.route')
+const LoginRoute = require('./routes/login.route')
 const { errorMiddleware } = require('./handlers/errorHandler');
 const cors = require('cors');
 const path = require('path');   
@@ -31,6 +33,8 @@ app.use('/api/membership',membershipRoute)
 app.use('/api/gymLocation',gymLocationRoute)
 app.use('/api/facility',facilityRoute)
 app.use('/api/gym',gymRoute)
+app.use('/api/signup',SignupRoute)
+app.use('/api/login',LoginRoute)
 app.use(errorMiddleware);
 
 app.get('/',(req,res)=>{

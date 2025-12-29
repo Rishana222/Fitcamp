@@ -21,6 +21,7 @@ import { getGymById } from '../../utils/gymApi';
 
 
 
+
 const Swiper = () => {
   const navigate = useNavigate();
   const [currentImage, setCurrentImage] = useState(gym1);
@@ -114,69 +115,7 @@ const Swiper = () => {
           
           <div className="w-full lg:w-[600px] flex flex-col gap-8 self-start mx-auto lg:mx-0">
           
-            {/* <div className="bg-white rounded-xl shadow-2xl px-4 sm:px-6 py-8 w-full">
-              <div className="flex flex-col sm:flex-row justify-between mb-7 items-start sm:items-center">
-                <div>
-                  <h2 className="font-bold text-2xl text-gray-900">Fitcamp Central Park</h2>
-                  <p className="text-sm font-light text-gray-500 flex items-center mt-1">
-                    <img
-                      src="https://img.icons8.com/?size=100&id=52671&format=png&color=000000"
-                      alt="location"
-                      className="h-[16px] w-[16px] mr-1"
-                    />
-                    Central Park, Jakarta Barat
-                  </p>
-                </div>
-                <div>
-                  <button className="bg-red-500 text-white px-4 py-2 rounded-full text-sm mt-3 sm:mt-0">Popular</button>
-                </div>
-              </div>
-              <div className="mt-6">
-                <h1 className="font-bold text-lg">Facilities Available</h1>
-              </div>
-              <hr className="border-t border-gray-300 mt-3" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 md:gap-x-8 mt-5">
-                {parkdata.map((card, index) => (
-                  <div key={index} className="flex items-center">
-                    <img className="h-[40px] w-[40px] object-contain" src={card.image} alt="" />
-                    <div className="ml-3">
-                      <h1 className="font-extrabold text-sm">{card.name}</h1>
-                      <p className="text-gray-500 text-xs">{card.sub}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8">
-                <h1 className="font-extrabold text-lg">Description</h1>
-                <hr className="border-t border-gray-300 mt-3" />
-                <p className="mt-3 font-light text-gray-700 leading-relaxed text-sm">
-                  Welcome to Fitcamp Central Park, your top choice for fitness in the city. Our gym features
-                  modern equipment, a variety of group classes, and comfortable amenities. Whether you’re into cardio,
-                  strength training, or group workouts, we’ve got you covered. Enjoy our clean locker rooms,
-                  relaxing sauna, and easy access to all gym locations.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row mt-6 gap-y-4 sm:gap-y-0 sm:gap-x-12">
-                <div className="flex gap-3 items-center">
-                  {operation && <img className="h-[45px] w-[45px] object-contain" src={operation} alt="Operation Hours Icon" />}
-                  <div>
-                    <p className="font-semibold text-gray-900 text-base">Opening Work</p>
-                    <p className="text-sm text-gray-400">05:00 AM - 11:00 PM</p>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center">
-                  {address && <img className="h-[45px] w-[45px] object-contain" src={address} alt="Address Icon" />}
-                  <div>
-                    <p className="font-semibold text-gray-900 text-base">Detail Address</p>
-                    <p className="text-sm text-gray-400">
-                      Litjen S. Parman St No.Kav. 28. Tanjing <br />
-                      Duren Utara. Grogol Petamburan, Jakarta <br />
-                      Barat, Jakarta 11470
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>   */}
+
             <div className="w-[95%] max-w-2xl mx-auto bg-white  px-6 md:px-10 py-4 shadow-sm font-sans text-slate-900  rounded-xl mb-7">
             
                     {/* Header Section */}
