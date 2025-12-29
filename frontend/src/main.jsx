@@ -20,6 +20,7 @@ import SubscriptionPage from './pages/Dashboard/SubscriptionPage.jsx';
 import Parkcard from './components/Detail/Parkcard.jsx';
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query"
 import GymPage from './pages/Dashboard/GymPage.jsx';
+import Swiper from './components/Detail/Swiper.jsx';
 
 
 
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
 
           </>
         ),
+      },
+        {
+        path: "/gym/:gymId",
+        element: <Swiper />,
       },
       {
         path: '/gym/:gymId/facilities',       // <--- Hidden route
