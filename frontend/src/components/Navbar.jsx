@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png'; 
 
 const Navbar = () => {
@@ -36,6 +36,11 @@ const Navbar = () => {
           <button className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-full capitalize">
             my subscription
           </button>
+        </div>
+        <div>
+         <Link to="/signup" className="ml-4 bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-full capitalize">
+           Signup
+          </Link>
         </div>
 
       </div>

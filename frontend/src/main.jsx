@@ -21,6 +21,8 @@ import Parkcard from './components/Detail/Parkcard.jsx';
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query"
 import GymPage from './pages/Dashboard/GymPage.jsx';
 import Swiper from './components/Detail/Swiper.jsx';
+import  Signup  from './pages/Signup.jsx';
+import Login from './pages/Login.jsx';
 
 
 
@@ -130,6 +132,26 @@ const router = createBrowserRouter([
           </>
         ),
       },
+      {
+        path: "/signup",
+        element: (
+          <>
+
+            <Signup />
+
+          </>
+        ),
+      },
+      {
+        path: "/login",
+        element: (
+          <>
+
+            <Login />
+
+          </>
+        ),
+      }
     ]
   },
   {
@@ -153,7 +175,7 @@ const router = createBrowserRouter([
       element:<GymPage/>
     }
   ]
-}
+},
 ]);
 
 
