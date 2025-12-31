@@ -6,8 +6,8 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="absolute top-3 lg:top-10 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
-      <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium">
+    <nav className="absolute top-3 lg:top-14 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
+      <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium ">
         
         
         <div
