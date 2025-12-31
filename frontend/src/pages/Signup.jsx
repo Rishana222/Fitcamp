@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreateSignup } from "../utils/signupApi";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,10 +21,10 @@ const Signup = () => {
     e.preventDefault();
     try {
       await CreateSignup(formData);
-      alert("Signup successful!");
+       toast.success("Signup successful ✅");
       navigate("/login");
     } catch (error) {
-      alert(error.response?.data?.message || "Signup failed");
+      toast.error(error.response?.data?.message || "Signup failed ❌");
     }
   };
   const handleLoginRedirect = () => {
