@@ -38,8 +38,8 @@ const Navbar = () => {
           </button>
         </div>
         <div>
-         <Link to="/signup" className="ml-4 bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-full capitalize">
-           Signup
+         <Link to="/login" className="ml-4 bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-full capitalize">
+           Signin
           </Link>
         </div>
 
