@@ -8,7 +8,8 @@ const CreateLoginController = async (req, res) => {
             message: "Login successful",
             userId: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            accessToken: user.accessToken 
         });
     } catch (error) {
         return res.status(400).json({ message: error.message });

@@ -14,7 +14,7 @@ const Categories = () => {
   });
 
   console.log({ id });
-if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
   return (
     <>
       <div className="relative   bg-white px-6 md:px-12 lg:px-24 pt-32 mb-1">
@@ -24,7 +24,7 @@ if (isLoading) return <p>Loading...</p>;
           Explore gyms in this location
         </p>
       </div>
-        <Card data={data?.data} />
+      <Card data={data?.data} />
       <div className="mb-8 flex justify-center">
         <button className="bg-black text-white hover:bg-gray-700 px-3.5 py-1.5 rounded-full font-light">Load More</button>
       </div>
