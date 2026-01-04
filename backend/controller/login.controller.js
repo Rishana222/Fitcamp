@@ -6,7 +6,7 @@ const CreateLoginController = async (req, res) => {
         const user = await CreateLoginService(req.body);
         return res.status(200).json({
             message: "Login successful",
-            userId: user._id,
+            userId: user.userId,
             name: user.name,
             email: user.email,
             accessToken: user.accessToken 
