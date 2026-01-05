@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Createlogin } from "../utils/loginApi";
 import { toast } from "react-toastify";
+import {useCreatelogin} from '../utils/loginApi'
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,22 +14,29 @@ const Login = () => {
     password: ""
   });
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-  const handleLogin = async (e) => {
+  const { mutate: login, isLoading } = useCreatelogin();
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      await Createlogin(formData);
-       toast.success("Login successful ✅");
-      navigate("/"); 
-    } catch (error) {
-     toast.error(error.response?.data?.message || "Login failed ❌");
-    }
+
+    login(formData, {
+      onSuccess: (data) => {
+        localStorage.setItem('accessToken',data.data.accessToken);
+        toast.success("Login successful ✅");
+        navigate("/");
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || "Login failed ❌");
+      }
+    });
   };
+  
   const handleSignupRedirect = () => {
     navigate('/signup');
   };

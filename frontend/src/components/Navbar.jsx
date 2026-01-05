@@ -1,18 +1,20 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo.png'; 
+import Logo from '../assets/logo.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const isLoggedIn = localStorage.getItem("accessToken");
+
   return (
     <nav className="absolute top-3 lg:top-14 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
       <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium ">
-        
-        
+
+
         <div
           className="flex items-center space-x-2 mb-2 md:mb-0 cursor-pointer"
-          onClick={() => navigate('/')} 
+          onClick={() => navigate('/')}
         >
           <img src={Logo} alt="Logo" className="w-10 md:w-12" />
           <h1 className="font-bold uppercase text-xl md:text-2xl lg:text-3xl">
@@ -38,9 +40,14 @@ const Navbar = () => {
           </button>
         </div>
         <div>
-         <Link to="/login" className="ml-4 bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-full capitalize">
-           Signin
-          </Link>
+          {!isLoggedIn && (
+            <Link
+              to="/login"
+              className="ml-4 bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-full capitalize"
+            >
+              Signin
+            </Link>
+          )}
         </div>
 
       </div>
