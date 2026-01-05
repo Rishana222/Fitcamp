@@ -6,7 +6,13 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const isLoggedIn = localStorage.getItem("accessToken");
-
+  const handleMySubscriptionClick = () => {
+    if (!isLoggedIn) {
+      navigate("/login");
+      return; 
+    }
+    navigate("/subscription");
+  };
   return (
     <nav className="absolute top-3 lg:top-14 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
       <div className="flex flex-col md:flex-row items-center justify-between text-black font-medium ">
@@ -35,7 +41,7 @@ const Navbar = () => {
           <a href="#about" className="hover:text-gray-700 capitalize">
             about
           </a>
-          <button className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-full capitalize">
+          <button  onClick={handleMySubscriptionClick} className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-full capitalize">
             my subscription
           </button>
         </div>

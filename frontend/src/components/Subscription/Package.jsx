@@ -5,9 +5,17 @@ import { useNavigate } from 'react-router-dom'
 
 const Package = () => {
     const Navigate = useNavigate();
-    const handleSubscribeClick = ()=>(
-        Navigate('/checkout')
-    )
+   const handleSubscribeClick = () => {
+  const token = localStorage.getItem("accessToken");
+
+  if (!token) {
+    Navigate("/login");
+    return;
+  }
+
+  Navigate("/checkout");
+};
+    
     return (
         <>
             <div className="pt-32 mb-10 ">
