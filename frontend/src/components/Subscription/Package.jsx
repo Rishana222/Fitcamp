@@ -5,17 +5,14 @@ import { useNavigate } from 'react-router-dom'
 
 const Package = () => {
     const Navigate = useNavigate();
-   const handleSubscribeClick = () => {
-  const token = localStorage.getItem("accessToken");
-
-  if (!token) {
-    Navigate("/login");
-    return;
-  }
-
-  Navigate("/checkout");
-};
-    
+    const handleSubscribeClick = (packageData) => {
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+            Navigate("/login");
+            return;
+        }
+        Navigate("/checkout", { state: { packageData } });
+    };
     return (
         <>
             <div className="pt-32 mb-10 ">
@@ -29,33 +26,33 @@ const Package = () => {
                             {sData.map((s, index) => (
                                 <div key={index} className='bg-white rounded-xl px-3 py-3 shadow-2xl pt-6'>
                                     <img src={s.img} className='w-full object-cover rounded-lg h-[95px] md:h-[115px] ' alt="" />
-                                     <h1 className='text-xs text-left mt-2 font-bold'>{s.title}</h1>
-                                     <p className='text-left text-gray-400 text-xs font-light'>{s.desc}</p>
-                                     <div className='flex mt-2 '>
+                                    <h1 className='text-xs text-left mt-2 font-bold'>{s.title}</h1>
+                                    <p className='text-left text-gray-400 text-xs font-light'>{s.desc}</p>
+                                    <div className='flex mt-2 '>
                                         <img className=' h-[20px] ' src="https://img.icons8.com/?size=100&id=41638&format=png&color=000000" alt="" />
                                         <h1 className='ml-4 text-xs' >{s.text1}</h1>
-                                     </div>
-                                     <div className='flex mt-2'>
+                                    </div>
+                                    <div className='flex mt-2'>
                                         <img className=' h-[20px] ' src="https://img.icons8.com/?size=100&id=41638&format=png&color=000000" alt="" />
                                         <h1 className='ml-4 text-xs' >{s.text2}</h1>
-                                     </div>
-                                     <div className='flex mt-2'>
+                                    </div>
+                                    <div className='flex mt-2'>
                                         <img className=' h-[20px] ' src="https://img.icons8.com/?size=100&id=41638&format=png&color=000000" alt="" />
                                         <h1 className='ml-4 text-xs' >{s.text3}</h1>
-                                     </div>
-                                     <div className='flex mt-2 mb-2'>
+                                    </div>
+                                    <div className='flex mt-2 mb-2'>
                                         <img className=' h-[20px] ' src="https://img.icons8.com/?size=100&id=41638&format=png&color=000000" alt="" />
                                         <h1 className='ml-4 text-xs' >{s.text4}</h1>
-                                     </div>
-                                     <div className='flex justify-between'>
-                                        <button onClick={handleSubscribeClick} className='bg-indigo-500 mt-1 text-white px-3 py-1 rounded-full '>Subscribe</button>
+                                    </div>
+                                    <div className='flex justify-between'>
+                                        <button onClick={() => handleSubscribeClick(s)}className='bg-indigo-500 mt-1 text-white px-3 py-1 rounded-full '>Subscribe</button>
                                         <div className='text-xs'>
                                             <p className='font-black'>{s.rp}</p>
                                             <p className='text-gray-500'>{s.duration}</p>
                                         </div>
-                                        
-                                     </div>
-                                     
+
+                                    </div>
+
                                 </div>
                             ))}
 
