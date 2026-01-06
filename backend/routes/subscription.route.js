@@ -1,5 +1,4 @@
 const express = require('express')
-const SUBSCRIPTION = require('../models/subscriptionModel')
 const { subscriptionCreateController, subscriptionGetController ,subscriptionDeleteController,subscriptionUpdateController,getAllSubscriptionsController} = require('../controller/subscription.controller')
 
 const route = express.Router();

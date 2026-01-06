@@ -1,17 +1,25 @@
 const mongoose = require('mongoose')
 const subscribeSchema = new mongoose.Schema({
-    membershipId: {
+    membershipName: {
         type: String,
     },
-    startDate: {
-        type: String
+    desc:{
+        type:String
     },
-    endDate: {
-        type: String
+    amount:{
+        type:String
     },
+    duration:{
+        type:String
+    },
+     features: [
+        {
+            type: String
+        }
+    ],
     status: {
         type: String,
-        enum: ["active", "expired"]
+        enum: ["active", "inactive"]
     }
 })
 const subscribe = mongoose.model('subscribe', subscribeSchema)

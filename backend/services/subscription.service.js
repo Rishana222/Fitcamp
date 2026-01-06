@@ -2,11 +2,18 @@ const Subscription = require('../models/subscriptionModel')
 const { ErrorHandler } = require('../handlers/errorHandler')
 
 const createSubscriptionService = async (data) => {
-    const { membershipId, startDate, endDate, status } = data;
-    if (!membershipId || !startDate || !endDate || !status) {
+    const { membershipName, desc, amount, duration, features, status } = data;
+    if (!membershipName || !amount || !duration || !status || !desc ) {
         throw new ErrorHandler("All fields are required", 400)
     }
-    const subscribe = await Subscription.create(data)
+    const subscribe = await Subscription.create({
+        membershipName,
+        desc,
+        amount,
+        duration,
+        features: features || [],
+        status
+    });
     return subscribe
 };
 
@@ -27,14 +34,14 @@ const updateSubscriptionsService = async (id, updateData) => {
     if (!existingSubscription) {
         throw new ErrorHandler('subscription not found', 404);
     }
-    const updatedSubscription = await Subscription.findByIdAndUpdate(id,updateData, { new: true });
+    const updatedSubscription = await Subscription.findByIdAndUpdate(id, updateData, { new: true });
     return updatedSubscription;
 };
 
 const deleteSubscriptionsService = async (id) => {
     const existingSubscription = await Subscription.findById(id);
     if (!existingSubscription) {
-       throw new ErrorHandler('subscription not found',404)
+        throw new ErrorHandler('subscription not found', 404)
     }
     const subscription = await Subscription.findByIdAndDelete(id);
     return subscription;

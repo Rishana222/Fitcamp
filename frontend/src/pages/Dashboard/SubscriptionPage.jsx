@@ -2,7 +2,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Input, Modal, Table, Tag, message, DatePicker, Select } from "antd";
 import { useState } from "react";
-import { usecreateSubscription, getAllSubscription, useDeleteSubscription,useUpdateSubscription } from "../../utils/subscriptionApi";
+import { usecreateSubscription, getAllSubscription, useDeleteSubscription, useUpdateSubscription } from "../../utils/subscriptionApi";
 import { toast } from 'react-toastify';
 
 const { RangePicker } = DatePicker;
@@ -12,9 +12,9 @@ function SubscriptionPage() {
     const [openCreateModal, setOpenCreateModal] = useState(false);
     const [openUpdateModal, setOpenUpdateModal] = useState(false)
     const [form] = Form.useForm()
-     const [updateForm] = Form.useForm()
+    const [updateForm] = Form.useForm()
 
-     const [SubscriptionId, setSubscriptionId] = useState()
+    const [SubscriptionId, setSubscriptionId] = useState()
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["getAllSubscription"],
@@ -23,7 +23,7 @@ function SubscriptionPage() {
 
     const { mutate: createSub } = usecreateSubscription()
     const { mutate: deleteSub } = useDeleteSubscription()
-    const {mutate:updateSub} =useUpdateSubscription()
+    const { mutate: updateSub } = useUpdateSubscription()
 
     const columns = [
         {
@@ -88,49 +88,49 @@ function SubscriptionPage() {
     const onHandleDelete = (id) => {
         deleteSub(id, {
             onSuccess(list) {
-            refetch()
-            toast.success(list?.data.message)     
+                refetch()
+                toast.success(list?.data.message)
             },
             onError() {
-            toast.error('failed')
+                toast.error('failed')
             }
         }
         )
     }
 
-        const HandleOpenUpdateModal = (value) => {
+    const HandleOpenUpdateModal = (value) => {
         setSubscriptionId(value._id)
         updateForm.setFieldsValue({
             membershipId: value.membershipId,
-        startDate: value.startDate,
-        endDate: value.endDate,
-        status: value.status,
+            startDate: value.startDate,
+            endDate: value.endDate,
+            status: value.status,
         })
         setOpenUpdateModal(true)
     }
     const onUpdateFormSubmit = (value) => {
-    const payload = {
-         membershipId: value.membershipId,
-        startDate: value.startDate,
-        endDate: value.endDate,
-        status: value.status,
-    };
+        const payload = {
+            membershipId: value.membershipId,
+            startDate: value.startDate,
+            endDate: value.endDate,
+            status: value.status,
+        };
 
-    updateSub(
-        { id: SubscriptionId, data: payload },
-        {
-            onSuccess(list) {
-                updateForm.resetFields();
-                setOpenUpdateModal(false);
-                refetch();
-                toast.success(list?.data?.message || "Updated successfully");
-            },
-            onError(error) {
-                toast.error(error?.response?.data?.message || error?.message || "Something went wrong");
+        updateSub(
+            { id: SubscriptionId, data: payload },
+            {
+                onSuccess(list) {
+                    updateForm.resetFields();
+                    setOpenUpdateModal(false);
+                    refetch();
+                    toast.success(list?.data?.message || "Updated successfully");
+                },
+                onError(error) {
+                    toast.error(error?.response?.data?.message || error?.message || "Something went wrong");
+                }
             }
-        }
-    );
-};    
+        );
+    };
     return (
         <>
             <div className="flex items-center justify-end mb-4">
@@ -154,21 +154,45 @@ function SubscriptionPage() {
             >
                 <Form layout="vertical" onFinish={onCreateFormSubmit} form={form}>
                     <Form.Item
-                        name="membershipId"
-                        label="Membership ID"
-                        rules={[{ required: true, message: "Membership ID is required" }]}
+                        name="membershipName"
+                        label="Membership Name"
+                        rules={[{ required: true, message: "Membership Name is required" }]}
                     >
-                        <Input placeholder="Enter membership ID" />
+                        <Input placeholder="Enter membership name" />
                     </Form.Item>
 
                     <Form.Item
-                        name="dateRange"
-                        label="Start & End Date"
-                        rules={[{ required: true, message: "Date range required" }]}
+                        name="desc"
+                        label="Description"
+                        rules={[{ required: true, message: "Description is required" }]}
                     >
-                        <RangePicker />
+                        <Input.TextArea placeholder="Enter description" />
                     </Form.Item>
 
+                    <Form.Item
+                        name="amount"
+                        label="Amount"
+                        rules={[{ required: true, message: "Amount is required" }]}
+                    >
+                        <Input placeholder="Enter amount" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="duration"
+                        label="Duration"
+                        rules={[{ required: true, message: "Duration is required" }]}
+                    >
+                        <Input placeholder="Enter duration, e.g., 1 month" />
+                    </Form.Item>
+                    <Form.Item
+                        name="features"
+                        label="Features"
+                        rules={[{ required: true, message: "Features are required" }]}
+                    >
+                        <Select mode="tags" placeholder="Enter features">
+                            {/* Users can type features freely */}
+                        </Select>
+                    </Form.Item>
                     <Form.Item
                         name="status"
                         label="Status"
@@ -176,10 +200,9 @@ function SubscriptionPage() {
                     >
                         <Select>
                             <Select.Option value="active">Active</Select.Option>
-                            <Select.Option value="expired">Expired</Select.Option>
+                            <Select.Option value="inactive">Inactive</Select.Option>
                         </Select>
                     </Form.Item>
-
                     <Form.Item>
                         <Button className="w-full" type="primary" htmlType="submit">
                             Submit
