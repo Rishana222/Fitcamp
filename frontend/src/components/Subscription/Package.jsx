@@ -1,6 +1,5 @@
 import React from 'react'
 import subscribe from '../../assets/Subscribe.png'
-import { sData } from '../../data/subscriptiondata'
 import { useQuery } from "@tanstack/react-query";
 import { getAllSubscription } from "../../utils/subscriptionApi";
 import { useNavigate } from 'react-router-dom'
@@ -10,33 +9,36 @@ import superImg from '../../assets/Frame 1.png';
 import megaImg from '../../assets/Team.png';
 
 const Package = () => {
-    const Navigate = useNavigate();
-    const handleSubscribeClick = (s, index) => {
+const Navigate = useNavigate();
+  const handleSubscribeClick = (s, index) => {
   const token = localStorage.getItem("accessToken");
   if (!token) {
     Navigate("/login");
     return;
   }
 
-  // Extract numeric amount
-const amount =
-    s.amount || (s.rp ? parseInt(s.rp.replace(/[^0-9]/g, "")) : 0);
+  const amount = Number(
+    typeof s.amount === "string"
+      ? s.amount.replace(/[^0-9.]/g, "")
+      : s.amount
+  );
 
-  // Map images based on index
-  const images = [regularImg, superImg, megaImg];
+  if (!amount || isNaN(amount)) return;
+
+  
 
   Navigate("/checkout", {
-  state: {
-    packageData: {
-      title: s.membershipName || s.title,
-      desc: s.desc,
-      duration: s.duration,
-      amount: amount,  // numeric
-      img: images[index] || subscribe,
-      features: s.features,
+    state: {
+      packageData: {
+        title: s.membershipName,
+        desc: s.desc,
+        duration: s.duration,
+        amount: amount, 
+        img: images[index] || subscribe,
+        features: s.features,
+      },
     },
-  },
-});
+  });
 };
 
     const { data, isLoading } = useQuery({
@@ -60,7 +62,7 @@ const amount =
                             {subscriptions.map((s, index) => (
                                 <div key={s._id} className='bg-white rounded-xl px-3 py-3 shadow-2xl pt-6'>
                                     <img
-                                        src={images[index] || subscribe}
+                                        src={images[index] }
                                         className="w-full object-cover rounded-lg h-[95px] md:h-[115px]"
                                         alt={s.membershipName}
                                     />
