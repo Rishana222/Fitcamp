@@ -27,49 +27,66 @@ function SubscriptionPage() {
 
     const columns = [
         {
-            title: "Membership ID",
-            dataIndex: "membershipId",
-            key: "membershipId",
+            title: "Membership Name",
+            dataIndex: "membershipName",
+            key: "membershipName",
         },
         {
-            title: "Start Date",
-            dataIndex: "startDate",
-            key: "startDate",
+            title: "Amount",
+            dataIndex: "amount",
+            key: "amount",
         },
         {
-            title: "End Date",
-            dataIndex: "endDate",
-            key: "endDate",
+            title: "Duration",
+            dataIndex: "duration",
+            key: "duration",
+        },
+        {
+            title: "Features",
+            dataIndex: "features",
+            key: "features",
+            render: (features) =>
+                features?.map((f, i) => <Tag key={i}>{f}</Tag>)
         },
         {
             title: "Status",
             dataIndex: "status",
             key: "status",
             render: (status) => (
-                <Tag color={status === "active" ? "green" : "red"}>{status}</Tag>
-            )
+                <Tag color={status === "active" ? "green" : "red"}>
+                    {status}
+                </Tag>
+            ),
         },
         {
             title: "Action",
-            key: "id",
             render: (record) => (
-                <div className="flex space-x-4">
-                    <button onClick={() => onHandleDelete(record._id)} className="bg-red-500 text-white  px-3 py-1 rounded-xs hover:bg-red-700">Delete</button>
-                    <button onClick={() => HandleOpenUpdateModal(record)} className="bg-blue-500 text-white  px-3 py-1 rounded-xs hover:bg-blue-700">update</button>
+                <div className="flex space-x-2">
+                    <button
+                        onClick={() => HandleOpenUpdateModal(record)}
+                        className="bg-blue-500 text-white px-3 py-1"
+                    >
+                        Update
+                    </button>
+                    <button
+                        onClick={() => onHandleDelete(record._id)}
+                        className="bg-red-500 text-white px-3 py-1"
+                    >
+                        Delete
+                    </button>
                 </div>
-            )
-        }
+            ),
+        },
     ];
 
-    const onCreateFormSubmit = async (values) => {
-        console.log(values);
-
-        const [start, end] = values.dateRange;
+    const onCreateFormSubmit = (values) => {
         const payLoad = {
-            membershipId: values.membershipId,
-            startDate: start.format("YYYY-MM-DD"),
-            endDate: end.format("YYYY-MM-DD"),
-            status: values.status
+            membershipName: values.membershipName,
+            desc: values.desc,
+            amount: values.amount,
+            duration: values.duration,
+            features: values.features,
+            status: values.status,
         };
         createSub(payLoad, {
             onSuccess(res) {
@@ -101,18 +118,22 @@ function SubscriptionPage() {
     const HandleOpenUpdateModal = (value) => {
         setSubscriptionId(value._id)
         updateForm.setFieldsValue({
-            membershipId: value.membershipId,
-            startDate: value.startDate,
-            endDate: value.endDate,
+            membershipName: value.membershipName,
+            desc: value.desc,
+            amount: value.amount,
+            duration: value.duration,
+            features: value.features,
             status: value.status,
         })
         setOpenUpdateModal(true)
     }
     const onUpdateFormSubmit = (value) => {
         const payload = {
-            membershipId: value.membershipId,
-            startDate: value.startDate,
-            endDate: value.endDate,
+            membershipName: value.membershipName,
+            desc: value.desc,
+            amount: value.amount,
+            duration: value.duration,
+            features: value.features,
             status: value.status,
         };
 
@@ -218,21 +239,45 @@ function SubscriptionPage() {
             >
                 <Form layout="vertical" onFinish={onUpdateFormSubmit} form={updateForm}>
                     <Form.Item
-                        name="membershipId"
-                        label="Membership ID"
-                        rules={[{ required: true, message: "Membership ID is required" }]}
+                        name="membershipName"
+                        label="Membership Name"
+                        rules={[{ required: true, message: "Membership Name is required" }]}
                     >
-                        <Input placeholder="Enter membership ID" />
+                        <Input placeholder="Enter membership name" />
                     </Form.Item>
 
                     <Form.Item
-                        name="dateRange"
-                        label="Start & End Date"
-                        rules={[{ required: true, message: "Date range required" }]}
+                        name="desc"
+                        label="Description"
+                        rules={[{ required: true, message: "Description is required" }]}
                     >
-                        <RangePicker />
+                        <Input.TextArea placeholder="Enter description" />
                     </Form.Item>
 
+                    <Form.Item
+                        name="amount"
+                        label="Amount"
+                        rules={[{ required: true, message: "Amount is required" }]}
+                    >
+                        <Input placeholder="Enter amount" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="duration"
+                        label="Duration"
+                        rules={[{ required: true, message: "Duration is required" }]}
+                    >
+                        <Input placeholder="Enter duration, e.g., 1 month" />
+                    </Form.Item>
+                    <Form.Item
+                        name="features"
+                        label="Features"
+                        rules={[{ required: true, message: "Features are required" }]}
+                    >
+                        <Select mode="tags" placeholder="Enter features">
+                            {/* Users can type features freely */}
+                        </Select>
+                    </Form.Item>
                     <Form.Item
                         name="status"
                         label="Status"
@@ -240,10 +285,9 @@ function SubscriptionPage() {
                     >
                         <Select>
                             <Select.Option value="active">Active</Select.Option>
-                            <Select.Option value="expired">Expired</Select.Option>
+                            <Select.Option value="inactive">Inactive</Select.Option>
                         </Select>
                     </Form.Item>
-
                     <Form.Item>
                         <Button className="w-full" type="primary" htmlType="submit">
                             Submit
@@ -251,6 +295,7 @@ function SubscriptionPage() {
                     </Form.Item>
                 </Form>
             </Modal>
+
         </>
     );
 }

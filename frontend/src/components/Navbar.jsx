@@ -11,7 +11,7 @@ const Navbar = () => {
       navigate("/login");
       return;
     }
-    navigate("/checkout");
+    navigate("/subscription");
   };
   return (
     <nav className="absolute top-3 lg:top-14 left-0 w-full z-50 bg-transparent px-6 md:px-12 lg:px-24">
