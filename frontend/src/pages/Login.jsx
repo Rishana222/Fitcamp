@@ -28,6 +28,7 @@ const Login = () => {
     login(formData, {
       onSuccess: (data) => {
         localStorage.setItem('accessToken',data.data.accessToken);
+        localStorage.setItem("userId", data.data.userId); 
         toast.success("Login successful ✅");
         navigate("/");
       },

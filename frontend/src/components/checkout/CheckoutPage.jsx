@@ -1,30 +1,62 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import regular from '../../assets/Group 38.png';
-import vector from '../../assets/Vector.png';
+import { toast } from "react-toastify";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useCreateCheckout } from "../../utils/checkoutApi";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
+  const { mutate: createCheckout } = useCreateCheckout();
   const location = useLocation();
 
   const packageData = location.state?.packageData;
 
- 
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+
   useEffect(() => {
     if (!packageData) {
       navigate('/subscribe');
+    } else {
+      setName(packageData.name || "");
+      setPhoneNumber(packageData.phoneNumber || "");
+      setEmail(packageData.email || "");
     }
   }, [packageData, navigate]);
 
- 
   if (!packageData) return null;
 
-  
   const subtotal = Number(packageData.amount);
   const tax = +(subtotal * 0.11).toFixed(2);
   const total = +(subtotal + tax).toFixed(2);
 
-  const handleCheckoutClick = () => navigate('/booking');
+  const handleCheckoutClick = () => {
+    if (!name || !phoneNumber || !email) {
+      toast.error("Please fill all the fields!");
+      return;
+    }
+
+    const checkoutData = {
+      name,
+      phoneNumber,
+      email,
+      totalAmount: total,
+      userId: packageData.userId,
+      planId: packageData.planId,
+    };
+
+    createCheckout(checkoutData, {
+      onSuccess: (res) => {
+        toast.success("Checkout successful!");
+        navigate("/booking", { state: { checkout: res.data } });
+      },
+      onError: (err) => {
+        console.error(err);
+        toast.error("Checkout failed. Try again.");
+      },
+    });
+  };
 
   return (
     <div className="relative bg-sky-200 h-[350px] mb-[1100px] sm:mb-[990px] lg:mb-[480px]">
@@ -41,15 +73,27 @@ const CheckoutPage = () => {
           <form className="space-y-4">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
               <label className="font-bold w-full md:w-36 text-sm">Full Name :</label>
-              <input className="border border-gray-300 rounded-lg px-3 py-2 w-full text-xs" />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 w-full text-xs"
+              />
             </div>
             <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
               <label className="font-bold w-full md:w-36 text-sm">Phone Number :</label>
-              <input className="border border-gray-300 rounded-lg px-3 py-2 w-full text-xs" />
+              <input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 w-full text-xs"
+              />
             </div>
             <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
               <label className="font-bold w-full md:w-36 text-sm">Email :</label>
-              <input className="border border-gray-300 rounded-lg px-3 py-2 w-full text-xs" />
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 w-full text-xs"
+              />
             </div>
           </form>
         </div>
@@ -81,6 +125,16 @@ const CheckoutPage = () => {
             className="text-white bg-indigo-500 w-full px-4 py-2 rounded-full"
           >
             Checkout
+          </button>
+
+          <button className="flex items-center w-full mt-4 p-4 bg-[#D1EEFD] rounded-2xl">
+            <img src="https://img.icons8.com/ios-filled/50/ticket.png" className="w-6 h-6 mr-3" alt="icon" />
+            <span className="font-bold flex-1 text-left text-sm">Use Promo Code</span>
+            <div className="bg-black rounded-full p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
           </button>
         </div>
 

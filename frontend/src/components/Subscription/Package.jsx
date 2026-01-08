@@ -7,6 +7,7 @@ import cardImg from '../../assets/Subscribe.png';
 import regularImg from '../../assets/Regular (1).png';
 import superImg from '../../assets/Frame 1.png';
 import megaImg from '../../assets/Team.png';
+import { toast } from 'react-toastify';
 
 const Package = () => {
 const Navigate = useNavigate();
@@ -16,6 +17,19 @@ const Navigate = useNavigate();
     Navigate("/login");
     return;
   }
+  console.log("Access Token:", token);
+
+
+  const userId = localStorage.getItem("userId");
+  console.log("userid", userId);
+
+  if (!userId) {
+    toast.error("User not logged in");
+    Navigate("/login");
+    return;
+  }
+
+
 
   const amount = Number(
     typeof s.amount === "string"
@@ -31,6 +45,8 @@ const Navigate = useNavigate();
     state: {
       packageData: {
         title: s.membershipName,
+        planId: s._id,    
+        userId: userId,
         desc: s.desc,
         duration: s.duration,
         amount: amount, 

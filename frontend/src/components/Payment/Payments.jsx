@@ -1,7 +1,7 @@
 import React from 'react'
 import success from '../../assets/Success (1).png'
 import regular from '../../assets/Group 38.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useLocation} from 'react-router-dom'
 
 
 const Payments = () => {
@@ -9,6 +9,8 @@ const Payments = () => {
     const handleViewSubscriptionClick = ()=>(
         Navigate('/viewsubscription')
     )
+     const location = useLocation();
+  const checkout = location.state?.checkout; 
     return (
         <>
             <div className='relative bg-sky-200 h-[350px] flex justify-center mb-[450px]'>
@@ -19,7 +21,7 @@ const Payments = () => {
                         the status to your email address</p>
                         <div className='flex bg-sky-100 mt-4 justify-between px-4 py-2 rounded-2xl'>
                             <img className='h-10 w-10' src={regular} alt="" />
-                            <h1 className="font-bold text-lg mt-1">Booking ID: <span className="text-blue-600">10238</span></h1>
+                            <h1 className="font-bold text-lg mt-1">Booking ID: <span className="text-blue-600">{checkout?._id || 'N/A'}</span></h1>
                         </div>
                         <div className='flex justify-center'>
                              <button onClick={handleViewSubscriptionClick} className='text-white bg-indigo-400 mt-5 px-5 rounded-full py-1'>View My Subscription</button>
