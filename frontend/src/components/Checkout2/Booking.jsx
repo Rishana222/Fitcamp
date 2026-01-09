@@ -16,7 +16,7 @@ const Booking = () => {
   
   useEffect(() => {
     if (!checkout) {
-      navigate('/subscribe');
+      navigate('/Subscription');
     }
   }, [checkout, navigate]);
 

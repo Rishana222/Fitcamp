@@ -17,7 +17,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (!packageData) {
-      navigate('/subscribe');
+      navigate('/Subscription');
     } else {
       setName(packageData.name || "");
       setPhoneNumber(packageData.phoneNumber || "");
