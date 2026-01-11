@@ -44,7 +44,14 @@ const CheckoutPage = () => {
       totalAmount: total,
       userId: packageData.userId,
       planId: packageData.planId,
+      packageName: packageData.title,
+      amount: packageData.amount,
+      duration: packageData.duration,
+      desc: packageData.desc,
+      features: packageData.features,
+      img: packageData.img,
     };
+    console.log("Checkout data:", packageData.planId, packageData);
 
     createCheckout(checkoutData, {
       onSuccess: (res) => {

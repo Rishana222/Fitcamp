@@ -11,6 +11,7 @@ const gymRoute = require ('./routes/gym.route')
 const SignupRoute = require('./routes/signup.route')
 const LoginRoute = require('./routes/login.route')
 const CheckoutRoute = require('./routes/checkout.route')
+const transactionRoute = require('./routes/transaction.route')
 const { errorMiddleware } = require('./handlers/errorHandler');
 const cors = require('cors');
 const path = require('path');   
@@ -37,6 +38,7 @@ app.use('/api/gym',gymRoute)
 app.use('/api/signup',SignupRoute)
 app.use('/api/login',LoginRoute)
 app.use('/api/checkout',CheckoutRoute)
+app.use('/api/transaction',transactionRoute)
 app.use(errorMiddleware);
 
 app.get('/',(req,res)=>{

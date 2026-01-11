@@ -1,14 +1,33 @@
 import React from 'react'
 import ticket from '../../assets/Frame 10 (1).png'
 import boxingGloves from '../../assets/Regular (1).png'
-import { useLocation } from 'react-router-dom';
+import { useLocation ,useNavigate} from 'react-router-dom';
 
 const Transaction = () => {
     const location = useLocation();
-    const { bookingId, phoneNumber } = location.state || {};
-  
+    const bookingId = location.state?.bookingId;
+    const navigate = useNavigate();
+    const subscriptionData = JSON.parse(localStorage.getItem('subscriptionData'));
+    const transaction = location.state?.transaction;
+    
    
-    if (!bookingId || !phoneNumber) {
+      if (!subscriptionData) {
+    
+    return (
+      <div className='relative bg-sky-200 h-[350px] flex justify-center items-center'>
+        <h1 className='text-red-500 font-bold text-xl'>
+          No subscription data found!
+        </h1>
+        <button
+          onClick={() => navigate('/subscription')}
+          className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'
+        >
+          Go Back to Subscriptions
+        </button>
+      </div>
+    );
+  }
+    if (!bookingId ) {
         return (
             <div className='relative bg-sky-200 h-[350px] flex justify-center items-center'>
                 <h1 className='text-red-500 font-bold text-xl'>

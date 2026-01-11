@@ -20,7 +20,7 @@ const ViewSubscription = () => {
                         <label className="font-bold w-full md:w-36 text-sm " htmlFor="phone" >Booking ID</label>
                         <input
                             className="border border-gray-300 rounded-lg text-gray-700 px-3 py-2 flex-1 w-full text-xs focus:ring-indigo-500 focus:border-indigo-500"
-                            type="number"
+                            type="text"
                             value={bookingId}
                             onChange={(e) => setBookingId(e.target.value)}
                             id="phone"
@@ -31,7 +31,7 @@ const ViewSubscription = () => {
                         <label className="font-bold w-full md:w-36 text-sm " htmlFor="phone" >Phone Number :</label>
                         <input
                             className="border border-gray-300 rounded-lg text-gray-700 px-3 py-2 flex-1 w-full text-xs focus:ring-indigo-500 focus:border-indigo-500"
-                            type="number"
+                            type="text"
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             id="phone"

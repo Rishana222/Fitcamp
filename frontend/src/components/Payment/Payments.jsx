@@ -5,6 +5,7 @@ import { useNavigate,useLocation} from 'react-router-dom'
 
 
 const Payments = () => {
+    
     const Navigate = useNavigate();
     const handleViewSubscriptionClick = ()=>(
         Navigate('/viewsubscription')
