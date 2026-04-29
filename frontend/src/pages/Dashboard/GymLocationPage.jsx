@@ -1,20 +1,19 @@
-import { InboxOutlined } from "@ant-design/icons"
+import { InboxOutlined } from "@ant-design/icons"//
 import { useQuery } from "@tanstack/react-query"
-import { Button, Form, Image, Input, message, Modal, Table } from "antd"
-import Dragger from "antd/es/upload/Dragger"
-import { useState } from "react"
+import { Button, Form, Image, Input, message, Modal, Table } from "antd"//
+import Dragger from "antd/es/upload/Dragger"//
+import { useState } from "react"//
 import { getGymlocation, useCreateGymLocation, useDeleteGymLocation ,useUpdateGymLocation  } from "../../utils/gymlocationApi"
 import { toast } from 'react-toastify'
 
 
 
-
 function GymLocationPage() {
 
-    const [openCreateModal, setOpenCreateModal] = useState(false)
-    const [openUpdateModal, setOpenUpdateModal] = useState(false)
-    const [form] = Form.useForm()
-    const [updateForm] = Form.useForm()
+    const [openCreateModal, setOpenCreateModal] = useState(false)//
+    const [openUpdateModal, setOpenUpdateModal] = useState(false)//
+    const [form] = Form.useForm()//
+    const [updateForm] = Form.useForm()//
   
 
     const [gymId, setGymId] = useState()
